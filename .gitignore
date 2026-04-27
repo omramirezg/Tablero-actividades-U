@@ -1,0 +1,9 @@
+# Ignorar todo por defecto — política de "lista blanca"
+# Esto evita que cualquier archivo nuevo (PDFs, Excel, Word, scripts, datos
+# institucionales) se suba a GitHub por error.
+*
+
+# Excepciones explícitas — solo estos archivos sí se publican
+!.gitignore
+!index.html
+!README.md

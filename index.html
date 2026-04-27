@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seguimiento Plan de Acción 2024–2026 · Facultad de Minas</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%23c7941a'/%3E%3Ctext x='50' y='66' font-family='Inter,Arial' font-size='44' font-weight='800' text-anchor='middle' fill='%231a1a1a'%3EFM%3C/text%3E%3C/svg%3E">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --gold:#c7941a;--gold-light:#f5e6b8;--gold-dark:#8a6610;
+  --green:#2d7a3a;--green-light:#d4edda;--green-dark:#1a4d24;
+  --amber:#b8760d;--amber-light:#fef3d0;--amber-dark:#7a4e08;
+  --red:#a83232;--red-light:#f8d7da;--red-dark:#6b1d1d;
+  --purple:#5b4a9e;--purple-light:#e8e0f3;
+  --blue:#1f5e8a;--blue-light:#d6e8f5;
+  --bg:#f7f6f3;--bg2:#fff;--bg3:#f0eeea;--bg4:#fbfaf7;
+  --text:#1a1a1a;--text2:#5c5c5c;--text3:#8c8c8c;
+  --border:#e5e2dc;--radius:10px;--radius-lg:14px;
+  --shadow:0 1px 3px rgba(0,0,0,.04),0 1px 2px rgba(0,0,0,.06);
+  --shadow-md:0 4px 6px rgba(0,0,0,.04),0 2px 4px rgba(0,0,0,.06);
+  --shadow-lg:0 10px 25px rgba(0,0,0,.06),0 4px 10px rgba(0,0,0,.04);
+}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased}
+
+/* Header */
+.hd{background:linear-gradient(180deg,#202020,#1a1a1a);position:sticky;top:0;z-index:100;border-bottom:3px solid var(--gold);box-shadow:0 2px 10px rgba(0,0,0,.15)}
+.hd-in{max-width:1320px;margin:0 auto;padding:14px 32px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.hd-brand{display:flex;align-items:center;gap:14px}
+.hd-logo{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#e0b440,var(--gold));display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;color:#1a1a1a;flex-shrink:0;box-shadow:0 2px 6px rgba(199,148,26,.3)}
+.hd-t h1{color:#fff;font-size:17px;font-weight:600;letter-spacing:-.3px;line-height:1.3}
+.hd-t h1 em{font-style:normal;color:var(--gold)}
+.hd-t p{color:#8c8c8c;font-size:11.5px;margin-top:1px}
+.hd-r{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+.hd-acts{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.btn{border:none;padding:8px 16px;border-radius:8px;font-size:12.5px;font-weight:500;cursor:pointer;font-family:inherit;transition:all .15s;display:inline-flex;align-items:center;gap:6px}
+.btn-ref{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.15)}
+.btn-ref:hover{background:rgba(255,255,255,.2)}
+.btn-ref:disabled{opacity:.4;cursor:not-allowed}
+.btn-upl{background:var(--gold);color:#1a1a1a;font-weight:600}
+.btn-upl:hover{background:#d4a01f}
+.b-admin{font-size:9.5px;font-weight:600;color:var(--gold);background:rgba(199,148,26,.15);padding:3px 9px;border-radius:20px;letter-spacing:.5px;text-transform:uppercase}
+.lu{font-size:10.5px;color:#7c7c7c}
+.sp{display:inline-block;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes fu{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* Tabs */
+.tw{background:var(--bg2);border-bottom:1px solid var(--border);position:sticky;top:58px;z-index:90;box-shadow:0 1px 3px rgba(0,0,0,.02)}
+.tbs{max-width:1320px;margin:0 auto;padding:0 32px;display:flex;gap:0;overflow-x:auto;scrollbar-width:none}
+.tbs::-webkit-scrollbar{display:none}
+.tb{padding:13px 18px;font-size:12.5px;font-weight:500;cursor:pointer;border:none;background:transparent;color:var(--text3);font-family:inherit;border-bottom:2px solid transparent;white-space:nowrap;transition:all .15s;position:relative}
+.tb:hover{color:var(--text);background:var(--bg3)}
+.tb.on{color:var(--text);border-bottom-color:var(--gold);font-weight:600}
+.tb-cnt{display:inline-block;background:var(--bg3);color:var(--text3);font-size:10px;font-weight:600;padding:1px 6px;border-radius:8px;margin-left:6px;min-width:18px;text-align:center}
+.tb.on .tb-cnt{background:var(--gold-light);color:var(--gold-dark)}
+
+/* Container */
+.ct{max-width:1320px;margin:0 auto;padding:24px 32px}
+.sb{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:10px 16px;margin-bottom:20px;font-size:12px;color:var(--text2);display:flex;align-items:center;gap:10px;box-shadow:var(--shadow);flex-wrap:wrap}
+.sd{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.sd-l{background:var(--green);box-shadow:0 0 0 3px rgba(45,122,58,.2)}
+.sd-f{background:var(--amber)}
+.sd-d{background:var(--text3)}
+.sd-e{background:var(--red)}
+.sb-warn{background:#fff8e1;border-color:#f5d878;color:#7a5a08}
+
+/* KPIs */
+.kg{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:24px}
+.kp{background:var(--bg2);border-radius:var(--radius-lg);padding:18px;border:1px solid var(--border);box-shadow:var(--shadow);text-align:center;animation:fu .4s ease both;transition:transform .15s, box-shadow .15s}
+.kp:hover{transform:translateY(-1px);box-shadow:var(--shadow-md)}
+.kp:nth-child(2){animation-delay:.05s}.kp:nth-child(3){animation-delay:.1s}.kp:nth-child(4){animation-delay:.15s}.kp:nth-child(5){animation-delay:.2s}
+.kl{font-size:9.5px;text-transform:uppercase;letter-spacing:1px;color:var(--text3);font-weight:600;margin-bottom:6px}
+.kv{font-size:32px;font-weight:800;letter-spacing:-1.5px;line-height:1}
+.ks{font-size:11px;color:var(--text3);margin-top:5px}
+.ka{width:36px;height:3px;border-radius:2px;margin:8px auto 0}
+
+/* Filters */
+.fr{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap;align-items:center;background:var(--bg2);padding:12px 14px;border-radius:var(--radius);border:1px solid var(--border)}
+.fl{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;margin-right:2px}
+.fs{padding:7px 12px;border:1px solid var(--border);border-radius:7px;font-size:12.5px;font-family:inherit;background:var(--bg2);color:var(--text);cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%238c8c8c' d='M3 5l3 3 3-3'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 9px center;padding-right:28px;max-width:220px}
+.fs:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(199,148,26,.12)}
+.fi{padding:7px 12px;border:1px solid var(--border);border-radius:7px;font-size:12.5px;font-family:inherit;background:var(--bg2);color:var(--text);min-width:200px;flex:1;max-width:280px}
+.fi:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(199,148,26,.12)}
+.fc{margin-left:auto;font-size:11.5px;color:var(--text3);font-weight:500}
+.fbtn{background:transparent;border:1px solid var(--border);color:var(--text3);padding:7px 11px;border-radius:7px;font-size:11.5px;cursor:pointer;font-family:inherit;font-weight:500;transition:all .15s}
+.fbtn:hover{background:var(--bg3);color:var(--text)}
+
+/* Legend */
+.lg{display:flex;gap:18px;margin-bottom:20px;font-size:11.5px;color:var(--text2);font-weight:500;align-items:center;flex-wrap:wrap}
+.li{display:flex;align-items:center;gap:6px}
+.ld{width:10px;height:10px;border-radius:3px}
+
+/* Section title */
+.st{font-size:14px;font-weight:700;margin-bottom:14px;color:var(--text);display:flex;align-items:center;gap:10px;letter-spacing:-.2px}
+.st::before{content:'';width:4px;height:18px;background:var(--gold);border-radius:2px;flex-shrink:0}
+.st-sub{font-size:11.5px;font-weight:400;color:var(--text3);margin-left:4px}
+
+/* Eje cards */
+.ec{background:var(--bg2);border-radius:var(--radius-lg);padding:16px 20px;margin-bottom:10px;border:1px solid var(--border);box-shadow:var(--shadow);animation:fu .4s ease both;transition:box-shadow .15s}
+.ec:hover{box-shadow:var(--shadow-md)}
+.eh{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:12px}
+.ei{flex:1;min-width:0}
+.en{font-size:10.5px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.8px;margin-bottom:2px}
+.em{font-size:13.5px;font-weight:500;color:var(--text);line-height:1.3}
+.ep{font-size:26px;font-weight:800;letter-spacing:-1px;flex-shrink:0;line-height:1}
+
+/* Tricolor bar */
+.bt{height:9px;background:var(--bg3);border-radius:5px;overflow:hidden;display:flex}
+.bd{background:var(--green);border-radius:5px 0 0 5px;transition:width .6s cubic-bezier(.4,0,.2,1)}
+.bp{background:var(--amber);transition:width .6s cubic-bezier(.4,0,.2,1)}
+.bn{background:var(--red);border-radius:0 5px 5px 0;transition:width .6s cubic-bezier(.4,0,.2,1)}
+.bm{display:flex;justify-content:space-between;margin-top:7px;font-size:10.5px;color:var(--text3)}
+.bml{display:flex;gap:14px}
+
+/* Tables */
+.dtw{background:var(--bg2);border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow)}
+.dt{width:100%;border-collapse:collapse}
+.dt thead th{background:var(--bg3);font-size:10.5px;font-weight:600;padding:11px 14px;text-align:center;text-transform:uppercase;letter-spacing:.5px;color:var(--text3);border-bottom:1px solid var(--border)}
+.dt thead th:first-child,.dt thead th:last-child{text-align:left}
+.dt tbody td{padding:11px 14px;font-size:12.5px;border-bottom:1px solid var(--bg3);text-align:center;vertical-align:middle}
+.dt tbody td:first-child,.dt tbody td:last-child{text-align:left}
+.dt tbody tr:last-child td{border-bottom:none}
+.dt tbody tr:hover{background:#fdfcf9;cursor:pointer}
+.dn{font-weight:600;color:var(--text)}
+.mb{width:78px;height:6px;background:var(--bg3);border-radius:3px;overflow:hidden;display:inline-block;vertical-align:middle;margin-right:8px}
+.mbf{height:100%;border-radius:3px;transition:width .5s cubic-bezier(.4,0,.2,1)}
+
+/* Project card */
+.pc{background:var(--bg2);border-radius:var(--radius-lg);border:1px solid var(--border);margin-bottom:11px;overflow:hidden;box-shadow:var(--shadow);animation:fu .35s ease both;transition:box-shadow .15s}
+.pc:hover{box-shadow:var(--shadow-md)}
+.ph{padding:14px 20px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;gap:12px;transition:background .1s}
+.ph:hover{background:var(--bg4)}
+.pl{display:flex;align-items:center;gap:10px;flex:1;min-width:0}
+.ch{width:20px;height:20px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:var(--bg3);transition:all .2s;flex-shrink:0;font-size:10px;color:var(--text3)}
+.ch.op{background:var(--gold-light);color:var(--gold-dark);transform:rotate(90deg)}
+.pi{min-width:0;flex:1}
+.pid{font-size:10.5px;font-weight:700;color:var(--gold);letter-spacing:.3px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.pnm{font-size:13.5px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:560px;margin-top:1px}
+.pmeta{font-size:10.5px;color:var(--text3);margin-top:2px;display:flex;gap:10px;flex-wrap:wrap}
+.pmeta b{color:var(--text2);font-weight:500}
+.pr{text-align:right;flex-shrink:0;display:flex;align-items:center;gap:18px}
+.pbudget{text-align:right;font-size:10.5px;color:var(--text3);min-width:80px}
+.pbudget b{display:block;color:var(--text2);font-size:12px;font-weight:600}
+.ppct{font-size:26px;font-weight:800;letter-spacing:-1px;line-height:1}
+.pmt{font-size:10.5px;color:var(--text3);margin-top:2px}
+
+/* Badges */
+.bg{display:inline-block;padding:3px 9px;border-radius:20px;font-size:9.5px;font-weight:600;letter-spacing:.3px;vertical-align:middle}
+.bg-d{background:var(--green-light);color:var(--green-dark)}
+.bg-p{background:var(--amber-light);color:var(--amber-dark)}
+.bg-n{background:var(--red-light);color:var(--red-dark)}
+.bg-c{background:var(--purple-light);color:var(--purple)}
+.bg-x{background:#f0e0e0;color:#5c1d1d;text-decoration:line-through}
+.bg-pgd{background:var(--blue-light);color:var(--blue);font-weight:500}
+
+/* Activity table */
+.atw{border-top:1px solid var(--border);overflow:hidden;background:var(--bg4)}
+.at{width:100%;border-collapse:collapse}
+.at th{background:var(--bg3);padding:9px 14px;text-align:center;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;font-size:9.5px}
+.at th:first-child,.at th:nth-child(2){text-align:left}
+.at td{padding:11px 14px;border-top:1px solid var(--bg3);font-size:12px;text-align:center;vertical-align:middle}
+.at td:first-child,.at td:nth-child(2){text-align:left}
+.at tbody tr:hover{background:#fdfcf9}
+.anm{color:var(--text3);font-size:11.5px}
+.aname{font-weight:500;color:var(--text)}
+.pv{display:flex;align-items:center;gap:6px;justify-content:center}
+.pbr{width:42px;height:4px;background:var(--bg3);border-radius:2px;overflow:hidden}
+.pfl{height:100%;background:var(--gold);border-radius:2px}
+.ptx{font-size:11.5px;font-weight:600;min-width:30px}
+.spr{font-weight:700}
+.apv{font-weight:700}
+.adsc{font-size:10.5px;color:var(--text3);max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:inline-block;vertical-align:middle}
+.alink{color:var(--blue);text-decoration:none;font-size:13px}
+.alink:hover{text-decoration:underline}
+.aem{padding:22px;text-align:center;color:var(--text3);font-size:12.5px;border-top:1px solid var(--border);background:var(--bg4)}
+.warn-w{display:inline-block;padding:2px 7px;border-radius:4px;font-size:10px;font-weight:600;background:#fef3d0;color:var(--amber-dark);margin-left:8px}
+
+/* PGD section */
+.pgdg{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-bottom:20px}
+.pgdc{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:14px;box-shadow:var(--shadow);animation:fu .4s ease both;transition:transform .15s}
+.pgdc:hover{transform:translateY(-1px);box-shadow:var(--shadow-md)}
+.pgdh{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.pgdcode{font-size:11px;font-weight:700;color:var(--blue);background:var(--blue-light);padding:2px 8px;border-radius:4px;letter-spacing:.3px}
+.pgdv{font-size:18px;font-weight:800;letter-spacing:-.5px}
+.pgdm{font-size:10.5px;color:var(--text3)}
+.pgdb{height:5px;background:var(--bg3);border-radius:3px;margin-top:8px;overflow:hidden}
+.pgdbf{height:100%;background:var(--gold);border-radius:3px;transition:width .6s ease}
+
+/* Footer */
+.ft{text-align:center;padding:30px;margin-top:36px;border-top:1px solid var(--border)}
+.ft1{font-size:12.5px;font-weight:500;color:var(--text2);margin-bottom:4px}
+.ft2{font-size:10.5px;color:var(--text3)}
+.ftu{font-weight:700;color:var(--gold-dark)}
+
+/* Loading & empty */
+.lds{display:flex;flex-direction:column;align-items:center;justify-content:center;height:380px;gap:14px}
+.ldsp{width:34px;height:34px;border:3px solid var(--border);border-top-color:var(--gold);border-radius:50%;animation:spin .7s linear infinite}
+.ldt{font-size:13px;color:var(--text3)}
+.es{text-align:center;padding:44px 20px;color:var(--text3);font-size:13px;background:var(--bg2);border-radius:var(--radius-lg);border:1px dashed var(--border)}
+
+/* Responsive */
+@media(max-width:900px){
+  .kg{grid-template-columns:repeat(3,1fr)}
+  .pnm{max-width:280px}
+  .ct{padding:20px 20px}
+  .hd-in{padding:12px 20px}
+  .tbs{padding:0 20px}
+  .pr{gap:10px}
+  .pbudget{display:none}
+}
+@media(max-width:640px){
+  .hd-in{padding:12px 16px}
+  .hd-t h1{font-size:14.5px}
+  .tbs{padding:0 12px}
+  .ct{padding:18px 14px}
+  .kg{grid-template-columns:repeat(2,1fr);gap:8px}
+  .kp{padding:14px}
+  .kv{font-size:24px}
+  .fr{flex-direction:column;align-items:stretch;gap:8px}
+  .fs,.fi{width:100%;max-width:100%}
+  .fc{display:none}
+  .eh{flex-direction:column;align-items:flex-start;gap:6px}
+  .pnm{max-width:200px;font-size:12.5px}
+  .ppct{font-size:22px}
+  .pr{flex-direction:column;align-items:flex-end;gap:4px}
+}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const { useState, useEffect, useMemo } = React;
+
+/* ═══════════════════════════════════════════════════════════════
+   CONFIGURACIÓN — edita solo estos valores
+   ═══════════════════════════════════════════════════════════════ */
+
+const SHEET_ID  = '1L9-LzvVmmp_lZkVhddij0zYrWwkg2lhLagSdgWzwMFQ';
+const API_KEY   = 'AIzaSyDQW8nnSbj0tEfYGZeEIjPXjCvfnvBmhjo';
+const TAB_PROY  = 'Proyectos';
+const TAB_ACT   = 'Actividades';
+const ADMIN_KEY = 'minas2026';
+
+/* ═══════════════════════════════════════════════════════════════ */
+
+const isAdmin = new URLSearchParams(window.location.search).get('clave') === ADMIN_KEY;
+
+const EJES = {
+  1: "Bienestar, inclusión y equidad para una comunidad académica integral",
+  2: "Innovación académica y transformación curricular para un mundo conectado",
+  3: "Investigación, innovación e internacionalización para el desarrollo global",
+  4: "Reconstrucción del tejido social y fortalecimiento institucional",
+  5: "Sostenibilidad integral: ambiental, social y financiera"
+};
+
+const DSH = {
+  "Bienestar Universitario FM": "DBUFM",
+  "Centro de Desarrollo e Innovación": "CDI",
+  "Oficina Comunicaciones FM": "COM",
+  "Dirección de Laboratorios": "DIRLAB",
+  "Instituto Educación en Ingeniería": "IEI",
+  "Decanatura": "DEC",
+  "UGA-IP": "UGA-IP",
+  "Vicedecanatura Académica": "VICA",
+  "VIE Facultad de Minas": "VIE",
+  "UAPE": "UAPE",
+  "Campus Sostenible": "CAMP.SOS"
+};
+
+/* ═══════════════ DATOS DE DEMOSTRACIÓN ═══════════════ */
+
+const DEMO_P = [
+  {id:5,eje:1,nombre:"Fortalecimiento del Centro del cuidado y bienestar",dep:"Bienestar Universitario FM",resp:"Duber Romero",pgd:"E8 Pb",pres:1500000,ejec:1311821,est:"Activo",gestor:"Paula Ladino",obs:""},
+  {id:6,eje:1,nombre:"Fortalecimiento de entornos favorables para trayectos de vida",dep:"Bienestar Universitario FM",resp:"Duber Romero",pgd:"E8 Pa",pres:6940800,ejec:3536650,est:"Activo",gestor:"Leidy Madrigal",obs:""},
+  {id:7,eje:1,nombre:"Transformación de relaciones humanas en la Facultad de Minas",dep:"Bienestar Universitario FM",resp:"Duber Romero",pgd:"E6 Pb",pres:10200000,ejec:1499400,est:"Activo",gestor:"Leidy Madrigal",obs:"Algunas actividades no autorizadas en 2025-2"},
+  {id:1,eje:1,nombre:"Estrategias de permanencia y formación integral",dep:"Vicedecanatura Académica",resp:"Diana Castañeda",pgd:"E8 Pa",pres:208000000,ejec:208000000,est:"Activo",gestor:"Diana Castañeda",obs:""},
+  {id:2,eje:1,nombre:"Sistema Automático de Monitoreo, Seguimiento y Respuesta",dep:"UAPE",resp:"Liliana Gaitán",pgd:"E8 Pe",pres:25000000,ejec:24448374,est:"Activo",gestor:"Liliana Gaitán",obs:""},
+  {id:8,eje:2,nombre:"Armonización Curricular",dep:"Vicedecanatura Académica",resp:"Diana Castañeda",pgd:"E3 Pb",pres:460080000,ejec:270253492,est:"Activo",gestor:"Diana Castañeda",obs:""},
+  {id:10,eje:2,nombre:"Fortalecimiento docente",dep:"Instituto Educación en Ingeniería",resp:"Diego Herrera",pgd:"E3 Pd",pres:45000000,ejec:40100000,est:"Activo",gestor:"Diego Herrera",obs:""},
+  {id:11,eje:2,nombre:"Aula STEAM",dep:"Instituto Educación en Ingeniería",resp:"Manuel Delgado",pgd:"E6 Pa",pres:80000000,ejec:31158370,est:"Activo",gestor:"Manuel Delgado",obs:""},
+  {id:12,eje:3,nombre:"Evento Difusión Científica de proyectos I+E",dep:"VIE Facultad de Minas",resp:"Camilo Burbano",pgd:"E4 Pb",pres:30000000,ejec:28231470,est:"Activo",gestor:"Camilo Burbano",obs:""},
+  {id:13,eje:3,nombre:"Fortalecimiento de los semilleros Facultad de Minas",dep:"VIE Facultad de Minas",resp:"Laura Martínez",pgd:"E4 Pa",pres:300000000,ejec:220000000,est:"Activo",gestor:"Laura Martínez",obs:""},
+  {id:16,eje:3,nombre:"Consultorio Universitario (antes CDI)",dep:"Centro de Desarrollo e Innovación",resp:"Valeria Castillo",pgd:"E4 Pa",pres:24370000,ejec:33933435,est:"Cerrado",gestor:"Gabriel Garzón",obs:"Cerrado al alcance inicial; ampliado en 2026"},
+  {id:17,eje:3,nombre:"Sistema de Evaluación de Impacto (SGEI)",dep:"Centro de Desarrollo e Innovación",resp:"Gabriel Garzón",pgd:"E5 Pc",pres:20000000,ejec:45116472,est:"Activo",gestor:"Gabriel Garzón",obs:""},
+  {id:18,eje:3,nombre:"Sistema de Identificación y Transferencia con Power BI",dep:"Centro de Desarrollo e Innovación",resp:"Gabriel Garzón",pgd:"E4 Pb",pres:20000000,ejec:11798840,est:"Activo",gestor:"Gabriel Garzón",obs:""},
+  {id:19,eje:4,nombre:"Mejoramiento del índice de satisfacción de servicios",dep:"Oficina Comunicaciones FM",resp:"—",pgd:"E2 Pc",pres:3000000,ejec:494708,est:"Activo",gestor:"Alba Vargas",obs:""},
+  {id:20,eje:4,nombre:"Mejoramiento de infraestructura y equipo humano",dep:"Oficina Comunicaciones FM",resp:"—",pgd:"E2 Pc",pres:5000000,ejec:5000000,est:"Activo",gestor:"Alba Vargas",obs:""},
+  {id:21,eje:4,nombre:"Crear y consolidar centros de pensamiento",dep:"Decanatura",resp:"Decanatura",pgd:"E4 Pb",pres:0,ejec:179867670,est:"Activo",gestor:"Decanatura",obs:"Tres propuestas ganadoras seleccionadas"},
+  {id:28,eje:5,nombre:"Fortalecimiento capacidades laboratorios docencia",dep:"Dirección de Laboratorios",resp:"Andrea Guerrero",pgd:"E5 Pb",pres:660000000,ejec:191576383,est:"Activo",gestor:"Andrea Guerrero",obs:""},
+  {id:29,eje:5,nombre:"Potenciar capacidades tecnológicas laboratorios",dep:"Dirección de Laboratorios",resp:"Andrea Guerrero",pgd:"E5 Pb",pres:170000000,ejec:95318888,est:"Activo",gestor:"Andrea Guerrero",obs:""},
+  {id:22,eje:5,nombre:"Mantenimientos especializados a infraestructura",dep:"UGA-IP",resp:"—",pgd:"E5 Pb",pres:203000000,ejec:32076800,est:"Activo",gestor:"Robinson Durango",obs:""},
+  {id:26,eje:5,nombre:"Posicionamiento Campus Sostenible",dep:"Campus Sostenible",resp:"Linda Berrío",pgd:"E6 Pc",pres:10500000,ejec:0,est:"Activo",gestor:"Linda Berrío",obs:""},
+  {id:27,eje:5,nombre:"Iniciativas para sostenibilidad en el Campus",dep:"Campus Sostenible",resp:"Linda Berrío",pgd:"E6 Pc",pres:24500000,ejec:0,est:"Activo",gestor:"Linda Berrío",obs:""}
+];
+
+const DEMO_A = [
+  {idP:5,idA:"5.1",nom:"Jornadas de salud y prevención",w:.40,ts:8,cs:7,est:"En progreso",ds:"7 de 8 espacios realizados",fecha:"2026-04-15",resp:"Paula Ladino",obs:""},
+  {idP:5,idA:"5.2",nom:"Adquisición kits primeros auxilios",w:.30,ts:2,cs:2,est:"Completada",ds:"4 kits adquiridos",fecha:"2026-03-20",resp:"Paula Ladino",obs:""},
+  {idP:5,idA:"5.3",nom:"Espacios de bienestar y autocuidado",w:.30,ts:4,cs:4,est:"Completada",ds:"4 espacios realizados",fecha:"2026-04-10",resp:"Duber Romero",obs:""},
+  {idP:6,idA:"6.1",nom:"Ferias interculturales con sede",w:.40,ts:4,cs:3,est:"En progreso",ds:"3 de 4 ferias completadas",fecha:"2026-04-15",resp:"Leidy Madrigal",obs:""},
+  {idP:6,idA:"6.2",nom:"Espacios bienestar para posgrados",w:.60,ts:8,cs:8,est:"Completada",ds:"8 espacios realizados",fecha:"2026-04-15",resp:"Leidy Madrigal",obs:""},
+  {idP:7,idA:"7.1",nom:"Ferias interculturales (diversidad)",w:.50,ts:4,cs:0,est:"No iniciada",ds:"No autorizadas en 2025-2 por restricciones",fecha:"2026-04-15",resp:"Leidy Madrigal",obs:"Pendiente reprogramación"},
+  {idP:7,idA:"7.2",nom:"Acompañamiento a docentes",w:.50,ts:8,cs:6,est:"En progreso",ds:"6 de 8 sesiones completadas",fecha:"2026-04-15",resp:"Leidy Madrigal",obs:""},
+  {idP:1,idA:"1.1",nom:"Planeación de estrategias",w:.30,ts:3,cs:2,est:"En progreso",ds:"4 asignaturas priorizadas",fecha:"2026-04-01",resp:"Diana Castañeda",obs:""},
+  {idP:1,idA:"1.2",nom:"Entrenamientos académicos",w:.40,ts:3,cs:1,est:"En progreso",ds:"39 grupos identificados",fecha:"2026-04-01",resp:"Diana Castañeda",obs:""},
+  {idP:1,idA:"1.3",nom:"Seguimiento y evaluación",w:.30,ts:3,cs:1,est:"En progreso",ds:"Reuniones mensuales",fecha:"2026-04-01",resp:"Diana Castañeda",obs:""},
+  {idP:2,idA:"2.1",nom:"Diseño del sistema de monitoreo",w:.40,ts:3,cs:3,est:"Completada",ds:"Diseño aprobado",fecha:"2025-12-15",resp:"Liliana Gaitán",obs:""},
+  {idP:2,idA:"2.2",nom:"Implementación piloto",w:.40,ts:4,cs:2,est:"En progreso",ds:"2 facultades en piloto",fecha:"2026-04-10",resp:"Liliana Gaitán",obs:""},
+  {idP:2,idA:"2.3",nom:"Evaluación y ajustes",w:.20,ts:2,cs:0,est:"No iniciada",ds:"Pendiente fin de piloto",fecha:"2026-04-10",resp:"Liliana Gaitán",obs:""},
+  {idP:8,idA:"8.1",nom:"Asesoría a grupos gestores curriculares",w:.35,ts:4,cs:2,est:"En progreso",ds:"10 pregrados acompañados",fecha:"2026-04-15",resp:"Diana Castañeda",obs:""},
+  {idP:8,idA:"8.2",nom:"Estudios de contexto curricular",w:.35,ts:7,cs:2,est:"En progreso",ds:"Diagnóstico en proceso",fecha:"2026-04-15",resp:"Diana Castañeda",obs:""},
+  {idP:8,idA:"8.3",nom:"Mesas de reforma de posgrados",w:.30,ts:3,cs:1,est:"En progreso",ds:"Mesa instalada en marzo",fecha:"2026-03-30",resp:"Diana Castañeda",obs:""},
+  {idP:10,idA:"10.1",nom:"Literacidades en inglés",w:.35,ts:3,cs:2,est:"En progreso",ds:"Curso-taller en marcha",fecha:"2026-04-01",resp:"Diego Herrera",obs:""},
+  {idP:10,idA:"10.2",nom:"Evaluación docente",w:.35,ts:3,cs:1,est:"En progreso",ds:"Tercera fase",fecha:"2026-04-01",resp:"Diego Herrera",obs:""},
+  {idP:10,idA:"10.3",nom:"Investigación en docencia",w:.30,ts:3,cs:1,est:"En progreso",ds:"Asesorías individuales",fecha:"2026-04-01",resp:"Diego Herrera",obs:""},
+  {idP:11,idA:"11.1",nom:"Concursos de ingeniería",w:.20,ts:2,cs:1,est:"En progreso",ds:"1 de 2 realizados",fecha:"2026-04-10",resp:"Manuel Delgado",obs:""},
+  {idP:11,idA:"11.2",nom:"Ludoteca: diseño de juegos",w:.20,ts:3,cs:1,est:"En progreso",ds:"Diseño en curso",fecha:"2026-04-10",resp:"Manuel Delgado",obs:""},
+  {idP:11,idA:"11.3",nom:"Pensamiento computacional",w:.15,ts:2,cs:1,est:"En progreso",ds:"Sesiones piloto",fecha:"2026-04-10",resp:"Manuel Delgado",obs:""},
+  {idP:11,idA:"11.4",nom:"Cocina como laboratorio",w:.15,ts:2,cs:1,est:"En progreso",ds:"Culturas alimentarias",fecha:"2026-04-10",resp:"Manuel Delgado",obs:""},
+  {idP:11,idA:"11.5",nom:"Residencias artísticas",w:.15,ts:3,cs:0,est:"No iniciada",ds:"Pendiente convocatoria",fecha:"2026-04-10",resp:"Manuel Delgado",obs:""},
+  {idP:11,idA:"11.6",nom:"Juego vida universitaria",w:.15,ts:3,cs:1,est:"En progreso",ds:"Manifiesto inicial",fecha:"2026-04-10",resp:"Manuel Delgado",obs:""},
+  {idP:12,idA:"12.1",nom:"Planificación del evento",w:.30,ts:4,cs:4,est:"Completada",ds:"Junio 2025 ejecutado",fecha:"2025-06-30",resp:"Camilo Burbano",obs:""},
+  {idP:12,idA:"12.2",nom:"Selección de proyectos",w:.30,ts:3,cs:3,est:"Completada",ds:"Seleccionados y notificados",fecha:"2025-06-30",resp:"Camilo Burbano",obs:""},
+  {idP:12,idA:"12.3",nom:"Desarrollo y difusión",w:.40,ts:3,cs:3,est:"Completada",ds:"Difusión completada",fecha:"2025-07-15",resp:"Camilo Burbano",obs:""},
+  {idP:13,idA:"13.1",nom:"Convocatoria y comité",w:.30,ts:4,cs:4,est:"Completada",ds:"Aprobada por Consejo Facultad",fecha:"2025-09-30",resp:"Laura Martínez",obs:""},
+  {idP:13,idA:"13.2",nom:"Distribución de recursos",w:.40,ts:3,cs:3,est:"Completada",ds:"7 propuestas financiadas",fecha:"2025-11-20",resp:"Laura Martínez",obs:""},
+  {idP:13,idA:"13.3",nom:"Difusión de resultados",w:.30,ts:3,cs:3,est:"Completada",ds:"Socialización completa",fecha:"2026-02-15",resp:"Laura Martínez",obs:""},
+  {idP:16,idA:"16.1",nom:"Difusión y búsqueda de casos",w:.15,ts:4,cs:4,est:"Completada",ds:"17 solicitudes recibidas, 8 atendidas",fecha:"2025-12-12",resp:"Valeria Castillo",obs:""},
+  {idP:16,idA:"16.2",nom:"Conformación equipos de estudiantes",w:.20,ts:5,cs:5,est:"Completada",ds:"27 estudiantes en 8 equipos",fecha:"2025-08-25",resp:"Valeria Castillo",obs:""},
+  {idP:16,idA:"16.3",nom:"Proceso de consultoría completo",w:.40,ts:7,cs:7,est:"Completada",ds:"8 casos con entregables finales",fecha:"2025-12-12",resp:"Valeria Castillo",obs:""},
+  {idP:16,idA:"16.4",nom:"Alianzas y portafolio",w:.25,ts:6,cs:6,est:"Completada",ds:"7 docentes tutores activos",fecha:"2025-12-12",resp:"Valeria Castillo",obs:""},
+  {idP:17,idA:"17.1",nom:"Desarrollo MinasImpactApp",w:.30,ts:3,cs:3,est:"Completada",ds:"Aplicativo funcional desplegado",fecha:"2025-12-15",resp:"Gabriel Garzón",obs:""},
+  {idP:17,idA:"17.2",nom:"Capacitación del equipo",w:.15,ts:2,cs:2,est:"Completada",ds:"Talleres y guías entregados",fecha:"2025-11-30",resp:"Gabriel Garzón",obs:""},
+  {idP:17,idA:"17.3",nom:"Registro y monitoreo en tiempo real",w:.25,ts:3,cs:2,est:"En progreso",ds:"Categorías de impacto definidas",fecha:"2026-04-15",resp:"Gabriel Garzón",obs:""},
+  {idP:17,idA:"17.4",nom:"Indicadores de impacto",w:.20,ts:3,cs:2,est:"En progreso",ds:"En definición final",fecha:"2026-04-15",resp:"Gabriel Garzón",obs:""},
+  {idP:17,idA:"17.5",nom:"Evaluación continua y reportes",w:.10,ts:3,cs:0,est:"No iniciada",ds:"Programado para 2026-2",fecha:"2026-04-15",resp:"Gabriel Garzón",obs:""},
+  {idP:18,idA:"18.1",nom:"Integración de resultados en BD",w:.25,ts:3,cs:3,est:"Completada",ds:"Base consolidada",fecha:"2025-12-20",resp:"Gabriel Garzón",obs:""},
+  {idP:18,idA:"18.2",nom:"Plantillas Power BI",w:.25,ts:4,cs:4,est:"Completada",ds:"Tablero construido y validado",fecha:"2026-01-30",resp:"Gabriel Garzón",obs:""},
+  {idP:18,idA:"18.3",nom:"Indicadores de impacto",w:.30,ts:4,cs:2,est:"En progreso",ds:"En definición",fecha:"2026-04-15",resp:"Gabriel Garzón",obs:""},
+  {idP:18,idA:"18.4",nom:"Difusión y alianzas",w:.20,ts:4,cs:1,est:"En progreso",ds:"1 material publicado",fecha:"2026-04-15",resp:"Gabriel Garzón",obs:""},
+  {idP:19,idA:"19.1",nom:"Vocerías y talleres",w:.50,ts:4,cs:1,est:"En progreso",ds:"Taller previsto para 2026-2",fecha:"2026-04-10",resp:"Alba Vargas",obs:""},
+  {idP:19,idA:"19.2",nom:"Boletines y medios",w:.50,ts:3,cs:1,est:"En progreso",ds:"33 boletines publicados",fecha:"2026-04-10",resp:"Alba Vargas",obs:""},
+  {idP:20,idA:"20.1",nom:"Contratación equipo comunicaciones",w:.50,ts:2,cs:2,est:"Completada",ds:"Equipo conformado",fecha:"2025-08-15",resp:"Alba Vargas",obs:""},
+  {idP:20,idA:"20.2",nom:"Adquisición de equipos audiovisuales",w:.50,ts:3,cs:3,est:"Completada",ds:"Equipos en operación",fecha:"2025-10-30",resp:"Alba Vargas",obs:""},
+  {idP:21,idA:"21.1",nom:"Diseño de convocatoria centros de pensamiento",w:.30,ts:3,cs:3,est:"Completada",ds:"Convocatoria publicada",fecha:"2025-09-15",resp:"Decanatura",obs:""},
+  {idP:21,idA:"21.2",nom:"Selección de propuestas ganadoras",w:.30,ts:2,cs:2,est:"Completada",ds:"3 propuestas seleccionadas",fecha:"2025-12-15",resp:"Decanatura",obs:""},
+  {idP:21,idA:"21.3",nom:"Ejecución de centros (12 meses)",w:.40,ts:12,cs:4,est:"En progreso",ds:"4 de 12 meses ejecutados",fecha:"2026-04-15",resp:"Decanatura",obs:""},
+  {idP:22,idA:"22.1",nom:"Mantenimiento eléctrico",w:.40,ts:5,cs:1,est:"En progreso",ds:"1 de 5 intervenciones",fecha:"2026-03-15",resp:"Robinson Durango",obs:""},
+  {idP:22,idA:"22.2",nom:"Mantenimiento sanitario",w:.30,ts:4,cs:1,est:"En progreso",ds:"1 de 4 intervenciones",fecha:"2026-03-15",resp:"Robinson Durango",obs:""},
+  {idP:22,idA:"22.3",nom:"Mantenimiento estructural",w:.30,ts:3,cs:1,est:"En progreso",ds:"1 de 3 intervenciones",fecha:"2026-03-15",resp:"Robinson Durango",obs:""},
+  {idP:28,idA:"28.1",nom:"Intervenciones locativas",w:.40,ts:4,cs:4,est:"Completada",ds:"Lab Termodinámica intervenido",fecha:"2025-12-15",resp:"Andrea Guerrero",obs:""},
+  {idP:28,idA:"28.2",nom:"Adquisición de equipos",w:.35,ts:3,cs:3,est:"Completada",ds:"Equipos adquiridos y entregados",fecha:"2025-11-30",resp:"Andrea Guerrero",obs:""},
+  {idP:28,idA:"28.3",nom:"Capacitación y soporte técnico",w:.25,ts:3,cs:3,est:"Completada",ds:"Capacitaciones realizadas",fecha:"2026-01-30",resp:"Andrea Guerrero",obs:""},
+  {idP:29,idA:"29.1",nom:"Convocatoria laboratorios 2025",w:.50,ts:3,cs:3,est:"Completada",ds:"3 ganadores",fecha:"2025-09-30",resp:"Andrea Guerrero",obs:""},
+  {idP:29,idA:"29.2",nom:"Ejecución de proyectos ganadores",w:.50,ts:3,cs:2,est:"En progreso",ds:"2 de 3 en marcha",fecha:"2026-04-15",resp:"Andrea Guerrero",obs:""},
+  {idP:26,idA:"26.1",nom:"Producción audiovisual de campañas",w:.50,ts:4,cs:2,est:"En progreso",ds:"Reels producidos",fecha:"2026-04-15",resp:"Linda Berrío",obs:""},
+  {idP:26,idA:"26.2",nom:"Conmemoración de días ambientales",w:.50,ts:4,cs:2,est:"En progreso",ds:"2 de 4 conmemoraciones",fecha:"2026-04-15",resp:"Linda Berrío",obs:""},
+  {idP:27,idA:"27.1",nom:"Reto Naturalista",w:.50,ts:5,cs:5,est:"Completada",ds:"5 recorridos realizados",fecha:"2025-11-15",resp:"Linda Berrío",obs:""},
+  {idP:27,idA:"27.2",nom:"Cultivo y siembras participativas",w:.50,ts:3,cs:1,est:"En progreso",ds:"Siembra inicial completada",fecha:"2026-04-15",resp:"Linda Berrío",obs:""}
+];
+
+/* ═══════════════ HELPERS ═══════════════ */
+
+const fmPct = n => Math.round(n * 100) + '%';
+const fmCop = n => n ? '$' + Math.round(n).toLocaleString('es-CO') : '—';
+const fmCopShort = n => {
+  if (!n) return '—';
+  if (n >= 1e9) return '$' + (n/1e9).toFixed(1) + 'B';
+  if (n >= 1e6) return '$' + (n/1e6).toFixed(1) + 'M';
+  if (n >= 1e3) return '$' + (n/1e3).toFixed(0) + 'K';
+  return '$' + n;
+};
+const pColor = v => v >= 0.7 ? 'var(--green)' : v >= 0.4 ? 'var(--amber)' : 'var(--red)';
+/* Si el gestor escribió ESTADO en el Sheet, lo respetamos.
+   Si está vacío, lo derivamos automáticamente de Ci/Ti. */
+const deriveStatus = (cs, ts, manual) => {
+  if (manual) {
+    const m = String(manual).trim().toLowerCase();
+    if (m.startsWith('compl')) return 'Completada';
+    if (m.startsWith('en pro') || m.startsWith('progr')) return 'En progreso';
+    if (m.startsWith('no')) return 'No iniciada';
+  }
+  if (!ts || ts <= 0) return 'No iniciada';
+  if (cs >= ts) return 'Completada';
+  if (cs <= 0) return 'No iniciada';
+  return 'En progreso';
+};
+const normWeight = w => {
+  const v = +w || 0;
+  return v > 1 ? v / 100 : v;
+};
+
+/* parsea respuesta de Sheets API: data.values es [[headers], [row1], ...] */
+function rowsFromSheet(values) {
+  if (!values || !values.length) return [];
+  const [headers, ...rows] = values;
+  return rows.map(r => Object.fromEntries(headers.map((h, i) => [h, r[i]])));
+}
+
+/* ═══════════════ APP ═══════════════ */
+
+function App() {
+  const [proj, setProj]   = useState([]);
+  const [acts, setActs]   = useState([]);
+  const [tab, setTab]     = useState('General');
+  const [fEje, setFEje]   = useState('Todos');
+  const [fEst, setFEst]   = useState('Todos');
+  const [fPGD, setFPGD]   = useState('Todos');
+  const [fResp, setFResp] = useState('Todos');
+  const [search, setSearch] = useState('');
+  const [exp, setExp]     = useState({});
+  const [src, setSrc]     = useState(null);
+  const [load, setLoad]   = useState(true);
+  const [upd, setUpd]     = useState(null);
+  const [refr, setRefr]   = useState(false);
+  const [err, setErr]     = useState('');
+
+  /* ─── Carga desde Google Sheets API v4 ─── */
+  function doFetch(isR) {
+    if (isR) setRefr(true); else setLoad(true);
+    setErr('');
+    const u = (tab) => `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${encodeURIComponent(tab)}?key=${API_KEY}`;
+    Promise.all([
+      fetch(u(TAB_PROY)).then(r => r.json()),
+      fetch(u(TAB_ACT)).then(r => r.json())
+    ]).then(([rp, ra]) => {
+      if (rp.error || ra.error) {
+        const m = (rp.error || ra.error).message || 'Error desconocido';
+        throw new Error(m);
+      }
+      const pd = rowsFromSheet(rp.values);
+      const ad = rowsFromSheet(ra.values);
+      setProj(pd.map(r => ({
+        id: +(r.ID_PROYECTO || 0),
+        eje: +(r.EJE_PLAN_ACCION || 0),
+        nombre: r.NOMBRE_PROYECTO || '',
+        dep: r.DEPENDENCIA_ENCARGADA || '',
+        resp: r.PERSONA_RESPONSABLE || r.RESPONSABLE || '—',
+        pgd: r.EJE_PGD || '',
+        pres: +(r.PRESUPUESTO_INICIAL || 0),
+        ejec: +(r.EJECUCION_PRESUPUESTO || 0),
+        est: r.ESTADO_PROYECTO || 'Activo',
+        gestor: r.GESTOR_ENCARGADO || '',
+        obs: r.OBSERVACIONES_GENERALES || r.OBSERVACIONES || ''
+      })).filter(r => r.id));
+      setActs(ad.map(r => ({
+        idP: +(r.ID_PROYECTO || 0),
+        idA: r.ID_ACTIVIDAD || '',
+        nom: r.NOMBRE_ACTIVIDAD || '',
+        w: normWeight(r.PESO_Wi),
+        ts: +(r.TOTAL_SUBACTIVIDADES || 0),
+        cs: +(r.SUBACT_COMPLETADAS || 0),
+        est: r.ESTADO || '',
+        ds: r.DESCRIPCION_AVANCE || '',
+        fecha: r.FECHA_ACTUALIZACION || '',
+        resp: r.RESPONSABLE || '',
+        obs: r.OBSERVACIONES || ''
+      })).filter(r => r.idP));
+      setSrc('sheets'); setUpd(new Date()); setLoad(false); setRefr(false);
+    }).catch(e => {
+      console.warn('Sheets error:', e.message);
+      setErr(e.message); setLoad(false); setRefr(false);
+      if (!isR) doDemo();
+    });
+  }
+
+  function doDemo() { setProj(DEMO_P); setActs(DEMO_A); setSrc('demo'); setLoad(false); }
+
+  useEffect(() => {
+    if (SHEET_ID && API_KEY) doFetch(false); else doDemo();
+  }, []);
+
+  /* ─── Carga desde Excel local (modo admin) ─── */
+  function doFile(e) {
+    const f = e.target.files[0]; if (!f) return; setLoad(true);
+    const rd = new FileReader();
+    rd.onload = ev => {
+      try {
+        const wb = XLSX.read(ev.target.result, { type: 'binary' });
+        const sP = wb.Sheets[TAB_PROY] || wb.Sheets[wb.SheetNames[0]];
+        const sA = wb.Sheets[TAB_ACT]  || wb.Sheets[wb.SheetNames[1]];
+        const s1 = XLSX.utils.sheet_to_json(sP);
+        const s2 = XLSX.utils.sheet_to_json(sA);
+        setProj(s1.map(r => ({
+          id: +(r.ID_PROYECTO || 0), eje: +(r.EJE_PLAN_ACCION || 0),
+          nombre: r.NOMBRE_PROYECTO || '', dep: r.DEPENDENCIA_ENCARGADA || '',
+          resp: r.PERSONA_RESPONSABLE || r.RESPONSABLE || '—', pgd: r.EJE_PGD || '',
+          pres: +(r.PRESUPUESTO_INICIAL || 0), ejec: +(r.EJECUCION_PRESUPUESTO || 0),
+          est: r.ESTADO_PROYECTO || 'Activo', gestor: r.GESTOR_ENCARGADO || '', obs: r.OBSERVACIONES_GENERALES || r.OBSERVACIONES || ''
+        })).filter(r => r.id));
+        setActs(s2.map(r => ({
+          idP: +(r.ID_PROYECTO || 0), idA: r.ID_ACTIVIDAD || '',
+          nom: r.NOMBRE_ACTIVIDAD || '', w: normWeight(r.PESO_Wi),
+          ts: +(r.TOTAL_SUBACTIVIDADES || 0), cs: +(r.SUBACT_COMPLETADAS || 0),
+          est: r.ESTADO || '', ds: r.DESCRIPCION_AVANCE || '', fecha: r.FECHA_ACTUALIZACION || '',
+          resp: r.RESPONSABLE || '', obs: r.OBSERVACIONES || ''
+        })).filter(r => r.idP));
+        setSrc('file'); setUpd(new Date()); setErr('');
+      } catch (er) { alert('Error leyendo Excel: ' + er.message); }
+      setLoad(false);
+      e.target.value = '';
+    };
+    rd.readAsBinaryString(f);
+  }
+
+  /* ─── Listas derivadas ─── */
+  const deps = useMemo(() => [...new Set(proj.map(p => p.dep))].filter(Boolean).sort(), [proj]);
+  const responsables = useMemo(() => [...new Set(proj.map(p => p.resp))].filter(r => r && r !== '—').sort(), [proj]);
+  const pgds = useMemo(() => [...new Set(proj.map(p => p.pgd))].filter(Boolean).sort(), [proj]);
+
+  const tabList = ['General', ...deps.map(d => DSH[d] || d.substring(0, 8))];
+  const aDep = tab === 'General' ? null : deps.find(d => (DSH[d] || d.substring(0, 8)) === tab);
+
+  /* ─── Cálculos ─── */
+  function getAv(pid) {
+    const a = acts.filter(x => x.idP === pid);
+    if (!a.length) return 0;
+    const totalW = a.reduce((s, x) => s + x.w, 0);
+    if (totalW <= 0) return 0;
+    // si los pesos no suman 1.0, normalizamos
+    const norm = totalW > 0 ? a.reduce((s, x) => s + (x.w / totalW) * (Math.min(x.cs, x.ts) / Math.max(x.ts, 1)), 0) : 0;
+    return Math.min(1, Math.max(0, norm));
+  }
+  function getCn(pid) {
+    const a = acts.filter(x => x.idP === pid);
+    return {
+      t: a.length,
+      d: a.filter(x => deriveStatus(x.cs, x.ts, x.est) === 'Completada').length,
+      p: a.filter(x => deriveStatus(x.cs, x.ts, x.est) === 'En progreso').length,
+      n: a.filter(x => deriveStatus(x.cs, x.ts, x.est) === 'No iniciada').length
+    };
+  }
+  function getWeightWarn(pid) {
+    const a = acts.filter(x => x.idP === pid);
+    if (!a.length) return null;
+    const sum = a.reduce((s, x) => s + x.w, 0);
+    if (Math.abs(sum - 1) > 0.02) return sum;
+    return null;
+  }
+
+  /* ─── Filtros aplicados ─── */
+  const filt = useMemo(() => {
+    let f = aDep ? proj.filter(p => p.dep === aDep) : proj;
+    if (fEje !== 'Todos')  f = f.filter(p => p.eje === +fEje);
+    if (fEst !== 'Todos')  f = f.filter(p => p.est === fEst);
+    if (fPGD !== 'Todos')  f = f.filter(p => p.pgd === fPGD);
+    if (fResp !== 'Todos') f = f.filter(p => p.resp === fResp);
+    if (search.trim()) {
+      const q = search.trim().toLowerCase();
+      f = f.filter(p => p.nombre.toLowerCase().includes(q) || ('p' + p.id).includes(q) || String(p.id).includes(q) || (p.resp || '').toLowerCase().includes(q));
+    }
+    return f;
+  }, [proj, aDep, fEje, fEst, fPGD, fResp, search]);
+
+  function clearFilters() {
+    setFEje('Todos'); setFEst('Todos'); setFPGD('Todos'); setFResp('Todos'); setSearch('');
+  }
+  const hasFilters = fEje !== 'Todos' || fEst !== 'Todos' || fPGD !== 'Todos' || fResp !== 'Todos' || search.trim();
+
+  /* ─── Estadísticas globales ─── */
+  const gS = useMemo(() => {
+    const pids = new Set(filt.map(p => p.id));
+    const a = acts.filter(x => pids.has(x.idP));
+    const stats = a.map(x => deriveStatus(x.cs, x.ts, x.est));
+    return {
+      t: a.length,
+      d: stats.filter(s => s === 'Completada').length,
+      p: stats.filter(s => s === 'En progreso').length,
+      n: stats.filter(s => s === 'No iniciada').length,
+      av: filt.length ? filt.reduce((s, p) => s + getAv(p.id), 0) / filt.length : 0,
+      pres: filt.reduce((s, p) => s + p.pres, 0),
+      ejec: filt.reduce((s, p) => s + p.ejec, 0)
+    };
+  }, [filt, acts]);
+
+  /* ─── Por eje ─── */
+  const eStats = useMemo(() => [1, 2, 3, 4, 5].map(e => {
+    const ep = filt.filter(p => p.eje === e);
+    const pids = new Set(ep.map(p => p.id));
+    const ea = acts.filter(a => pids.has(a.idP));
+    const sts = ea.map(x => deriveStatus(x.cs, x.ts, x.est));
+    return {
+      eje: e,
+      t: ea.length,
+      d: sts.filter(s => s === 'Completada').length,
+      p: sts.filter(s => s === 'En progreso').length,
+      n: sts.filter(s => s === 'No iniciada').length,
+      av: ep.length ? ep.reduce((s, p) => s + getAv(p.id), 0) / ep.length : 0,
+      pc: ep.length
+    };
+  }).filter(e => e.pc > 0), [filt, acts]);
+
+  /* ─── Por dependencia ─── */
+  const dStats = useMemo(() => deps.map(d => {
+    const dp = filt.filter(p => p.dep === d); if (!dp.length) return null;
+    const pids = new Set(dp.map(p => p.id));
+    const da = acts.filter(a => pids.has(a.idP));
+    const sts = da.map(x => deriveStatus(x.cs, x.ts, x.est));
+    return {
+      dep: d, sh: DSH[d] || d.substring(0, 8),
+      t: da.length,
+      d: sts.filter(s => s === 'Completada').length,
+      p: sts.filter(s => s === 'En progreso').length,
+      n: sts.filter(s => s === 'No iniciada').length,
+      av: dp.reduce((s, p) => s + getAv(p.id), 0) / dp.length,
+      pc: dp.length
+    };
+  }).filter(Boolean).sort((a, b) => b.av - a.av), [filt, acts, deps]);
+
+  /* ─── Por eje PGD ─── */
+  const pgdStats = useMemo(() => {
+    const map = {};
+    filt.forEach(p => {
+      if (!p.pgd) return;
+      if (!map[p.pgd]) map[p.pgd] = { code: p.pgd, projects: [], avSum: 0 };
+      map[p.pgd].projects.push(p);
+      map[p.pgd].avSum += getAv(p.id);
+    });
+    return Object.values(map).map(x => ({
+      code: x.code,
+      pc: x.projects.length,
+      av: x.avSum / x.projects.length
+    })).sort((a, b) => a.code.localeCompare(b.code));
+  }, [filt, acts]);
+
+  /* ─── Header ─── */
+  const Header = (
+    <div className="hd">
+      <div className="hd-in">
+        <div className="hd-brand">
+          <div className="hd-logo">FM</div>
+          <div className="hd-t">
+            <h1>Seguimiento <em>Plan de Acción</em> 2024–2026</h1>
+            <p>Facultad de Minas · Universidad Nacional de Colombia, Sede Medellín</p>
+          </div>
+        </div>
+        <div className="hd-r">
+          <div className="hd-acts">
+            {SHEET_ID && API_KEY && (
+              <button className="btn btn-ref" onClick={() => doFetch(true)} disabled={refr}>
+                <span className={refr ? 'sp' : ''}>↻</span>
+                {refr ? ' Actualizando...' : ' Actualizar datos'}
+              </button>
+            )}
+            {isAdmin && <label className="btn btn-upl" htmlFor="fup">Cargar Excel</label>}
+            {isAdmin && <input id="fup" type="file" accept=".xlsx,.xls" onChange={doFile} style={{ display: 'none' }} />}
+            {isAdmin && <span className="b-admin">Admin</span>}
+          </div>
+          {upd && <div className="lu">Actualizado: {upd.toLocaleString('es-CO', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' })}</div>}
+        </div>
+      </div>
+    </div>
+  );
+
+  if (load) return (
+    <div>{Header}<div className="lds"><div className="ldsp"></div><div className="ldt">Cargando datos del plan de acción...</div></div></div>
+  );
+
+  /* ─── Status banner ─── */
+  const statusBanner = (
+    <div className={'sb' + (src === 'demo' && err ? ' sb-warn' : '')}>
+      <span className={'sd ' + (src === 'sheets' ? 'sd-l' : src === 'file' ? 'sd-f' : err ? 'sd-e' : 'sd-d')}></span>
+      {src === 'sheets' && <span>Conectado a Google Sheets · presiona <b>Actualizar datos</b> para sincronizar</span>}
+      {src === 'file' && <span>Datos cargados desde archivo Excel local</span>}
+      {src === 'demo' && !err && <span>Datos de demostración · configura el Google Sheet para ver datos reales</span>}
+      {src === 'demo' && err && <span><b>No se pudo conectar al Sheet:</b> {err.substring(0, 140)} · mostrando datos de demostración</span>}
+    </div>
+  );
+
+  return (
+    <div>
+      {Header}
+      <div className="tw">
+        <div className="tbs">
+          {tabList.map(t => {
+            const cn = t === 'General' ? proj.length : (proj.filter(p => (DSH[p.dep] || p.dep.substring(0, 8)) === t).length);
+            return (
+              <button key={t} className={'tb' + (tab === t ? ' on' : '')} onClick={() => { setTab(t); setExp({}); }}>
+                {t}<span className="tb-cnt">{cn}</span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      <div className="ct">
+        {statusBanner}
+
+        {/* KPIs */}
+        <div className="kg">
+          <div className="kp">
+            <div className="kl">Avance ponderado</div>
+            <div className="kv" style={{ color: pColor(gS.av) }}>{fmPct(gS.av)}</div>
+            <div className="ka" style={{ background: pColor(gS.av) }}></div>
+            <div className="ks">{filt.length} {filt.length === 1 ? 'proyecto' : 'proyectos'}</div>
+          </div>
+          <div className="kp">
+            <div className="kl">Total actividades</div>
+            <div className="kv">{gS.t}</div>
+            <div className="ka" style={{ background: 'var(--text3)' }}></div>
+            <div className="ks">en {filt.length} proyectos</div>
+          </div>
+          <div className="kp">
+            <div className="kl">Completadas</div>
+            <div className="kv" style={{ color: 'var(--green)' }}>{gS.d}</div>
+            <div className="ka" style={{ background: 'var(--green)' }}></div>
+            <div className="ks">{gS.t ? Math.round(gS.d / gS.t * 100) + '% del total' : ''}</div>
+          </div>
+          <div className="kp">
+            <div className="kl">En progreso</div>
+            <div className="kv" style={{ color: 'var(--amber)' }}>{gS.p}</div>
+            <div className="ka" style={{ background: 'var(--amber)' }}></div>
+            <div className="ks">{gS.t ? Math.round(gS.p / gS.t * 100) + '% del total' : ''}</div>
+          </div>
+          <div className="kp">
+            <div className="kl">No iniciadas</div>
+            <div className="kv" style={{ color: 'var(--red)' }}>{gS.n}</div>
+            <div className="ka" style={{ background: 'var(--red)' }}></div>
+            <div className="ks">{gS.t ? Math.round(gS.n / gS.t * 100) + '% del total' : ''}</div>
+          </div>
+        </div>
+
+        {/* Filtros */}
+        <div className="fr">
+          <span className="fl">Filtrar</span>
+          <input className="fi" type="search" placeholder="Buscar proyecto, ID o responsable..." value={search} onChange={e => setSearch(e.target.value)} />
+          <select className="fs" value={fEje} onChange={e => setFEje(e.target.value)}>
+            <option value="Todos">Todos los ejes</option>
+            {[1,2,3,4,5].map(e => <option key={e} value={e}>Eje {e}</option>)}
+          </select>
+          <select className="fs" value={fEst} onChange={e => setFEst(e.target.value)}>
+            <option value="Todos">Todos los estados</option>
+            {['Activo','Cerrado','Cancelado'].map(s => <option key={s} value={s}>{s}</option>)}
+          </select>
+          <select className="fs" value={fPGD} onChange={e => setFPGD(e.target.value)}>
+            <option value="Todos">Todos los ejes PGD</option>
+            {pgds.map(e => <option key={e} value={e}>{e}</option>)}
+          </select>
+          {responsables.length > 0 && (
+            <select className="fs" value={fResp} onChange={e => setFResp(e.target.value)}>
+              <option value="Todos">Todos los responsables</option>
+              {responsables.map(r => <option key={r} value={r}>{r}</option>)}
+            </select>
+          )}
+          {hasFilters && <button className="fbtn" onClick={clearFilters}>✕ Limpiar</button>}
+          <span className="fc">{filt.length} de {aDep ? proj.filter(p => p.dep === aDep).length : proj.length}</span>
+        </div>
+
+        {/* Leyenda */}
+        <div className="lg">
+          <span className="li"><span className="ld" style={{ background: 'var(--green)' }}></span>Completada</span>
+          <span className="li"><span className="ld" style={{ background: 'var(--amber)' }}></span>En progreso</span>
+          <span className="li"><span className="ld" style={{ background: 'var(--red)' }}></span>No iniciada</span>
+          <span className="li"><span className="ld" style={{ background: 'var(--purple)' }}></span>Proyecto cerrado</span>
+        </div>
+
+        {/* ════════════════ VISTA GENERAL ════════════════ */}
+        {tab === 'General' && (
+          <div>
+            {eStats.length === 0 && <div className="es">No hay proyectos con los filtros seleccionados.</div>}
+
+            {eStats.length > 0 && (
+              <>
+                <div className="st">Avance ponderado por eje del Plan de Acción</div>
+                {eStats.map((e, i) => (
+                  <div key={e.eje} className="ec" style={{ animationDelay: i * 0.06 + 's' }}>
+                    <div className="eh">
+                      <div className="ei">
+                        <div className="en">Eje {e.eje} · {e.pc} {e.pc === 1 ? 'proyecto' : 'proyectos'}</div>
+                        <div className="em">{EJES[e.eje]}</div>
+                      </div>
+                      <div className="ep" style={{ color: pColor(e.av) }}>{fmPct(e.av)}</div>
+                    </div>
+                    <div className="bt">
+                      <div className="bd" style={{ width: (e.t ? e.d / e.t * 100 : 0) + '%' }}></div>
+                      <div className="bp" style={{ width: (e.t ? e.p / e.t * 100 : 0) + '%' }}></div>
+                      <div className="bn" style={{ width: (e.t ? e.n / e.t * 100 : 0) + '%' }}></div>
+                    </div>
+                    <div className="bm">
+                      <div className="bml">
+                        <span>{e.d} completadas</span>
+                        <span>{e.p} en progreso</span>
+                        <span>{e.n} no iniciadas</span>
+                      </div>
+                      <span>{e.t} actividades</span>
+                    </div>
+                  </div>
+                ))}
+              </>
+            )}
+
+            {dStats.length > 0 && (
+              <div style={{ marginTop: 28 }}>
+                <div className="st">Avance por dependencia <span className="st-sub">click una fila para ver el detalle</span></div>
+                <div className="dtw">
+                  <table className="dt">
+                    <thead>
+                      <tr>
+                        <th>Dependencia</th><th>Proy.</th><th>Act.</th>
+                        <th>Compl.</th><th>Progr.</th><th>No ini.</th>
+                        <th>Avance ponderado</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {dStats.map(d => (
+                        <tr key={d.dep} onClick={() => setTab(d.sh)}>
+                          <td><span className="dn">{d.sh}</span> <span style={{color:'var(--text3)',fontSize:11}}>· {d.dep}</span></td>
+                          <td>{d.pc}</td>
+                          <td>{d.t}</td>
+                          <td style={{ color: 'var(--green)', fontWeight: 600 }}>{d.d}</td>
+                          <td style={{ color: 'var(--amber)', fontWeight: 600 }}>{d.p}</td>
+                          <td style={{ color: 'var(--red)', fontWeight: 600 }}>{d.n}</td>
+                          <td>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: 10, justifyContent:'center' }}>
+                              <div className="mb"><div className="mbf" style={{ width: fmPct(d.av), background: pColor(d.av) }}></div></div>
+                              <span style={{ fontWeight: 700, color: pColor(d.av), fontSize: 13.5, minWidth: 40 }}>{fmPct(d.av)}</span>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            )}
+
+            {pgdStats.length > 0 && (
+              <div style={{ marginTop: 28 }}>
+                <div className="st">Aporte al Plan Global de Desarrollo (PGD UNAL 2025–2027) <span className="st-sub">avance promedio por eje y programa del PGD</span></div>
+                <div className="pgdg">
+                  {pgdStats.map((g, i) => (
+                    <div key={g.code} className="pgdc" style={{ animationDelay: i * 0.04 + 's' }}>
+                      <div className="pgdh">
+                        <span className="pgdcode">{g.code}</span>
+                        <span className="pgdv" style={{ color: pColor(g.av) }}>{fmPct(g.av)}</span>
+                      </div>
+                      <div className="pgdm">{g.pc} {g.pc === 1 ? 'proyecto' : 'proyectos'}</div>
+                      <div className="pgdb"><div className="pgdbf" style={{ width: fmPct(g.av), background: pColor(g.av) }}></div></div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* ════════════════ VISTA POR DEPENDENCIA ════════════════ */}
+        {tab !== 'General' && (
+          <div>
+            <div className="st">{aDep || tab} <span className="st-sub">{filt.length} {filt.length === 1 ? 'proyecto' : 'proyectos'}</span></div>
+            {filt.length === 0 && <div className="es">No hay proyectos con los filtros seleccionados.</div>}
+
+            {filt.map((p, pi) => {
+              const pAv = getAv(p.id);
+              const pCn = getCn(p.id);
+              const pActs = acts.filter(x => x.idP === p.id);
+              const isOpen = exp[p.id];
+              const wWarn = getWeightWarn(p.id);
+              const bc = p.est === 'Cerrado' ? 'bg-c' : p.est === 'Cancelado' ? 'bg-x' : pAv >= 0.7 ? 'bg-d' : pAv >= 0.4 ? 'bg-p' : 'bg-n';
+              const ejecPct = p.pres > 0 ? p.ejec / p.pres : 0;
+
+              return (
+                <div key={p.id} className="pc" style={{ animationDelay: pi * 0.05 + 's' }}>
+                  <div className="ph" onClick={() => setExp(prev => ({ ...prev, [p.id]: !prev[p.id] }))}>
+                    <div className="pl">
+                      <div className={'ch' + (isOpen ? ' op' : '')}>▶</div>
+                      <div className="pi">
+                        <div className="pid">
+                          <span>P{p.id}</span>
+                          <span className={'bg ' + bc}>{p.est}</span>
+                          {p.pgd && <span className="bg bg-pgd">{p.pgd}</span>}
+                        </div>
+                        <div className="pnm" title={p.nombre}>{p.nombre}</div>
+                        <div className="pmeta">
+                          {p.resp && p.resp !== '—' && <span><b>Responsable:</b> {p.resp}</span>}
+                          {p.gestor && <span><b>Gestor:</b> {p.gestor}</span>}
+                          <span><b>Eje PA:</b> {p.eje}</span>
+                          {wWarn && <span className="warn-w" title={'Pesos suman ' + Math.round(wWarn*100) + '%, no 100%'}>⚠ pesos {Math.round(wWarn*100)}%</span>}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="pr">
+                      <div className="pbudget">
+                        <b>{fmCopShort(p.ejec)} / {fmCopShort(p.pres)}</b>
+                        <span>presupuesto {p.pres ? Math.round(ejecPct*100) + '%' : ''}</span>
+                      </div>
+                      <div>
+                        <div className="ppct" style={{ color: pColor(pAv) }}>{fmPct(pAv)}</div>
+                        <div className="pmt">{pCn.d}/{pCn.t} {pCn.t === 1 ? 'actividad' : 'actividades'}</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {isOpen && pActs.length > 0 && (
+                    <div className="atw">
+                      <table className="at">
+                        <thead>
+                          <tr>
+                            <th style={{ width: '3%' }}>#</th>
+                            <th style={{ width: '26%' }}>Actividad</th>
+                            <th style={{ width: '11%' }}>Peso Wi</th>
+                            <th style={{ width: '10%' }}>Subact.</th>
+                            <th style={{ width: '9%' }}>Aporte</th>
+                            <th style={{ width: '12%' }}>Estado</th>
+                            <th style={{ width: '17%' }}>Descripción</th>
+                            <th style={{ width: '12%' }}>Observaciones</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {pActs.map((a, i) => {
+                            const totalW = pActs.reduce((s, x) => s + x.w, 0);
+                            const wNorm = totalW > 0 ? a.w / totalW : 0;
+                            const ap = wNorm * (Math.min(a.cs, a.ts) / Math.max(a.ts, 1));
+                            const est = deriveStatus(a.cs, a.ts, a.est);
+                            const eb = est === 'Completada' ? 'bg-d' : est === 'En progreso' ? 'bg-p' : 'bg-n';
+                            return (
+                              <tr key={a.idA || i}>
+                                <td><span className="anm">{i + 1}</span></td>
+                                <td>
+                                  <div className="aname">{a.nom}</div>
+                                  {a.resp && <div style={{fontSize:10.5,color:'var(--text3)',marginTop:1}}>↳ {a.resp}{a.fecha && ' · ' + a.fecha}</div>}
+                                </td>
+                                <td><div className="pv"><span className="ptx">{fmPct(a.w)}</span><div className="pbr"><div className="pfl" style={{ width: Math.min(100, a.w * 100) + '%' }}></div></div></div></td>
+                                <td><span className="spr" style={{ color: a.cs >= a.ts && a.ts > 0 ? 'var(--green)' : 'var(--text)' }}>{a.cs}/{a.ts}</span></td>
+                                <td><span className="apv" style={{ color: pColor(a.ts > 0 ? a.cs / a.ts : 0) }}>{fmPct(ap)}</span></td>
+                                <td><span className={'bg ' + eb}>{est}</span></td>
+                                <td><span className="adsc" title={a.ds}>{a.ds || '—'}</span></td>
+                                <td><span className="adsc" title={a.obs} style={{maxWidth:140}}>{a.obs || '—'}</span></td>
+                              </tr>
+                            );
+                          })}
+                        </tbody>
+                      </table>
+                    </div>
+                  )}
+                  {isOpen && pActs.length === 0 && <div className="aem">Sin actividades registradas para este proyecto.</div>}
+                </div>
+              );
+            })}
+          </div>
+        )}
+
+        <div className="ft">
+          <div className="ft1"><span className="ftu">Universidad Nacional de Colombia</span> · Sede Medellín</div>
+          <div className="ft2">Facultad de Minas · Plan de Acción 2024–2026 · Dashboard de seguimiento por actividades</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.render(<App />, document.getElementById('root'));
+</script>
+</body>
+</html>
