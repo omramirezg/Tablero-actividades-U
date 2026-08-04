@@ -7321,13 +7321,14 @@ function GestionEstrategica({ data, onOpenCentro }) {
           <div className="gest-kpi-num">{convenios}</div>
           <div className="gest-kpi-lbl">Convenios firmados</div>
         </div>
-        {totalCop > 0 && (
-          <div className="gest-kpi">
-            <div className="gest-kpi-icon" aria-hidden="true"><Icon name="trophy" size={22}/></div>
-            <div className="gest-kpi-num">{'$' + (totalCop / 1e6).toLocaleString('es-CO') + 'M'}</div>
-            <div className="gest-kpi-lbl">Recursos europeos movilizados</div>
-          </div>
-        )}
+        {/* Cifra FIJA verificada por la Decanatura (ago-2026): $2.200M gestionados con
+            aliados internacionales en el bienio. Antes se mostraba la suma de montoCop
+            de las alianzas listadas ($1.100M), que se conserva como dato interno. */}
+        <div className="gest-kpi">
+          <div className="gest-kpi-icon" aria-hidden="true"><Icon name="trophy" size={22}/></div>
+          <div className="gest-kpi-num">$2.200M</div>
+          <div className="gest-kpi-lbl">Recursos internacionales gestionados</div>
+        </div>
       </div>
 
       <div className="gest-list">
