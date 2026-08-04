@@ -2933,10 +2933,10 @@ const MC_PROGRAMA = {
   semestreActual: '2026-01',
   semestreReportado: '2025-2',
   totalSemestres: 8, /* 2022-02 a 2026-01 inclusive = 8 semestres consecutivos */
-  /* Acumulado histórico aproximado desde 2022-02 — la suma de todos los
-     estudiantes recibidos en los 7 semestres cerrados (estimación
-     conservadora basada en 2025-2 + tendencia previa). */
-  estudiantesAcumulados: 2500,
+  /* Acumulado histórico aproximado desde 2022-02 — cifra actualizada por el
+     equipo del programa (ago-2026): cerca de 4.000 estudiantes acompañados.
+     Se muestra como "≈4.000" (cerca de, no "más de"). */
+  estudiantesAcumulados: 4000,
   /* Cifras del último semestre cerrado (2025-2): los 3 informes de
      entrenadores (Mat. Básicas 159 + C. Integral 108 + C. Diferencial 73)
      + Ecuaciones Diferenciales 83 según el informe de gestión de la VICA
@@ -3096,7 +3096,7 @@ const MC_REELS = [
    El array se duplica en el componente para crear el loop infinito. */
 const KPI_MARQUEE = [
   /* 🎓 Estudiantes / formación */
-  { num: '2.000+',                         lbl: 'estudiantes acompañados por Minas Contigo desde 2022',          cat: 'edu'      },
+  { num: '≈4.000',                         lbl: 'estudiantes acompañados por Minas Contigo desde 2022',          cat: 'edu'      },
   /* Cifra OFICIAL definida por el usuario (jun-2026): 80% es la aprobación
      promedio del programa — la misma que muestra el modal de Minas Contigo.
      Antes este KPI decía 83% (promedio del semestre 2025-2) y convivía con
@@ -7992,7 +7992,7 @@ function MinasContigo({ programa, cursos, hitos, testimonios, fotos, reels, onOp
           <div className="mc-kpis">
             <div className="mc-kpi">
               <div className="mc-kpi-icon" aria-hidden="true"><Icon name="users" size={22}/></div>
-              <div className="mc-kpi-num">{programa.estudiantesAcumulados.toLocaleString('es-CO')}<sup>+</sup></div>
+              <div className="mc-kpi-num">≈{programa.estudiantesAcumulados.toLocaleString('es-CO')}</div>
               <div className="mc-kpi-lbl">Estudiantes acompañados</div>
               <div className="mc-kpi-sub">acumulado desde {programa.inicio}</div>
             </div>
