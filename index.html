@@ -73,6 +73,11 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
 .hd-t h1{color:#fff;font-size:19.5px;font-weight:600;letter-spacing:-.3px;line-height:1.3}
 .hd-t h1 em{font-style:normal;color:var(--gold)}
 .hd-t p{color:#9a9a9d;font-size:12.5px;margin-top:1px}
+/* Título y línea de la Decana en UNA sola fila horizontal (la línea se va al
+   costado del h1, separada por un divisor sutil). En pantallas angostas
+   vuelve a caer debajo del título. */
+.hd-t-row{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.hd-t-row .hd-decana-line{margin-top:0;padding-left:14px;border-left:1px solid rgba(255,255,255,.2)}
 .hd-decana-line{color:#cfcfd2;font-size:12.5px;margin-top:4px;letter-spacing:.1px}
 .hd-decana-line .hd-decana-role{color:var(--gold);font-weight:600;text-transform:uppercase;letter-spacing:1.2px;font-size:10.5px;margin-right:6px}
 .hd-decana-line .hd-decana-name{color:#fff;font-weight:500}
@@ -2497,6 +2502,9 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
   .hd-t p{font-size:11.5px;margin-top:2px}
   .hd-decana-line{font-size:11.5px;margin-top:3px}
   .hd-decana-line .hd-decana-role{font-size:9.5px;letter-spacing:.9px;margin-right:5px}
+  /* En móvil la línea de la Decana vuelve a caer debajo del título. */
+  .hd-t-row{flex-direction:column;align-items:flex-start;gap:0}
+  .hd-t-row .hd-decana-line{margin-top:3px;padding-left:0;border-left:none}
 
   /* CTA strip — grid 4-col uniforme y compacto: los 4 botones (Minas Contigo,
      Alianzas, Otros logros, Impacto) en UNA sola fila horizontal, repartidos
@@ -15752,20 +15760,24 @@ function App() {
         <div className="hd-brand">
           <div className="hd-logo"><img src={FM_LOGO_SRC} alt="Sello Facultad de Minas" /></div>
           <div className="hd-t">
-            <h1>Seguimiento <em>Plan de Acción</em> 2024–2026 · Facultad de Minas</h1>
-            <div className="hd-decana-line">
-              <span className="hd-decana-role">{(DEP_DIR['Decanatura'] && DEP_DIR['Decanatura'].role) || 'Decana'}</span>
-              {DEP_DIR['Decanatura'] ? (
-                <button
-                  type="button"
-                  className="hd-decana-name hd-link hd-link-btn"
-                  onClick={() => setDirOpen('Decanatura')}
-                  title="Ver tarjeta de la Decana">
-                  {DEP_DIR['Decanatura'].name}
-                </button>
-              ) : (
-                <span className="hd-decana-name">Eva Cristina Manotas Rodríguez</span>
-              )}
+            {/* Título y línea de la Decana en la MISMA fila (.hd-t-row); en
+                móvil el CSS las vuelve a apilar. */}
+            <div className="hd-t-row">
+              <h1>Seguimiento <em>Plan de Acción</em> 2024–2026 · Facultad de Minas</h1>
+              <div className="hd-decana-line">
+                <span className="hd-decana-role">{(DEP_DIR['Decanatura'] && DEP_DIR['Decanatura'].role) || 'Decana'}</span>
+                {DEP_DIR['Decanatura'] ? (
+                  <button
+                    type="button"
+                    className="hd-decana-name hd-link hd-link-btn"
+                    onClick={() => setDirOpen('Decanatura')}
+                    title="Ver tarjeta de la Decana">
+                    {DEP_DIR['Decanatura'].name}
+                  </button>
+                ) : (
+                  <span className="hd-decana-name">Eva Cristina Manotas Rodríguez</span>
+                )}
+              </div>
             </div>
           </div>
         </div>
