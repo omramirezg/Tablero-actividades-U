@@ -246,13 +246,15 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 .kg-2 .kl{font-size:10px;letter-spacing:1.4px;margin-bottom:10px}
 .kg-2 .ks{font-size:11.5px;margin-top:8px}
 .kg-2 .ka{width:44px;height:3px;margin-top:12px}
-.kp{position:relative;background:color-mix(in srgb, var(--accent, white) 4%, white);border-radius:var(--radius-lg);padding:22px 20px 20px;border:1px solid color-mix(in srgb, var(--accent, var(--border)) 14%, var(--border));box-shadow:var(--shadow);text-align:center;animation:fu .5s var(--ease) both;transition:transform .25s var(--ease),box-shadow .25s var(--ease),border-color .25s var(--ease),background .25s var(--ease);overflow:hidden}
-.kp::before{content:'';position:absolute;left:0;right:0;top:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent,var(--gold)) 30%,var(--accent,var(--gold)) 70%,transparent);opacity:.7}
-.kp:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);background:color-mix(in srgb, var(--accent, white) 6%, white);border-color:color-mix(in srgb, var(--accent, var(--border)) 22%, var(--border))}
+/* Tarjeta KPI SIN fondo ni borde de color (solicitud ago-2026): fondo blanco
+   plano y borde neutro. El color queda solo en el número y en la rayita. */
+.kp{position:relative;background:#fff;border-radius:var(--radius-lg);padding:22px 20px 20px;border:1px solid var(--border);box-shadow:var(--shadow);text-align:center;animation:fu .5s var(--ease) both;transition:transform .25s var(--ease),box-shadow .25s var(--ease),border-color .25s var(--ease);overflow:hidden}
+.kp:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);border-color:#d6dae3}
 .kp:nth-child(2){animation-delay:.05s}.kp:nth-child(3){animation-delay:.1s}.kp:nth-child(4){animation-delay:.15s}.kp:nth-child(5){animation-delay:.2s}
-.kl{font-size:9.5px;text-transform:uppercase;letter-spacing:1.2px;color:var(--text3);font-weight:600;margin-bottom:8px}
+/* Textos de la tarjeta en negro y negrita (el color vive solo en el número). */
+.kl{font-size:9.5px;text-transform:uppercase;letter-spacing:1.2px;color:var(--text);font-weight:700;margin-bottom:8px}
 .kv{font-size:34px;font-weight:800;letter-spacing:-1.6px;line-height:1;font-feature-settings:"tnum"}
-.ks{font-size:11px;color:var(--text3);margin-top:6px}
+.ks{font-size:11px;color:var(--text);font-weight:700;margin-top:6px}
 .ka{width:36px;height:3px;border-radius:2px;margin:10px auto 0;opacity:.85}
 
 /* Filters */
