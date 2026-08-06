@@ -83,11 +83,13 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
 .hd-decana-line{color:#cfcfd2;font-size:12.5px;margin-top:4px;letter-spacing:.1px}
 .hd-decana-line .hd-decana-role{color:var(--gold);font-weight:600;text-transform:uppercase;letter-spacing:1.2px;font-size:10.5px;margin-right:6px}
 .hd-decana-line .hd-decana-name{color:#fff;font-weight:500}
-/* Link sobre fondo oscuro (header) — subrayado dorado discreto al hover */
-a.hd-link{color:inherit;text-decoration:none;border-bottom:1px dashed rgba(255,255,255,.25);transition:color .18s var(--ease),border-color .18s var(--ease);padding-bottom:1px;cursor:pointer}
+/* Link sobre fondo oscuro (header). El borde PUNTEADO se cambió por un
+   subrayado sólido (solicitud ago-2026): todo hipervínculo del tablero debe
+   distinguirse de un vistazo, sin depender del hover ni del color. */
+a.hd-link{color:inherit;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.55);transition:color .18s var(--ease),border-color .18s var(--ease);padding-bottom:1px;cursor:pointer}
 a.hd-link:hover{color:var(--gold);border-bottom-color:var(--gold)}
 /* Link sobre fondo claro (.dep-hero) — mismo concepto pero adaptado al tema claro */
-a.dep-link{color:inherit;text-decoration:none;border-bottom:1px dashed rgba(249,174,0,.35);transition:color .18s var(--ease),border-color .18s var(--ease);padding-bottom:1px;cursor:pointer;display:inline-block}
+a.dep-link{color:inherit;text-decoration:none;border-bottom:1px solid rgba(184,122,0,.65);transition:color .18s var(--ease),border-color .18s var(--ease);padding-bottom:1px;cursor:pointer;display:inline-block}
 a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 /* Botón con apariencia de link (para abrir el popover de directiva). Reset
    completo del <button> nativo y heredando las clases hd-link / dep-link. */
@@ -120,7 +122,7 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 .dpv-row-extra .dpv-row-ico{margin-top:2px}
 .dpv-row-stack{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1}
 .dpv-row-sub{font-size:10px;color:var(--text3);font-weight:600;text-transform:uppercase;letter-spacing:.7px;line-height:1.35}
-.dpv-row-link{color:var(--text);text-decoration:none;border-bottom:1px solid transparent;transition:color .15s var(--ease),border-color .15s var(--ease);word-break:break-all}
+.dpv-row-link{color:var(--text);text-decoration:none;border-bottom:1px solid var(--text3);transition:color .15s var(--ease),border-color .15s var(--ease);word-break:break-all}
 .dpv-row-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 .dpv-row-txt{color:var(--text)}
 .dpv-cta{display:inline-flex;align-items:center;gap:8px;margin-top:18px;padding:9px 16px;background:var(--text);color:#fff;font-size:12px;font-weight:600;letter-spacing:.2px;border-radius:8px;text-decoration:none;transition:background .15s var(--ease),transform .15s var(--ease),box-shadow .15s var(--ease);box-shadow:0 1px 2px rgba(0,0,0,.08)}
@@ -572,8 +574,8 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 .evhd svg{color:var(--gold)}
 .evlst{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:5px}
 .evlst li{font-size:12px;line-height:1.4}
-.evlst a{color:var(--gold-dark);text-decoration:none;font-weight:500;word-break:break-all;transition:color .15s var(--ease)}
-.evlst a:hover{color:var(--gold);text-decoration:underline}
+.evlst a{color:var(--gold-dark);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px;font-weight:500;word-break:break-all;transition:color .15s var(--ease)}
+.evlst a:hover{color:var(--gold);text-decoration-thickness:2px}
 /* Badge en la meta-line para anticipar que el proyecto tiene evidencias. */
 .ev-badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:600;background:rgba(249,174,0,.10);color:var(--gold-dark);border:1px solid rgba(249,174,0,.22);letter-spacing:.2px}
 .at{width:100%;min-width:680px;border-collapse:collapse}
@@ -672,7 +674,10 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 .adscm-evs a{display:flex;align-items:center;gap:10px;padding:10px 12px;background:#fafafa;border:1px solid var(--border-soft);border-radius:8px;font-size:12.5px;color:var(--text2);text-decoration:none;line-height:1.4;transition:background .15s var(--ease),border-color .15s var(--ease),color .15s var(--ease),transform .15s var(--ease);word-break:break-all}
 .adscm-evs a:hover{background:#fffaf0;border-color:var(--gold);color:var(--text);transform:translateX(2px)}
 .adscm-evs-ico{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;flex-shrink:0;background:linear-gradient(135deg,var(--gold) 0%,var(--gold-dark) 100%);color:#fff;border-radius:6px;font-size:12px;font-weight:700;box-shadow:0 1px 3px rgba(249,174,0,.3)}
-.adscm-evs-url{flex:1;min-width:0;font-family:'SFMono-Regular',Consolas,'Liberation Mono',Menlo,monospace;font-size:11.5px}
+/* La tarjeta completa NO se subraya (rompería el recuadro), pero el texto de
+   adentro SÍ: es lo que el usuario lee como "el enlace". */
+.adscm-evs-url{flex:1;min-width:0;font-family:'SFMono-Regular',Consolas,'Liberation Mono',Menlo,monospace;font-size:11.5px;text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+.adscm-evs a:hover .adscm-evs-url,.adscm-evs-imgfail:hover .adscm-evs-url{text-decoration-thickness:2px}
 /* Evidencias fotográficas (fotos de Drive o imágenes directas) — se
    muestran COMPLETAS e inline en pantalla, no como miniatura recortada.
    Cada foto ocupa hasta el ancho del panel, con la altura natural (sin
@@ -696,8 +701,8 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
   .adscm-body{padding:16px 20px 20px}
   .adscm-title{font-size:15.5px}
 }
-.alink{color:var(--blue);text-decoration:none;font-size:13px}
-.alink:hover{text-decoration:underline}
+.alink{color:var(--blue);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px;font-size:13px}
+.alink:hover{text-decoration-thickness:2px}
 .aem{padding:22px;text-align:center;color:var(--text3);font-size:12.5px;border-top:1px solid var(--border);background:var(--bg4)}
 .warn-w{display:inline-block;padding:2px 7px;border-radius:4px;font-size:10px;font-weight:600;background:#fef3d0;color:var(--amber-dark);margin-left:8px;border:1px solid rgba(146,86,3,.15)}
 
@@ -1035,10 +1040,25 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 .gd-card::before{content:'';position:absolute;left:0;right:0;top:0;height:4px;z-index:3;
     background:linear-gradient(90deg,var(--gold-dark),var(--gold) 50%,var(--gold-dark));
     border-radius:var(--radius-xl) var(--radius-xl) 0 0}
-.gd-eye{text-align:center;color:#e6b54a;font-size:10.5px;letter-spacing:2.2px;text-transform:uppercase;
-    font-weight:700;padding:28px 56px 0;margin-bottom:10px}
+/* Cabecera con el ESCUDO de la Facultad a la izquierda (solicitud ago-2026),
+   siguiendo el mismo patrón que los heroes de "Gestión estratégica" y "Otros
+   logros": sello absoluto a la izquierda, títulos centrados en el resto del
+   ancho. Se usa el sello A COLOR (FM_LOGO_SRC) porque la tarjeta es oscura —
+   la versión line-art negra desaparecería. */
+.gd-head{position:relative}
+.gd-head-logo{position:absolute;left:22px;top:24px;width:62px;height:62px;z-index:2;
+    display:flex;align-items:center;justify-content:center;
+    filter:drop-shadow(0 2px 6px rgba(0,0,0,.5))}
+.gd-head-logo img{width:100%;height:100%;object-fit:contain;display:block}
+/* El padding lateral sube a 88px SIMÉTRICO (no solo a la izquierda) para que el
+   bloque siga centrado en la tarjeta. 88px es el máximo que deja al título
+   "Una Facultad conectada con el mundo" en UN renglón: mide 551px y con este
+   padding le quedan 573px. Con 104px se partía en dos. El antetítulo afloja el
+   tracking de 2.2px a 1.8px por la misma razón. */
+.gd-eye{text-align:center;color:#e6b54a;font-size:10.5px;letter-spacing:1.8px;text-transform:uppercase;
+    font-weight:700;padding:28px 88px 0;margin-bottom:10px}
 .gd-title{text-align:center;font-family:'Playfair Display',Georgia,serif;font-size:28px;line-height:1.15;
-    color:#f6f5f3;font-weight:700;padding:0 30px;margin-bottom:8px}
+    color:#f6f5f3;font-weight:700;padding:0 88px;margin-bottom:8px}
 .gd-title em{font-style:italic;color:var(--gold)}
 .gd-sub{text-align:center;color:#a8a29e;font-size:13px;font-style:italic;line-height:1.5;max-width:540px;margin:0 auto 6px;padding:0 30px}
 .gd-section{padding:0 34px;margin-top:15px}
@@ -1085,6 +1105,9 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 .gd-count{color:#a8a29e;font-size:11px;font-weight:600;margin-left:2px}
 @media(max-width:640px){
   .gd-overlay{padding:12px}
+  /* En móvil el sello se oculta: no hay ancho para reservarle una columna sin
+     estrangular el título (misma decisión que en los heroes ≤1080px). */
+  .gd-head-logo{display:none}
   .gd-eye{padding:24px 46px 0;font-size:9.5px;letter-spacing:1.6px}
   .gd-title{font-size:21px;padding:0 18px}
   .gd-sub{padding:0 18px}
@@ -2179,8 +2202,8 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 .lgr-item-dep{font-size:11px;color:var(--text3);font-weight:600;letter-spacing:.2px}
 .lgr-item-proj{font-size:11px;color:var(--text3)}
 .lgr-item-proj b{color:var(--text2);font-weight:600;text-transform:uppercase;font-size:9.5px;letter-spacing:.8px;margin-right:4px}
-.lgr-item-link{font-size:11px;color:#3a4d6b;text-decoration:none;font-weight:600}
-.lgr-item-link:hover{text-decoration:underline}
+.lgr-item-link{font-size:11px;color:#3a4d6b;text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px;font-weight:600}
+.lgr-item-link:hover{text-decoration-thickness:2px}
 
 /* ≤1080px: el escudo se OCULTA (no forzarlo donde aprieta el título —
    el hero queda centrado y limpio). Solo en desktop amplio (>1080px). */
@@ -2427,8 +2450,8 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 .gest-card-monto{display:inline-flex;align-items:center;padding:3px 10px;border-radius:14px;font-size:11px;font-weight:800;letter-spacing:-.2px;background:linear-gradient(135deg,var(--gold) 0%,var(--gold-dark) 100%);color:#fff;font-feature-settings:"tnum";box-shadow:0 1px 3px rgba(249,174,0,.35)}
 .gest-card-link{font-size:11px;color:var(--text3);display:inline-flex;align-items:center;gap:4px}
 .gest-card-link b{color:var(--text2);font-weight:600;text-transform:uppercase;font-size:9.5px;letter-spacing:.8px;margin-right:4px}
-.gest-card-link a{color:var(--gold-dark);text-decoration:none;font-weight:600;font-size:11px}
-.gest-card-link a:hover{text-decoration:underline}
+.gest-card-link a{color:var(--gold-dark);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px;font-weight:600;font-size:11px}
+.gest-card-link a:hover{text-decoration-thickness:2px}
 .gest-card-aside{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0;min-width:90px}
 .gest-card-status{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:14px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;line-height:1.2}
 .gest-card-status-ok{background:var(--green-light);color:var(--green-dark);border:1px solid rgba(22,163,74,.2)}
@@ -5602,7 +5625,7 @@ function EvidImg({ thumbs, full }) {
     return (
       <a href={full} target="_blank" rel="noopener noreferrer" className="adscm-evs-imgfail" title="Abrir la foto en Google Drive">
         <span className="adscm-evs-ico" aria-hidden="true">🖼</span>
-        Ver foto en Drive
+        <span className="adscm-evs-url">Ver foto en Drive</span>
       </a>
     );
   }
@@ -6510,9 +6533,14 @@ function GestionDestacada({ open, onClose }) {
     <div className="gd-overlay" role="dialog" aria-modal="true" aria-label="Gestión destacada de la Decanatura" onClick={onClose}>
       <div className="gd-card" ref={cardRef} onClick={(e) => e.stopPropagation()}>
         <button className="wel-close" onClick={onClose} aria-label="Cerrar">×</button>
-        <div className="gd-eye">{s.eye}</div>
-        <div className="gd-title">{s.titulo}</div>
-        {s.sub && <div className="gd-sub">{s.sub}</div>}
+        <div className="gd-head">
+          <div className="gd-head-logo" aria-hidden="true">
+            <img src={FM_LOGO_SRC} alt="" />
+          </div>
+          <div className="gd-eye">{s.eye}</div>
+          <div className="gd-title">{s.titulo}</div>
+          {s.sub && <div className="gd-sub">{s.sub}</div>}
+        </div>
         {s.secciones.map((sec, i) => (
           <div key={i} className="gd-section">
             <div className="gd-section-title">{sec.t}</div>
