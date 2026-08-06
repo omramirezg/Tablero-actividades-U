@@ -1208,9 +1208,11 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 .cnh-eyebrow-star{color:var(--gold);font-size:11px;letter-spacing:0}
 .cnh-grid{display:grid;grid-template-columns:1fr 1px 1fr;align-items:stretch}
 .cnh-divider{background:linear-gradient(180deg,transparent,var(--border) 18%,var(--border) 82%,transparent)}
-.cnh-side{position:relative;padding:24px 28px 22px;display:flex;flex-direction:column;gap:14px;cursor:pointer;transition:background .25s var(--ease),transform .25s var(--ease);background:linear-gradient(180deg,color-mix(in srgb,var(--cn-color) 6%,#fff) 0%,#fff 80%)}
-.cnh-side:hover{background:linear-gradient(180deg,color-mix(in srgb,var(--cn-color) 11%,#fff) 0%,color-mix(in srgb,var(--cn-color) 3%,#fff) 80%);transform:translateY(-1px)}
-.cnh-side::before{content:'';position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,transparent,var(--cn-color) 30%,var(--cn-color) 70%,transparent);opacity:.85}
+/* Paneles de los Centros SIN fondo de color (solicitud ago-2026): fondo blanco
+   plano y sin barra superior tintada. El color institucional del Centro sigue
+   vivo en el logo, el rótulo y la cifra. */
+.cnh-side{position:relative;padding:24px 28px 22px;display:flex;flex-direction:column;gap:14px;cursor:pointer;transition:background .25s var(--ease),transform .25s var(--ease);background:#fff}
+.cnh-side:hover{background:var(--bg4);transform:translateY(-1px)}
 .cnh-side-hd{display:flex;align-items:center;gap:14px}
 .cnh-logo{flex-shrink:0;width:54px;height:54px;border-radius:50%;background:#fff;border:2px solid var(--cn-color);display:flex;align-items:center;justify-content:center;color:var(--cn-color);box-shadow:0 4px 14px color-mix(in srgb,var(--cn-color) 22%,transparent)}
 .cnh-logo svg{width:30px;height:30px}
