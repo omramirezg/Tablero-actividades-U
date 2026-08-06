@@ -151,9 +151,10 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
    institucional). Tonos suaves, sin saturación agresiva. */
 .btn-mc{background:linear-gradient(180deg,rgba(120,142,118,.18),rgba(120,142,118,.10));color:#fff;border:1px solid rgba(155,176,154,.5);font-weight:600;letter-spacing:.15px;position:relative;padding:8px 14px 8px 12px}
 .btn-mc:hover{background:linear-gradient(180deg,rgba(120,142,118,.30),rgba(120,142,118,.18));border-color:#9bb09a;transform:translateY(-1px);box-shadow:0 4px 14px rgba(120,142,118,.32);color:#fff}
-.btn-mc-ico{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;background:linear-gradient(135deg,#34d399,#10b981);border-radius:7px;color:#fff;box-shadow:0 2px 6px -1px rgba(16,185,129,.45),inset 0 1px 0 rgba(255,255,255,.25);transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
-.btn-mc:hover .btn-mc-ico{transform:scale(1.08) rotate(-3deg);box-shadow:0 3px 10px -1px rgba(16,185,129,.6),inset 0 1px 0 rgba(255,255,255,.3)}
-.btn-mc-ico svg{width:14px;height:14px;stroke-width:2.2}
+/* Icono SIN caja (solicitud ago-2026): solo el trazo, del color del botón. */
+.btn-mc-ico{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;color:#34d399;transition:transform .2s var(--ease),color .2s var(--ease)}
+.btn-mc:hover .btn-mc-ico{transform:scale(1.1);color:#6ee7b7}
+.btn-mc-ico svg{width:19px;height:19px;stroke-width:2}
 .btn-mc-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#b8cdb6;box-shadow:0 0 0 0 rgba(184,205,182,.6);animation:mcPulse 2.6s ease-in-out infinite;margin-left:2px;flex-shrink:0}
 @keyframes mcPulse{
   0%,100%{box-shadow:0 0 0 0 rgba(184,205,182,.55)}
@@ -165,15 +166,16 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
    y un pulse suave en el dot para llamar la atención sin ser molesto. */
 .btn-gest{background:linear-gradient(180deg,rgba(249,174,0,.15),rgba(249,174,0,.08));color:#fff;border:1px solid rgba(249,174,0,.45);font-weight:600;letter-spacing:.15px;position:relative;padding:8px 14px 8px 12px}
 .btn-gest:hover{background:linear-gradient(180deg,rgba(249,174,0,.28),rgba(249,174,0,.18));border-color:var(--gold);transform:translateY(-1px);box-shadow:0 4px 14px rgba(249,174,0,.32);color:#fff}
-.btn-gest-ico{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;background:linear-gradient(135deg,#f9ae00,#b87a00);border-radius:7px;color:#fff;box-shadow:0 2px 6px -1px rgba(217,119,6,.5),inset 0 1px 0 rgba(255,255,255,.3);transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
-.btn-gest:hover .btn-gest-ico{transform:scale(1.08) rotate(-3deg);box-shadow:0 3px 10px -1px rgba(217,119,6,.65),inset 0 1px 0 rgba(255,255,255,.35)}
-.btn-gest-ico svg{width:14px;height:14px;stroke-width:2.2}
+/* Icono SIN caja (solicitud ago-2026): solo el trazo, del color del botón. */
+.btn-gest-ico{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;color:var(--gold);transition:transform .2s var(--ease),color .2s var(--ease)}
+.btn-gest:hover .btn-gest-ico{transform:scale(1.1);color:#ffc44d}
+.btn-gest-ico svg{width:19px;height:19px;stroke-width:2}
 .btn-gest-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 0 rgba(249,174,0,.6);animation:gestPulse 2.4s ease-in-out infinite;margin-left:2px;flex-shrink:0}
 /* Botón "Impacto humano" — reusa el layout de .btn-gest; solo cambia el color a rosa. */
 .btn-hum{background:linear-gradient(180deg,rgba(190,24,93,.18),rgba(190,24,93,.10));border-color:rgba(236,72,153,.5)}
 .btn-hum:hover{background:linear-gradient(180deg,rgba(190,24,93,.30),rgba(190,24,93,.18));border-color:#ec4899;box-shadow:0 4px 14px rgba(190,24,93,.32)}
-.btn-hum .btn-gest-ico{background:linear-gradient(135deg,#fb7185,#e11d48);box-shadow:0 2px 6px -1px rgba(225,29,72,.5),inset 0 1px 0 rgba(255,255,255,.3)}
-.btn-hum:hover .btn-gest-ico{box-shadow:0 3px 10px -1px rgba(225,29,72,.65),inset 0 1px 0 rgba(255,255,255,.35)}
+.btn-hum .btn-gest-ico{color:#fb7185}
+.btn-hum:hover .btn-gest-ico{color:#fda4af}
 .btn-hum .btn-gest-dot{background:#f9a8c4;box-shadow:0 0 0 0 rgba(236,72,153,.6)}
 @keyframes gestPulse{
   0%,100%{box-shadow:0 0 0 0 rgba(249,174,0,.55)}
@@ -181,9 +183,10 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 }
 .btn-lgr{background:linear-gradient(180deg,rgba(58,77,107,.18),rgba(58,77,107,.10));color:#fff;border:1px solid rgba(95,121,158,.5);font-weight:600;letter-spacing:.15px;position:relative;padding:8px 14px 8px 12px}
 .btn-lgr:hover{background:linear-gradient(180deg,rgba(58,77,107,.30),rgba(58,77,107,.18));border-color:#7d99c3;transform:translateY(-1px);box-shadow:0 4px 14px rgba(58,77,107,.32);color:#fff}
-.btn-lgr-ico{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;background:linear-gradient(135deg,#38bdf8,#0284c7);border-radius:7px;color:#fff;box-shadow:0 2px 6px -1px rgba(2,132,199,.5),inset 0 1px 0 rgba(255,255,255,.3);transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
-.btn-lgr:hover .btn-lgr-ico{transform:scale(1.08) rotate(-3deg);box-shadow:0 3px 10px -1px rgba(2,132,199,.65),inset 0 1px 0 rgba(255,255,255,.35)}
-.btn-lgr-ico svg{width:14px;height:14px;stroke-width:2.2}
+/* Icono SIN caja (solicitud ago-2026): solo el trazo, del color del botón. */
+.btn-lgr-ico{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;color:#7dd3fc;transition:transform .2s var(--ease),color .2s var(--ease)}
+.btn-lgr:hover .btn-lgr-ico{transform:scale(1.1);color:#bae6fd}
+.btn-lgr-ico svg{width:19px;height:19px;stroke-width:2}
 .btn-lgr-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#a3bce0;box-shadow:0 0 0 0 rgba(163,188,224,.6);animation:lgrPulse 2.8s ease-in-out infinite;margin-left:2px;flex-shrink:0}
 /* Labels dentro de los 3 CTA del header — wrap permite que el texto largo
    "Logros en alianzas estratégicas" se quiebre con elegancia en pantallas
@@ -5991,11 +5994,8 @@ function CentroHero({ projects, getAv, onOpen }) {
 
   return (
     <div className="cnh">
-      <div className="cnh-eyebrow">
-        {/* Estrellas ✦ a ambos lados removidas por solicitud — el eyebrow
-            queda limpio, solo el texto en uppercase dorado centrado. */}
-        Sello de la Decanatura · 2024–2026
-      </div>
+      {/* Franja "Sello de la Decanatura · 2024–2026" removida por solicitud
+          (ago-2026): la tarjeta arranca directamente con los dos Centros. */}
       <div className="cnh-grid">
         {renderSide('FDP')}
         <div className="cnh-divider"></div>
