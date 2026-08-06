@@ -45,8 +45,8 @@
 body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased;font-feature-settings:"cv11","ss01","ss03"}
 
 /* Accesibilidad — respetar preferencia de movimiento reducido del SO.
-   Desactiva animaciones pulse infinitas (btn-mc-dot, btn-gest-dot, btn-lgr-dot,
-   mcCurrentPulse) y reduce duraciones para usuarios con vértigo o sensibilidad. */
+   Desactiva animaciones pulse infinitas (mcCurrentPulse) y reduce duraciones
+   para usuarios con vértigo o sensibilidad. */
 @media (prefers-reduced-motion: reduce) {
   *,*::before,*::after{
     animation-duration:0.01ms !important;
@@ -157,39 +157,28 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 .btn-mc-ico{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;color:#34d399;transition:transform .2s var(--ease),color .2s var(--ease)}
 .btn-mc:hover .btn-mc-ico{transform:scale(1.1);color:#6ee7b7}
 .btn-mc-ico svg{width:19px;height:19px;stroke-width:2}
-.btn-mc-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#b8cdb6;box-shadow:0 0 0 0 rgba(184,205,182,.6);animation:mcPulse 2.6s ease-in-out infinite;margin-left:2px;flex-shrink:0}
-@keyframes mcPulse{
-  0%,100%{box-shadow:0 0 0 0 rgba(184,205,182,.55)}
-  50%{box-shadow:0 0 0 6px rgba(184,205,182,0)}
-}
+/* Punto que titilaba a la derecha del botón (.btn-mc-dot + @keyframes mcPulse)
+   removido por solicitud (ago-2026), igual que en los otros tres botones. */
 
 /* Botón "Alianzas estratégicas" en el header — diseñado para destacarse
-   sobre el fondo oscuro del header. Borde dorado sutil, ícono de globo,
-   y un pulse suave en el dot para llamar la atención sin ser molesto. */
+   sobre el fondo oscuro del header. Borde dorado sutil e ícono de globo. */
 .btn-gest{background:linear-gradient(180deg,rgba(249,174,0,.15),rgba(249,174,0,.08));color:#fff;border:1px solid rgba(249,174,0,.45);font-weight:600;letter-spacing:.15px;position:relative;padding:8px 14px 8px 12px}
 .btn-gest:hover{background:linear-gradient(180deg,rgba(249,174,0,.28),rgba(249,174,0,.18));border-color:var(--gold);transform:translateY(-1px);box-shadow:0 4px 14px rgba(249,174,0,.32);color:#fff}
 /* Icono SIN caja (solicitud ago-2026): solo el trazo, del color del botón. */
 .btn-gest-ico{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;color:var(--gold);transition:transform .2s var(--ease),color .2s var(--ease)}
 .btn-gest:hover .btn-gest-ico{transform:scale(1.1);color:#ffc44d}
 .btn-gest-ico svg{width:19px;height:19px;stroke-width:2}
-.btn-gest-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 0 rgba(249,174,0,.6);animation:gestPulse 2.4s ease-in-out infinite;margin-left:2px;flex-shrink:0}
 /* Botón "Impacto humano" — reusa el layout de .btn-gest; solo cambia el color a rosa. */
 .btn-hum{background:linear-gradient(180deg,rgba(190,24,93,.18),rgba(190,24,93,.10));border-color:rgba(236,72,153,.5)}
 .btn-hum:hover{background:linear-gradient(180deg,rgba(190,24,93,.30),rgba(190,24,93,.18));border-color:#ec4899;box-shadow:0 4px 14px rgba(190,24,93,.32)}
 .btn-hum .btn-gest-ico{color:#fb7185}
 .btn-hum:hover .btn-gest-ico{color:#fda4af}
-.btn-hum .btn-gest-dot{background:#f9a8c4;box-shadow:0 0 0 0 rgba(236,72,153,.6)}
-@keyframes gestPulse{
-  0%,100%{box-shadow:0 0 0 0 rgba(249,174,0,.55)}
-  50%{box-shadow:0 0 0 6px rgba(249,174,0,0)}
-}
 .btn-lgr{background:linear-gradient(180deg,rgba(58,77,107,.18),rgba(58,77,107,.10));color:#fff;border:1px solid rgba(95,121,158,.5);font-weight:600;letter-spacing:.15px;position:relative;padding:8px 14px 8px 12px}
 .btn-lgr:hover{background:linear-gradient(180deg,rgba(58,77,107,.30),rgba(58,77,107,.18));border-color:#7d99c3;transform:translateY(-1px);box-shadow:0 4px 14px rgba(58,77,107,.32);color:#fff}
 /* Icono SIN caja (solicitud ago-2026): solo el trazo, del color del botón. */
 .btn-lgr-ico{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;color:#7dd3fc;transition:transform .2s var(--ease),color .2s var(--ease)}
 .btn-lgr:hover .btn-lgr-ico{transform:scale(1.1);color:#bae6fd}
 .btn-lgr-ico svg{width:19px;height:19px;stroke-width:2}
-.btn-lgr-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#a3bce0;box-shadow:0 0 0 0 rgba(163,188,224,.6);animation:lgrPulse 2.8s ease-in-out infinite;margin-left:2px;flex-shrink:0}
 /* Labels dentro de los 3 CTA del header — wrap permite que el texto largo
    "Logros en alianzas estratégicas" se quiebre con elegancia en pantallas
    medianas sin saltar a su versión corta. */
@@ -199,10 +188,6 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
    un punto más grandes que el .btn base, para que el header se sienta
    proporcionado con el resto del dashboard. */
 .btn-mc,.btn-gest,.btn-lgr{font-size:13.5px}
-@keyframes lgrPulse{
-  0%,100%{box-shadow:0 0 0 0 rgba(163,188,224,.55)}
-  50%{box-shadow:0 0 0 6px rgba(163,188,224,0)}
-}
 .b-admin{font-size:9.5px;font-weight:600;color:var(--gold);background:rgba(249,174,0,.15);padding:3px 9px;border-radius:20px;letter-spacing:.5px;text-transform:uppercase;border:1px solid rgba(249,174,0,.25)}
 .lu{font-size:10.5px;color:#7c7c7c}
 .sp{display:inline-block;animation:spin .7s linear infinite}
@@ -1322,8 +1307,8 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 .cmodal-hd{position:relative;padding:30px 32px 26px;background:linear-gradient(135deg,var(--cn-color) 0%,var(--cn-color-dark) 100%);color:#fff;overflow:hidden}
 .cmodal-hd::before{content:'';position:absolute;right:-40px;top:-40px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.16) 0%,transparent 70%);pointer-events:none}
 .cmodal-hd-row{position:relative;display:flex;align-items:center;gap:18px}
-.cmodal-hd-logo{flex-shrink:0;width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.4);display:flex;align-items:center;justify-content:center;color:#fff;backdrop-filter:blur(4px)}
-.cmodal-hd-logo svg{width:34px;height:34px}
+/* .cmodal-hd-logo (círculo con el icono del Centro) removido por solicitud
+   (ago-2026) — junto con .cnh-logo de las tarjetas del home. */
 .cmodal-hd-titles{flex:1;min-width:0;padding-right:36px}
 .cmodal-hd-eye{font-size:9.5px;text-transform:uppercase;letter-spacing:2px;font-weight:700;opacity:.82;margin-bottom:4px}
 .cmodal-hd-name{font-size:24px;font-weight:700;letter-spacing:-.6px;line-height:1.15;margin-bottom:6px}
@@ -2593,9 +2578,8 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
   }
   .btn-mc-ico,.btn-gest-ico,.btn-lgr-ico{width:20px;height:20px;border-radius:6px;flex-shrink:0}
   .btn-mc-ico svg,.btn-gest-ico svg,.btn-lgr-ico svg{width:12px;height:12px}
-  /* Los dots pulsantes son decorativos: en mobile distraen y empujan el
-     layout, los ocultamos. La affordance del click sigue siendo clara. */
-  .btn-mc-dot,.btn-gest-dot,.btn-lgr-dot{display:none}
+  /* (Los dots pulsantes se eliminaron del todo en ago-2026; ya no hay nada
+     que ocultar aquí.) */
 
   /* Sticky en móvil lo maneja .hdwrap (header + tabs juntos), igual que en
      PC/tablet — header y dependencias SIEMPRE fijos. Solo reforzamos la
@@ -7406,7 +7390,8 @@ function CentroModal({ centro, projects, getAv, onClose, onOpenProject }) {
 
         <div className="cmodal-hd">
           <div className="cmodal-hd-row">
-            <div className="cmodal-hd-logo"><CentroIcon centro={centro.key} /></div>
+            {/* Icono circular del Centro removido por solicitud (ago-2026): la
+                cabecera arranca directamente con el rótulo y el nombre. */}
             <div className="cmodal-hd-titles">
               <div className="cmodal-hd-eye">Centro de Pensamiento</div>
               <div className="cmodal-hd-name">{centro.name}</div>
@@ -15875,7 +15860,6 @@ function App() {
                 </svg>
               </span>
               <span className="btn-lbl">Impacto</span>
-              <span className="btn-gest-dot" aria-hidden="true"></span>
             </button>
             )}
             {/* Botón "Gestión destacada" — reabre el carrusel de flyers de
@@ -15888,7 +15872,6 @@ function App() {
                 </svg>
               </span>
               <span className="btn-lbl">Gestión destacada</span>
-              <span className="btn-gest-dot" aria-hidden="true"></span>
             </button>
             {/* Botón "Minas Contigo": acceso permanente al modal del programa
                 de tutoría académica creado y liderado por la Decanatura.
@@ -15903,7 +15886,6 @@ function App() {
                 </svg>
               </span>
               <span className="btn-lbl">Minas Contigo</span>
-              <span className="btn-mc-dot" aria-hidden="true"></span>
             </button>
             {/* Botón "Logros en alianzas estratégicas": acceso permanente al modal de
                 Gestión Estratégica desde cualquier pestaña. El dot dorado
@@ -15920,7 +15902,6 @@ function App() {
               </span>
               <span className="btn-lbl btn-lbl-full">Alianzas estratégicas</span>
               <span className="btn-lbl btn-lbl-short">Alianzas</span>
-              <span className="btn-gest-dot" aria-hidden="true"></span>
             </button>
             {/* Botón "Otros logros": entregas concretas (laboratorios, aulas,
                 obras inauguradas) con video o noticia que las muestra. Color
@@ -15939,7 +15920,6 @@ function App() {
                 </svg>
               </span>
               <span className="btn-lbl">Otros logros</span>
-              <span className="btn-lgr-dot" aria-hidden="true"></span>
             </button>
             {/* Botón "Actualizar datos" eliminado: la carga ya es automática
                 al abrir el dashboard (useEffect inicial) y se vuelve a sincronizar
