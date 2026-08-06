@@ -836,6 +836,10 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
    cuando se cruza la mitad — los cards de la mitad 2 son visualmente
    idénticos a los de la mitad 1, así nunca se ve el salto. */
 .kpim{position:relative;margin:8px auto 24px;padding:6px 0}
+/* Desde ago-2026 el marquee va DEBAJO de la tarjeta de la dependencia. Como el
+   rótulo "Gestión" abre una sección nueva, se le da aire explícito en vez de
+   depender del colapso de márgenes con .dep-hero. */
+.dep-hero + .kpim{margin-top:26px}
 /* Track scrolleable. scrollbar-width:none + ::-webkit-scrollbar oculta la
    barra (el usuario navega con drag/swipe/flechas). scroll-behavior:auto
    porque el rAF necesita control fino — smooth solo se usa en scrollBy(). */
@@ -16166,20 +16170,11 @@ function App() {
       <div className={'ct' + (destMenuOpen ? ' ct-dest-shift' : '')}>
         {statusBanner}
 
-        {/* Marquee de KPIs específicos de la dependencia — va ARRIBA del
-            dep-hero (entre las pestañas y el nombre de la dep). Solo aparece
-            si la dep tiene un array definido en KPI_BY_DEP.
-            `key={aDep}` fuerza un REMOUNT del componente al cambiar de
-            pestaña — sin esto, React reusaría la misma instancia (mismo
-            wrapper DOM, misma posición JSX) y el useEffect [] no se volvería
-            a ejecutar → el scrollLeft no se resetearía → los KPIs de la
-            nueva dep aparecerían en la posición scrolleada de la anterior.
-            Con la key, React unmounta el viejo y monta uno nuevo desde 0. */}
-        {tab !== 'General' && aDep && KPI_BY_DEP[aDep] && (
-          <KpiMarquee key={aDep} items={KPI_BY_DEP[aDep]} ariaLabel={'Cifras destacadas de ' + (DEP_FULL[aDep] || aDep)} />
-        )}
-
         {/* Encabezado de dependencia (solo en pestañas de dependencia, NO en General).
+            Va PRIMERO (solicitud ago-2026): antes el marquee de cifras abría la
+            pestaña y uno leía los números sin saber todavía de qué dependencia
+            eran. Ahora primero se identifica la dependencia y su responsable, y
+            después vienen sus cifras.
             El nombre de la DEPENDENCIA enlaza a su página oficial (DEP_URL).
             El nombre de la PERSONA enlaza al directorio de directivos (DEP_DIR.url). */}
         {tab !== 'General' && aDep && (
@@ -16224,6 +16219,18 @@ function App() {
               />
             )}
           </div>
+        )}
+
+        {/* Marquee de KPIs específicos de la dependencia — va DEBAJO del
+            dep-hero. Solo aparece si la dep tiene un array en KPI_BY_DEP.
+            `key={aDep}` fuerza un REMOUNT del componente al cambiar de
+            pestaña — sin esto, React reusaría la misma instancia (mismo
+            wrapper DOM, misma posición JSX) y el useEffect [] no se volvería
+            a ejecutar → el scrollLeft no se resetearía → los KPIs de la
+            nueva dep aparecerían en la posición scrolleada de la anterior.
+            Con la key, React unmounta el viejo y monta uno nuevo desde 0. */}
+        {tab !== 'General' && aDep && KPI_BY_DEP[aDep] && (
+          <KpiMarquee key={aDep} items={KPI_BY_DEP[aDep]} ariaLabel={'Cifras destacadas de ' + (DEP_FULL[aDep] || aDep)} />
         )}
 
         {/* El muro "Impacto humano" ya NO va en el General: vive completo dentro
