@@ -267,6 +267,10 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 
 /* Section title */
 .st{font-size:14.5px;font-weight:700;margin-bottom:14px;color:var(--text);display:flex;align-items:center;gap:10px;letter-spacing:-.2px}
+/* Rótulo "Proyectos del Plan de Acción" en las pestañas de dependencia. Los 4px
+   de sangría lo alinean exactamente con el rótulo "Gestión" del marquee, que
+   lleva ese mismo margen — sin esto quedaban desfasados. */
+.st-proyectos{margin-left:4px}
 /* Barra dorada de los títulos de sección removida por solicitud (ago-2026). */
 .st-sub{font-size:11.5px;font-weight:400;color:var(--text3);margin-left:4px}
 
@@ -16284,6 +16288,16 @@ function App() {
             pantallas anchas y conserven impacto visual. */}
         {/* KPIs solo si NO es dependencia virtual (Secretaría no tiene
             proyectos del Plan, por eso se ocultan los KPIs ahí). */}
+        {/* Rótulo "Proyectos del Plan de Acción" — subió hasta ACÁ por solicitud
+            (ago-2026). Antes vivía abajo, justo encima de la lista, y las dos
+            tarjetas (Avance ponderado + Proyectos) quedaban huérfanas de título.
+            Ahora encabeza toda la sección: las dos cifras y la lista que sigue.
+            Solo en pestañas de dependencia — la vista General tiene su propia
+            estructura de secciones. */}
+        {tab !== 'General' && !VIRTUAL_DEPS.includes(aDep) && (
+          <div className="st st-proyectos">Proyectos del Plan de Acción</div>
+        )}
+
         {!VIRTUAL_DEPS.includes(aDep) && (
           <div className="kg kg-2">
             <div className="kp" style={{ '--accent': pColor(gS.av) }}>
@@ -16411,9 +16425,8 @@ function App() {
         {/* ════════════════ VISTA POR DEPENDENCIA (estándar) ════════════════ */}
         {tab !== 'General' && !VIRTUAL_DEPS.includes(aDep) && (
           <div>
-            <div className="st">Proyectos{/* Contador "N registrados" eliminado por solicitud — el conteo
-                ya se ve en el KPI "Proyectos" arriba y se sobreentiende
-                al recorrer la lista. */}</div>
+            {/* El rótulo "Proyectos" ya no va acá: subió a encabezar la sección
+                completa, arriba de las tarjetas de Avance ponderado y Proyectos. */}
             {filt.length === 0 && <div className="es">No hay proyectos con los filtros seleccionados.</div>}
 
             {filt.map((p, pi) => {
