@@ -299,7 +299,7 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
    overflow:visible para que el dropdown "Actividades destacadas" pueda
    "salir" hacia el margen derecho fuera del card. */
 .dep-hero{text-align:center;margin:8px 0 24px;padding:18px 280px 16px;background:linear-gradient(180deg,#fff,#fafbfc);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow);position:relative;overflow:visible;animation:fu .5s var(--ease) both}
-.dep-hero::before{content:'';position:absolute;left:50%;top:0;transform:translateX(-50%);width:80px;height:3px;background:linear-gradient(90deg,transparent,var(--gold),transparent);border-radius:0 0 3px 3px}
+/* Rayita dorada superior del hero de dependencia removida (solicitud ago-2026). */
 .dep-hero-name{font-size:20px;font-weight:700;color:var(--text);letter-spacing:-.4px;line-height:1.25;text-wrap:balance;-webkit-hyphens:none;hyphens:none;max-width:min(820px,100%);margin:0 auto}
 .dep-hero-dir{margin-top:8px;font-size:13px;color:var(--text2);line-height:1.4}
 .dep-hero-dir-label{color:var(--text3);font-weight:500;text-transform:uppercase;font-size:10.5px;letter-spacing:1.4px;margin-right:6px}
@@ -863,7 +863,9 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 .kpim-nav-left{left:6px}
 .kpim-nav-right{right:6px}
 
-.kpim-card{flex-shrink:0;width:232px;min-height:84px;padding:12px 16px;background:#fff;border:1px solid var(--border);border-radius:12px;border-left:3px solid var(--gold);box-shadow:0 1px 3px rgba(15,23,42,.04),0 1px 2px rgba(15,23,42,.03);display:flex;flex-direction:column;justify-content:center;transition:transform .2s var(--ease),box-shadow .2s var(--ease),border-color .2s var(--ease)}
+/* Tarjeta del carrusel de cifras SIN borde de color a la izquierda
+   (solicitud ago-2026): borde neutro completo; el color queda en el número. */
+.kpim-card{flex-shrink:0;width:232px;min-height:84px;padding:12px 16px;background:#fff;border:1px solid var(--border);border-radius:12px;box-shadow:0 1px 3px rgba(15,23,42,.04),0 1px 2px rgba(15,23,42,.03);display:flex;flex-direction:column;justify-content:center;transition:transform .2s var(--ease),box-shadow .2s var(--ease),border-color .2s var(--ease)}
 .kpim-card:hover{transform:translateY(-3px);box-shadow:0 6px 14px -4px rgba(15,23,42,.12),0 2px 4px rgba(15,23,42,.04)}
 .kpim-num{font-size:22px;font-weight:800;letter-spacing:-.7px;line-height:1.05;color:var(--text);font-feature-settings:"tnum";margin-bottom:5px;display:flex;align-items:baseline;gap:6px;flex-wrap:wrap}
 .kpim-lbl{font-size:10.5px;line-height:1.32;color:var(--text2);font-weight:500;letter-spacing:.05px}
@@ -877,21 +879,23 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
    Cada categoría tiene un acento de borde-izquierdo + color del número.
    Suficiente variedad para que el ojo perciba ritmo cromático al desfilar,
    sin perder coherencia institucional. */
-.kpim-cat-edu{border-left-color:#0ea5e9}              .kpim-cat-edu .kpim-num{color:#0369a1}
-.kpim-cat-care{border-left-color:#10b981}             .kpim-cat-care .kpim-num{color:#047857}
-.kpim-cat-money{border-left-color:var(--gold)}        .kpim-cat-money .kpim-num{color:var(--gold-dark)}
-.kpim-cat-food{border-left-color:#f59e0b}             .kpim-cat-food .kpim-num{color:#b45309}
-.kpim-cat-family{border-left-color:#ec4899}           .kpim-cat-family .kpim-num{color:#be185d}
-.kpim-cat-equity{border-left-color:#e11d48}           .kpim-cat-equity .kpim-num{color:#9f1239}
-.kpim-cat-green{border-left-color:#16a34a}            .kpim-cat-green .kpim-num{color:#15803d}
-.kpim-cat-award{border-left-color:#a855f7}            .kpim-cat-award .kpim-num{color:#7e22ce}
-.kpim-cat-research{border-left-color:#3b82f6}         .kpim-cat-research .kpim-num{color:#1e40af}
-.kpim-cat-kids{border-left-color:#f97316}             .kpim-cat-kids .kpim-num{color:#c2410c}
-.kpim-cat-alliance{border-left-color:#6366f1}         .kpim-cat-alliance .kpim-num{color:#4338ca}
-.kpim-cat-comms{border-left-color:#1d4ed8}            .kpim-cat-comms .kpim-num{color:#1e3a8a}
-.kpim-cat-infra{border-left-color:#64748b}            .kpim-cat-infra .kpim-num{color:#334155}
-.kpim-cat-culture{border-left-color:#7c3aed}          .kpim-cat-culture .kpim-num{color:#5b21b6}
-.kpim-cat-territory{border-left-color:#14b8a6}        .kpim-cat-territory .kpim-num{color:#0f766e}
+/* Cada categoría solo tiñe el NÚMERO — los bordes izquierdos de color se
+   removieron por solicitud (ago-2026). */
+.kpim-cat-edu .kpim-num{color:#0369a1}
+.kpim-cat-care .kpim-num{color:#047857}
+.kpim-cat-money .kpim-num{color:var(--gold-dark)}
+.kpim-cat-food .kpim-num{color:#b45309}
+.kpim-cat-family .kpim-num{color:#be185d}
+.kpim-cat-equity .kpim-num{color:#9f1239}
+.kpim-cat-green .kpim-num{color:#15803d}
+.kpim-cat-award .kpim-num{color:#7e22ce}
+.kpim-cat-research .kpim-num{color:#1e40af}
+.kpim-cat-kids .kpim-num{color:#c2410c}
+.kpim-cat-alliance .kpim-num{color:#4338ca}
+.kpim-cat-comms .kpim-num{color:#1e3a8a}
+.kpim-cat-infra .kpim-num{color:#334155}
+.kpim-cat-culture .kpim-num{color:#5b21b6}
+.kpim-cat-territory .kpim-num{color:#0f766e}
 
 /* Mobile: cards más compactas + flechas más chicas + fade lateral más
    estrecho para aprovechar mejor el viewport limitado. */
