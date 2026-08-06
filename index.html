@@ -1041,10 +1041,17 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 .gd-section-title{color:var(--gold);font-size:12px;letter-spacing:1.6px;text-transform:uppercase;font-weight:700;
     margin-bottom:9px;display:flex;align-items:center;gap:10px}
 .gd-section-title::after{content:'';flex:1;height:1px;background:#2f2f31}
-.gd-p{color:#d6d1c8;font-size:13px;line-height:1.6;margin:0 0 8px}
+/* Texto de cuerpo JUSTIFICADO (solicitud ago-2026). Se acompaña de hyphens:auto
+   — el documento es lang="es" — porque justificar sin guionado en columnas de
+   ~700px abre "ríos" de espacio entre palabras. Los títulos, el subtítulo, el
+   cierre y la fuente siguen centrados: ahí la justificación no aplica. */
+.gd-p{color:#d6d1c8;font-size:13px;line-height:1.6;margin:0 0 8px;text-align:justify;hyphens:auto;-webkit-hyphens:auto}
 .gd-p b{color:#f6f5f3}
 .gd-li{display:flex;gap:9px;align-items:baseline;margin-bottom:7px;color:#d6d1c8;font-size:13px;line-height:1.55}
 .gd-li b{color:#f6f5f3}
+/* El texto de la viñeta es el 2.º hijo flex: necesita flex:1 para ocupar todo el
+   ancho, sin lo cual text-align:justify no tendría efecto. */
+.gd-li-txt{flex:1;min-width:0;text-align:justify;hyphens:auto;-webkit-hyphens:auto}
 .gd-li-dot{color:var(--gold);font-size:11px;flex-shrink:0}
 .gd-cierre{text-align:center;color:var(--gold);font-size:13.5px;font-style:italic;font-weight:600;padding:14px 44px 0}
 .gd-links{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 22px;padding:16px 30px 0}
@@ -6498,7 +6505,7 @@ function GestionDestacada({ open, onClose }) {
             {(sec.items || []).map((it, j) => (
               <div key={j} className="gd-li">
                 <span className="gd-li-dot" aria-hidden="true">▪</span>
-                <span><b>{it.b}</b>{it.r}</span>
+                <span className="gd-li-txt"><b>{it.b}</b>{it.r}</span>
               </div>
             ))}
           </div>
