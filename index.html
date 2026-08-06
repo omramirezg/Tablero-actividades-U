@@ -523,8 +523,11 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 .ph{padding:14px 20px 14px 22px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;gap:12px;transition:background .15s var(--ease)}
 .ph:hover{background:var(--bg4)}
 .pl{display:flex;align-items:center;gap:10px;flex:1;min-width:0}
-.ch{width:22px;height:22px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:var(--bg3);transition:all .25s var(--ease);flex-shrink:0;font-size:10px;color:var(--text3);border:1px solid transparent}
-.ch.op{background:var(--gold-light);color:var(--gold-dark);transform:rotate(90deg);border-color:rgba(249,174,0,.2)}
+/* Icono ▶ de cada proyecto: más marcado (solicitud ago-2026) — círculo un poco
+   mayor, flecha más grande y en tinta oscura, con borde visible. */
+.ch{width:26px;height:26px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:var(--bg3);transition:all .25s var(--ease);flex-shrink:0;font-size:12px;color:var(--text);border:1px solid var(--border)}
+.ch.op{background:var(--gold-light);color:var(--gold-dark);transform:rotate(90deg);border-color:rgba(249,174,0,.45)}
+.ph:hover .ch{background:var(--gold-light);color:var(--gold-dark);border-color:rgba(249,174,0,.45)}
 .pi{min-width:0;flex:1}
 .pid{font-size:10.5px;font-weight:700;color:var(--gold);letter-spacing:.3px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .pnm{font-size:13.5px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:560px;margin-top:2px;letter-spacing:-.1px}
@@ -848,7 +851,7 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
    los section titles (.st) del resto del dashboard: barra dorada vertical
    + texto en negro firme. Coherencia visual institucional. */
 .kpim-tag{display:flex;align-items:center;gap:10px;font-size:14.5px;font-weight:700;color:var(--text);letter-spacing:-.2px;margin:0 0 10px 4px}
-.kpim-tag::before{content:'';width:4px;height:18px;background:linear-gradient(180deg,var(--gold),var(--gold-dark));border-radius:2px;flex-shrink:0;box-shadow:0 1px 3px rgba(249,174,0,.3)}
+/* Barra dorada del rótulo "Gestión" removida por solicitud (ago-2026). */
 
 /* Flechas de navegación manual ← → — flotan a los lados del marquee,
    por encima del fade lateral del mask-image. Background blanco con halo
