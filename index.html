@@ -965,10 +965,14 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 .wel-card::before{content:'';position:absolute;left:0;right:0;top:0;height:4px;z-index:3;
     background:linear-gradient(90deg,var(--gold-dark),var(--gold) 50%,var(--gold-dark));
     border-radius:var(--radius-xl) var(--radius-xl) 0 0}
-.wel-close{position:absolute;top:12px;right:14px;width:34px;height:34px;border-radius:50%;
-    border:1px solid #3a3a3d;background:rgba(255,255,255,.06);color:#cbcbce;font-size:22px;line-height:1;
-    cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:4;transition:all .2s var(--ease)}
-.wel-close:hover{background:rgba(255,255,255,.13);color:#fff;border-color:#4a4a4d}
+/* Cerrar: relleno OPACO y borde marcado (solicitud ago-2026). Antes era
+   rgba(255,255,255,.06) sobre la tarjeta oscura y se perdía contra el texto que
+   pasa por detrás al hacer scroll. La sombra lo despega del contenido. */
+.wel-close{position:absolute;top:12px;right:14px;width:36px;height:36px;border-radius:50%;
+    border:1px solid #6a6a74;background:#2b2b31;color:#f1eee8;font-size:22px;line-height:1;
+    cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:6;
+    box-shadow:0 2px 10px rgba(0,0,0,.55);transition:all .2s var(--ease)}
+.wel-close:hover{background:#3a3a42;color:#fff;border-color:var(--gold);transform:scale(1.06)}
 .wel-eye{text-align:center;color:#e6b54a;font-size:11px;letter-spacing:2.4px;text-transform:uppercase;
     font-weight:700;padding:30px 30px 0;margin-bottom:13px}
 .wel-title{text-align:center;font-family:'Playfair Display',Georgia,serif;font-size:31px;line-height:1.15;
@@ -1058,16 +1062,27 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 .gd-links a{color:#e6b54a;font-size:12.5px;font-weight:600;text-decoration:underline;text-underline-offset:3px}
 .gd-links a:hover{color:#ffcb5c}
 .gd-src{text-align:center;color:#7c766d;font-size:10.5px;font-style:italic;line-height:1.5;padding:10px 44px 0}
-.gd-navbar{position:sticky;bottom:0;display:flex;justify-content:space-between;align-items:center;gap:12px;
-    margin-top:14px;padding:16px 26px 18px;background:linear-gradient(180deg,rgba(24,24,27,0) 0%,#18181b 40%)}
+/* Barra de navegación SÓLIDA (solicitud ago-2026). Antes era un degradado que
+   arrancaba transparente arriba, así que el texto de las viñetas se veía por
+   detrás y las flechas se perdían contra él. Ahora es una barra opaca, un tono
+   más oscura que la tarjeta, con filo superior y sombra hacia arriba: el
+   contenido se corta limpio al pasar por debajo. */
+.gd-navbar{position:sticky;bottom:0;z-index:5;display:flex;justify-content:space-between;align-items:center;gap:12px;
+    margin-top:14px;padding:16px 26px 18px;background:#111114;border-top:1px solid #45454e;
+    box-shadow:0 -10px 22px rgba(0,0,0,.5)}
 .gd-navgrp{display:flex;align-items:center;gap:9px}
-.gd-arrow{width:34px;height:34px;border-radius:50%;border:1px solid #3a3a3d;background:rgba(255,255,255,.06);
-    color:#e8e3da;font-size:19px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s var(--ease)}
-.gd-arrow:hover{background:rgba(255,255,255,.13);border-color:var(--gold);color:#fff}
+/* Flechas con relleno opaco y borde marcado — antes eran rgba(255,255,255,.06)
+   sobre fondo translúcido y prácticamente no se leían. El borde llega a 3:1 de
+   contraste contra la barra, el mínimo que WCAG pide para un control. */
+.gd-arrow{width:34px;height:34px;border-radius:50%;border:1px solid #6a6a74;background:#2b2b31;
+    color:#f1eee8;font-size:19px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s var(--ease)}
+.gd-arrow:hover{background:#3a3a42;border-color:var(--gold);color:#fff}
 .gd-dots{display:flex;gap:6px;margin-left:4px}
-.gd-dot{width:8px;height:8px;border-radius:4px;border:none;background:#3f3c37;cursor:pointer;padding:0;transition:all .2s var(--ease)}
+.gd-dot{width:8px;height:8px;border-radius:4px;border:none;background:#6b665c;cursor:pointer;padding:0;transition:all .2s var(--ease)}
+.gd-dot:hover{background:#8a8478}
 .gd-dot-on{width:20px;background:var(--gold)}
-.gd-count{color:#7c766d;font-size:11px;font-weight:600;margin-left:2px}
+.gd-dot-on:hover{background:var(--gold)}
+.gd-count{color:#a8a29e;font-size:11px;font-weight:600;margin-left:2px}
 @media(max-width:640px){
   .gd-overlay{padding:12px}
   .gd-eye{padding:24px 46px 0;font-size:9.5px;letter-spacing:1.6px}
