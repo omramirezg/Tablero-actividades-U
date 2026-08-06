@@ -1030,7 +1030,17 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
    logros": sello absoluto a la izquierda, títulos centrados en el resto del
    ancho. Se usa el sello A COLOR (FM_LOGO_SRC) porque la tarjeta es oscura —
    la versión line-art negra desaparecería. */
-.gd-head{position:relative}
+/* El bloque de cabecera se lee como PORTADA, no como un párrafo más (solicitud
+   ago-2026): antes el título quedaba a 23px de la primera sección y se sentía
+   pegado. Ahora tiene banda propia (medio tono más clara que la tarjeta), aire
+   generoso abajo y un filo que la separa del contenido — el mismo recurso que
+   usa la barra de navegación al pie, así la tarjeta queda "encuadrada". */
+/* OJO con el margen inferior: colapsa contra el margin-top:15px de .gd-section
+   (son hermanos en flujo normal), así que el valor efectivo es el MAYOR de los
+   dos, no la suma. Por eso va 26px y no 10px. */
+.gd-head{position:relative;padding-bottom:22px;margin-bottom:26px;
+    background:linear-gradient(180deg,#1e1e23 0%,#18181b 100%);
+    border-bottom:1px solid #33333a}
 .gd-head-logo{position:absolute;left:22px;top:24px;width:62px;height:62px;z-index:2;
     display:flex;align-items:center;justify-content:center;
     filter:drop-shadow(0 2px 6px rgba(0,0,0,.5))}
@@ -1041,11 +1051,13 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
    padding le quedan 573px. Con 104px se partía en dos. El antetítulo afloja el
    tracking de 2.2px a 1.8px por la misma razón. */
 .gd-eye{text-align:center;color:#e6b54a;font-size:10.5px;letter-spacing:1.8px;text-transform:uppercase;
-    font-weight:700;padding:28px 88px 0;margin-bottom:10px}
+    font-weight:700;padding:30px 88px 0;margin-bottom:13px}
 .gd-title{text-align:center;font-family:'Playfair Display',Georgia,serif;font-size:28px;line-height:1.15;
-    color:#f6f5f3;font-weight:700;padding:0 88px;margin-bottom:8px}
+    color:#f6f5f3;font-weight:700;padding:0 88px;margin-bottom:0}
 .gd-title em{font-style:italic;color:var(--gold)}
-.gd-sub{text-align:center;color:#a8a29e;font-size:13px;font-style:italic;line-height:1.5;max-width:540px;margin:0 auto 6px;padding:0 30px}
+/* El margen inferior del subtítulo pasó al padding de .gd-head (para que el aire
+   sea el mismo haya o no subtítulo); acá solo queda la separación con el título. */
+.gd-sub{text-align:center;color:#a8a29e;font-size:13px;font-style:italic;line-height:1.5;max-width:540px;margin:10px auto 0;padding:0 30px}
 .gd-section{padding:0 34px;margin-top:15px}
 .gd-section-title{color:var(--gold);font-size:12px;letter-spacing:1.6px;text-transform:uppercase;font-weight:700;
     margin-bottom:9px;display:flex;align-items:center;gap:10px}
