@@ -1041,19 +1041,25 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 .gd-head{position:relative;padding-bottom:22px;margin-bottom:26px;
     background:linear-gradient(180deg,#1e1e23 0%,#18181b 100%);
     border-bottom:1px solid #33333a}
-.gd-head-logo{position:absolute;left:22px;top:24px;width:62px;height:62px;z-index:2;
+/* Sello 62 → 70px por solicitud (ago-2026). Al crecer 8px se corre su borde
+   derecho, así que el padding lateral SUBE en paralelo (88 → 98px) o el título
+   lo pisaría. */
+.gd-head-logo{position:absolute;left:18px;top:22px;width:70px;height:70px;z-index:2;
     display:flex;align-items:center;justify-content:center;
     filter:drop-shadow(0 2px 6px rgba(0,0,0,.5))}
 .gd-head-logo img{width:100%;height:100%;object-fit:contain;display:block}
-/* El padding lateral sube a 88px SIMÉTRICO (no solo a la izquierda) para que el
-   bloque siga centrado en la tarjeta. 88px es el máximo que deja al título
-   "Una Facultad conectada con el mundo" en UN renglón: mide 551px y con este
-   padding le quedan 573px. Con 104px se partía en dos. El antetítulo afloja el
-   tracking de 2.2px a 1.8px por la misma razón. */
+/* El padding lateral es SIMÉTRICO (no solo a la izquierda) para que el bloque
+   siga centrado en la tarjeta. 92px es el máximo que deja al título más largo
+   —"Una Facultad conectada con el mundo", 551px— en UN renglón: le quedan
+   559px. OJO al calcularlo: hay que restar la barra de scroll de la tarjeta
+   (~6px), no el ancho total. El antetítulo afloja el tracking de 2.2px a 1.8px
+   por la misma razón. text-wrap:balance es la red de seguridad: si en algún
+   ancho el título igual se parte, las dos líneas quedan parejas y no con una
+   palabra suelta abajo. */
 .gd-eye{text-align:center;color:#e6b54a;font-size:10.5px;letter-spacing:1.8px;text-transform:uppercase;
-    font-weight:700;padding:30px 88px 0;margin-bottom:13px}
+    font-weight:700;padding:30px 92px 0;margin-bottom:13px}
 .gd-title{text-align:center;font-family:'Playfair Display',Georgia,serif;font-size:28px;line-height:1.15;
-    color:#f6f5f3;font-weight:700;padding:0 88px;margin-bottom:0}
+    color:#f6f5f3;font-weight:700;padding:0 92px;margin-bottom:0;text-wrap:balance}
 .gd-title em{font-style:italic;color:var(--gold)}
 /* El margen inferior del subtítulo pasó al padding de .gd-head (para que el aire
    sea el mismo haya o no subtítulo); acá solo queda la separación con el título. */
@@ -1074,6 +1080,18 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
    ancho, sin lo cual text-align:justify no tendría efecto. */
 .gd-li-txt{flex:1;min-width:0;text-align:justify;hyphens:auto;-webkit-hyphens:auto}
 .gd-li-dot{color:var(--gold);font-size:11px;flex-shrink:0}
+/* Publicación de Instagram embebida dentro del flyer (solicitud ago-2026).
+   Opcional: solo se renderiza si la diapositiva declara `ig`. El iframe de
+   Instagram es blanco, así que se le pone marco y sombra para que no golpee
+   sobre la tarjeta oscura. */
+.gd-ig{margin:22px auto 4px;padding:0 34px;max-width:520px}
+.gd-ig-cap{text-align:center;color:#7c766d;font-size:10.5px;letter-spacing:1.4px;text-transform:uppercase;font-weight:700;margin-bottom:10px}
+.gd-ig-frame{background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 10px 30px -8px rgba(0,0,0,.6)}
+.gd-ig-frame iframe{width:100%;height:660px;border:0;display:block;background:#fafafa}
+@media(max-width:640px){
+  .gd-ig{padding:0 18px}
+  .gd-ig-frame iframe{height:580px}
+}
 .gd-cierre{text-align:center;color:var(--gold);font-size:13.5px;font-style:italic;font-weight:600;padding:14px 44px 0}
 .gd-links{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 22px;padding:16px 30px 0}
 .gd-links a{color:#e6b54a;font-size:12.5px;font-weight:600;text-decoration:underline;text-underline-offset:3px}
@@ -6562,10 +6580,10 @@ const GD_SLIDES = [
      este bienio, que es lo verificable. */
   {
     eye: 'Facultad de Minas · Gestión 2024–2026 · Eva Cristina Manotas Rodríguez',
-    titulo: <>Una Facultad que la industria <em>respalda</em></>,
-    sub: 'Renault Sofasa escogió a la Facultad de Minas para donar un vehículo destinado a la formación práctica de los estudiantes.',
+    titulo: <>Una gestión que <em>atrae</em> aliados</>,
+    sub: 'Gracias a la gestión 2024–2026 de la decana Eva Cristina Manotas Rodríguez, Renault Sofasa donó a la Facultad de Minas un vehículo para la formación práctica de los estudiantes.',
     secciones: [
-      { t: 'La alianza', intro: <>En agosto de 2026 la Facultad de Minas recibió en donación un <b>Renault Kwid 2026</b> de parte de <b>Renault Sofasa</b>, un vehículo que fortalecerá los procesos prácticos de enseñanza y aprendizaje de los estudiantes de <b>diferentes pregrados</b>.</> },
+      { t: 'Un logro de esta gestión', intro: <>En agosto de 2026 la Facultad de Minas recibió en donación un <b>Renault Kwid 2026</b> de parte de <b>Renault Sofasa</b>, un vehículo que fortalecerá los procesos prácticos de enseñanza y aprendizaje de los estudiantes de <b>diferentes pregrados</b>. La donación es fruto del acercamiento con el sector productivo impulsado por la <b>gestión 2024–2026</b>: la misma línea de trabajo que en el bienio abrió las puertas del CSIC, de Horizonte Europa y de IBM suma ahora a una multinacional del sector automotor.</> },
       { t: 'Lo que se dijo en la entrega', items: [
         { b: 'Renault Sofasa: ', r: 'Juan Camilo Vélez Martínez, presidente y director general, destacó el compromiso de la compañía con la educación y el desarrollo del talento que transformará la movilidad y la industria del país.' },
         { b: 'Decanatura: ', r: 'la decana Eva Cristina Manotas Rodríguez resaltó que este aporte representa una oportunidad para seguir fortaleciendo la formación práctica de los estudiantes y consolidar nuevas alianzas entre la Universidad y la empresa en investigación, innovación y prácticas académicas.' }
@@ -6575,9 +6593,10 @@ const GD_SLIDES = [
         { b: 'Sin costo para la Facultad: ', r: 'es una donación — el vehículo llega sin comprometer recursos propios.' },
         { b: 'Puerta a nuevas alianzas: ', r: 'la relación con la empresa se proyecta hacia investigación, innovación y prácticas académicas.' }
       ]},
-      { t: 'La lectura de fondo', intro: 'Que una multinacional del sector automotor escoja a la Facultad de Minas para este aporte es una señal de la confianza que la industria deposita hoy en la Facultad.' }
+      { t: 'La lectura de fondo', intro: 'Que una multinacional del sector automotor escoja a la Facultad de Minas para este aporte es una señal de la confianza que la industria le tiene hoy a la Facultad — confianza construida en este bienio, alianza por alianza.' }
     ],
-    cierre: 'Las alianzas con la industria no se declaran: se firman, se entregan y se ven en el aula.',
+    ig: 'DblvmaLIAbf',
+    cierre: 'Las alianzas con la industria no se declaran: se gestionan, se firman y se ven en el aula.',
     links: [
       { label: 'Publicación oficial de la Facultad', url: 'https://www.instagram.com/p/DblvmaLIAbf/' }
     ],
@@ -6617,6 +6636,23 @@ function GestionDestacada({ open, onClose }) {
             ))}
           </div>
         ))}
+        {/* Publicación embebida — opcional, solo si la diapositiva trae `ig`
+            (shortcode de Instagram). Va después de las secciones para que el
+            texto se lea primero y la publicación funcione como evidencia. */}
+        {s.ig && (
+          <div className="gd-ig">
+            <div className="gd-ig-cap">La publicación</div>
+            <div className="gd-ig-frame">
+              <iframe
+                src={'https://www.instagram.com/p/' + s.ig + '/embed'}
+                title="Publicación de la Facultad de Minas en Instagram"
+                loading="lazy"
+                scrolling="no"
+                allowtransparency="true"
+                allowFullScreen></iframe>
+            </div>
+          </div>
+        )}
         {s.cierre && <div className="gd-cierre">{s.cierre}</div>}
         <div className="gd-links">
           {s.links.map((l, i) => (
