@@ -1852,6 +1852,28 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 .lgr-hero-bar::before{left:-12px}
 .lgr-hero-bar::after{right:-12px}
 
+/* Acceso al sitio de noticias de la Facultad (solicitud ago-2026). Va arriba,
+   antes de la lista, para que se vea sin hacer scroll. Es una tarjeta-enlace:
+   por eso NO lleva subrayado en el bloque, pero el texto de acción sí — misma
+   regla que las tarjetas de evidencia. */
+.lgr-news{display:flex;align-items:center;gap:14px;margin:14px 36px 0;padding:14px 18px;
+    background:linear-gradient(180deg,#f8fafc,#fff);border:1px solid #bfdbfe;border-radius:12px;
+    text-decoration:none;color:var(--text);transition:background .18s var(--ease),border-color .18s var(--ease),transform .18s var(--ease),box-shadow .18s var(--ease)}
+.lgr-news:hover{background:linear-gradient(180deg,#eff6ff,#fff);border-color:#60a5fa;transform:translateY(-1px);box-shadow:0 6px 16px -6px rgba(59,130,246,.28)}
+.lgr-news-ico{flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#3a4d6b,#1d4ed8);color:#fff}
+.lgr-news-txt{flex:1;min-width:0}
+/* display:block obligatorio — son <span> dentro de un <a>, y en línea el
+   subtítulo quedaba pegado al título en el mismo renglón (y el margin-top se
+   ignoraba, porque los márgenes verticales no aplican a cajas inline). */
+.lgr-news-t{display:block;font-size:13px;font-weight:700;letter-spacing:-.1px;line-height:1.3}
+.lgr-news-t u{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px;color:#1d4ed8}
+.lgr-news-s{display:block;margin-top:3px;font-size:11.5px;color:var(--text3);line-height:1.4}
+.lgr-news-arrow{flex-shrink:0;color:#1d4ed8;font-size:16px;font-weight:700;transition:transform .18s var(--ease)}
+.lgr-news:hover .lgr-news-arrow{transform:translateX(3px)}
+@media(max-width:640px){
+  .lgr-news{margin:12px 18px 0;padding:12px 14px;gap:11px}
+  .lgr-news-ico{width:32px;height:32px}
+}
 .lgr-body{padding:18px 36px 28px;background:#fff}
 .lgr-list{display:grid;grid-template-columns:1fr;gap:24px}
 .lgr-empty{text-align:center;padding:60px 20px;color:var(--text3);font-style:italic}
@@ -14756,6 +14778,22 @@ function LogrosVisibles({ logros }) {
           )}
         </div>
       )}
+      {/* Acceso al sitio oficial de noticias — la lista de abajo es una
+          selección, no el archivo completo; este enlace lleva al listado real. */}
+      <a
+        className="lgr-news"
+        href="https://minas.medellin.unal.edu.co/noticias/facultad"
+        target="_blank"
+        rel="noopener noreferrer">
+        {/* 'scroll' (no 'megaphone': ese nombre solo existe en MediaIcon, en
+            Icon caería en el default → null y quedaría el cuadro vacío). */}
+        <span className="lgr-news-ico" aria-hidden="true"><Icon name="scroll" size={19}/></span>
+        <span className="lgr-news-txt">
+          <span className="lgr-news-t">¿Quiere ver todas las noticias de la Facultad? <u>Haga clic aquí</u></span>
+          <span className="lgr-news-s">Sala de prensa oficial de la Facultad de Minas · minas.medellin.unal.edu.co</span>
+        </span>
+        <span className="lgr-news-arrow" aria-hidden="true">→</span>
+      </a>
       <div className="lgr-body">
         {logros && logros.length > 0 ? (
           <div className="lgr-list">
