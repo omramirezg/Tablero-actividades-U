@@ -316,12 +316,12 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
    dropdown convencional debajo del botón.
    ───────────────────────────────────────────────────────────────── */
 .dest-menu{position:absolute;top:14px;right:16px;z-index:5}
-.dest-menu-btn{display:inline-flex;align-items:center;gap:8px;padding:9px 14px 9px 12px;background:linear-gradient(180deg,#fffaf0,#fff3d9);border:1px solid #e8c87a;border-radius:8px;color:#7a5a12;font:600 12.5px/1 var(--font-sans,inherit);letter-spacing:.2px;cursor:pointer;transition:all .2s var(--ease);box-shadow:0 1px 2px rgba(249,174,0,.12),inset 0 1px 0 rgba(255,255,255,.5)}
+.dest-menu-btn{display:inline-flex;align-items:center;gap:8px;padding:9px 14px 9px 12px;background:linear-gradient(180deg,#fffaf0,#fff3d9);border:1px solid #e8c87a;border-radius:8px;color:#7a5a12;font:600 12.5px/1 'Inter',system-ui,sans-serif;letter-spacing:.2px;cursor:pointer;transition:all .2s var(--ease);box-shadow:0 1px 2px rgba(249,174,0,.12),inset 0 1px 0 rgba(255,255,255,.5)}
 .dest-menu-btn:hover{background:linear-gradient(180deg,#fff3d9,#ffe9b8);border-color:#d4a82e;color:#5e4408;transform:translateY(-1px);box-shadow:0 4px 10px rgba(249,174,0,.18),inset 0 1px 0 rgba(255,255,255,.6)}
 .dest-menu-btn-open{background:linear-gradient(180deg,#ffe9b8,#fbd98a);border-color:#f9ae00;color:#4a3506}
 .dest-menu-btn svg{flex-shrink:0;color:#f9ae00;filter:drop-shadow(0 1px 0 rgba(255,255,255,.6))}
 .dest-menu-label{font-weight:650;letter-spacing:.3px}
-.dest-menu-count{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:18px;padding:0 6px;background:#f9ae00;color:#fff;border-radius:999px;font:700 10.5px/1 var(--font-sans,inherit);box-shadow:inset 0 -1px 0 rgba(0,0,0,.12)}
+.dest-menu-count{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:18px;padding:0 6px;background:#f9ae00;color:#fff;border-radius:999px;font:700 10.5px/1 'Inter',system-ui,sans-serif;box-shadow:inset 0 -1px 0 rgba(0,0,0,.12)}
 .dest-menu-caret{transition:transform .25s var(--ease);color:#a87a18 !important}
 .dest-menu-caret-open{transform:rotate(180deg)}
 
@@ -377,10 +377,10 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 /* HEADER del sidebar — eyebrow dorado + subtítulo + bar gradiente fina. */
 .dest-menu-head{padding:18px 18px 14px;background:linear-gradient(180deg,#fffaef 0%,#fff 100%);border-bottom:1px solid #f3e7c4;position:relative}
 .dest-menu-head-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.dest-menu-head-eye{display:inline-flex;align-items:center;gap:7px;font:900 12px/1 var(--font-sans,inherit);color:#3d2d05;letter-spacing:1.5px;text-transform:uppercase}
+.dest-menu-head-eye{display:inline-flex;align-items:center;gap:7px;font:900 12px/1 'Inter',system-ui,sans-serif;color:#3d2d05;letter-spacing:1.5px;text-transform:uppercase}
 .dest-menu-head-star{color:var(--gold);font-size:12px;letter-spacing:0;text-shadow:0 0 8px rgba(249,174,0,.5)}
-.dest-menu-head-count{display:inline-flex;align-items:center;justify-content:center;min-width:24px;height:22px;padding:0 8px;background:linear-gradient(180deg,#fbd98a,#f9ae00);color:#fff;border-radius:999px;font:700 11px/1 var(--font-sans,inherit);box-shadow:inset 0 -1px 0 rgba(0,0,0,.15),0 2px 6px rgba(249,174,0,.35),inset 0 1px 0 rgba(255,255,255,.4)}
-.dest-menu-head-sub{margin-top:6px;font:500 11.5px/1.35 var(--font-sans,inherit);color:var(--text3);letter-spacing:.1px;font-style:italic}
+.dest-menu-head-count{display:inline-flex;align-items:center;justify-content:center;min-width:24px;height:22px;padding:0 8px;background:linear-gradient(180deg,#fbd98a,#f9ae00);color:#fff;border-radius:999px;font:700 11px/1 'Inter',system-ui,sans-serif;box-shadow:inset 0 -1px 0 rgba(0,0,0,.15),0 2px 6px rgba(249,174,0,.35),inset 0 1px 0 rgba(255,255,255,.4)}
+.dest-menu-head-sub{margin-top:6px;font:500 11.5px/1.35 'Inter',system-ui,sans-serif;color:var(--text3);letter-spacing:.1px;font-style:italic}
 .dest-menu-head-bar{margin-top:10px;width:36px;height:2px;background:linear-gradient(90deg,var(--gold) 0%,rgba(249,174,0,.3) 60%,transparent 100%);border-radius:2px;box-shadow:0 1px 3px rgba(249,174,0,.25)}
 
 /* LISTA — items con padding generoso, separadores hairline y hover suave. */
@@ -388,9 +388,12 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 @media(max-width:1499px){
   .dest-menu-list{max-height:380px}
 }
-.dest-menu-item{position:relative;display:flex;align-items:flex-start;gap:13px;padding:13px 14px 13px 12px;background:transparent;border:0;border-radius:11px;cursor:pointer;text-align:left;transition:background .18s var(--ease),transform .14s var(--ease),box-shadow .18s var(--ease);font-family:inherit;color:var(--text);width:100%}
+/* Sin icono (solicitud ago-2026): el item es solo título + flecha. Se centra
+   verticalmente y el separador arranca desde el borde del texto, no desde donde
+   estaba el icono. */
+.dest-menu-item{position:relative;display:flex;align-items:center;gap:10px;padding:13px 14px 13px 14px;background:transparent;border:0;border-radius:11px;cursor:pointer;text-align:left;transition:background .18s var(--ease),transform .14s var(--ease),box-shadow .18s var(--ease);font-family:inherit;color:var(--text);width:100%}
 .dest-menu-item + .dest-menu-item{margin-top:3px}
-.dest-menu-item + .dest-menu-item::before{content:'';position:absolute;left:54px;right:28px;top:-4px;height:1px;background:linear-gradient(90deg,transparent,#eef0f4 25%,#eef0f4 75%,transparent);pointer-events:none}
+.dest-menu-item + .dest-menu-item::before{content:'';position:absolute;left:14px;right:28px;top:-4px;height:1px;background:linear-gradient(90deg,transparent,#eef0f4 12%,#eef0f4 75%,transparent);pointer-events:none}
 .dest-menu-item:hover{background:linear-gradient(180deg,#fffaf0,#fff5dd);box-shadow:inset 0 0 0 1px rgba(249,174,0,.14)}
 .dest-menu-item:hover + .dest-menu-item::before,
 .dest-menu-item:has(+ .dest-menu-item:hover)::after{opacity:0}
@@ -420,12 +423,14 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 
 /* CUERPO DEL ITEM — título limpio + meta line con tipo·fecha */
 .dest-menu-item-body{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px;padding-top:1px}
-.dest-menu-item-title{font:650 13.5px/1.4 var(--font-sans,inherit);color:var(--text);letter-spacing:-.15px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+/* Al quitar el icono el título gana ~48px de ancho; se sube el clamp a 3 líneas
+   para que los títulos largos se lean completos en vez de cortarse con "…". */
+.dest-menu-item-title{font:650 13.5px/1.4 'Inter',system-ui,sans-serif;color:var(--text);letter-spacing:-.15px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .dest-menu-item-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 
 /* CHIP DE TIPO — usa la misma clase de color del icono para sincronizarse.
    Por default es gris; las clases de tipo (dest-i-*) lo pintan acorde. */
-.dest-menu-item-tipo{font:700 8.5px/1 var(--font-sans,inherit);text-transform:uppercase;letter-spacing:1.2px;padding:4px 9px 3.5px;background:#f4f5f7;color:var(--text2);border-radius:999px;border:1px solid #e9ebef;transition:filter .2s var(--ease)}
+.dest-menu-item-tipo{font:700 8.5px/1 'Inter',system-ui,sans-serif;text-transform:uppercase;letter-spacing:1.2px;padding:4px 9px 3.5px;background:#f4f5f7;color:var(--text2);border-radius:999px;border:1px solid #e9ebef;transition:filter .2s var(--ease)}
 .dest-menu-item:hover .dest-menu-item-tipo{filter:brightness(.97)}
 /* Cuando el chip lleva una clase dest-i-*, hereda el color del fondo y borde */
 .dest-menu-item-tipo.dest-i-yt   {background:#fee2e2;color:#c81e1e;border-color:#fecaca}
@@ -443,7 +448,7 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 .dest-menu-item-tipo.dest-i-message   {background:#ffedd5;color:#c2410c;border-color:#fed7aa}
 
 .dest-menu-item-sep{color:var(--text3);font-size:10px;line-height:1;font-weight:700;opacity:.5}
-.dest-menu-item-fecha{font:600 10.5px/1 var(--font-sans,inherit);color:var(--text3);letter-spacing:.3px;font-feature-settings:"tnum"}
+.dest-menu-item-fecha{font:600 10.5px/1 'Inter',system-ui,sans-serif;color:var(--text3);letter-spacing:.3px;font-feature-settings:"tnum"}
 
 /* FLECHA — sutil, animada en hover */
 .dest-menu-item-arrow{flex-shrink:0;color:#cdd2da;font-size:15px;line-height:1;transition:transform .22s var(--ease),color .22s var(--ease);align-self:center}
@@ -5829,21 +5834,20 @@ function DirectorPopover({ person, onClose }) {
 
             {(person.email || person.phone || person.office || person.emailExtra) && (
               <div className="dpv-contact">
+                {/* Emojis ✉ 📍 ☎ removidos por solicitud (ago-2026): el bloque de
+                    contacto queda como lista de texto plano alineada a la izquierda. */}
                 {person.email && (
                   <div className="dpv-row">
-                    <span className="dpv-row-ico" aria-hidden="true">✉</span>
                     <a className="dpv-row-link" href={'mailto:' + person.email}>{person.email}</a>
                   </div>
                 )}
                 {person.office && (
                   <div className="dpv-row">
-                    <span className="dpv-row-ico" aria-hidden="true">📍</span>
                     <span className="dpv-row-txt">{person.office}</span>
                   </div>
                 )}
                 {person.phone && (
                   <div className="dpv-row">
-                    <span className="dpv-row-ico" aria-hidden="true">☎</span>
                     <span className="dpv-row-txt">{person.phone}</span>
                   </div>
                 )}
@@ -5853,7 +5857,6 @@ function DirectorPopover({ person, onClose }) {
                     distinguirlo visualmente del rol principal del header. */}
                 {person.emailExtra && (
                   <div className="dpv-row dpv-row-extra">
-                    <span className="dpv-row-ico" aria-hidden="true">✉</span>
                     <div className="dpv-row-stack">
                       <a className="dpv-row-link" href={'mailto:' + person.emailExtra}>{person.emailExtra}</a>
                       {person.roleExtra && <div className="dpv-row-sub">{person.roleExtra}</div>}
@@ -5969,7 +5972,8 @@ function CentroHero({ projects, getAv, onOpen }) {
         tabIndex={0}
         onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onOpen(key); } }}>
         <div className="cnh-side-hd">
-          <div className="cnh-logo"><CentroIcon centro={key} /></div>
+          {/* Logo circular del Centro removido por solicitud (ago-2026): el
+              encabezado queda solo con el rótulo y el nombre. */}
           <div className="cnh-side-titles">
             <div className="cnh-eye">Centro de Pensamiento</div>
             <div className="cnh-name">{c.name}</div>
@@ -6417,7 +6421,7 @@ const GD_SLIDES = [
     secciones: [
       { t: 'Internacionalización en cifras', items: [
         { b: '$166 millones ($166.072.590)', r: ' invertidos en asesoría especializada para fortalecer la estrategia de internacionalización.' },
-        { b: 'Cerca de $2.200 millones', r: ' gestionados con aliados internacionales en el bienio, destinados a promover la movilidad internacional entrante y saliente de investigadores.' },
+        { b: 'Cerca de $2.200 millones', r: ' gestionados con aliados internacionales en el bienio gracias a la estrategia de internacionalización, destinados a promover la movilidad internacional entrante y saliente de investigadores.' },
         { b: '$1.287 millones', r: ' invertidos en 2025 en convocatorias de movilidad para estudiantes y profesores.' },
         { b: '306 movilidades apoyadas', r: ' · el 63% internacionales.' }
       ]},
@@ -14910,10 +14914,9 @@ function DestacadasMenu({ depKey, items, openId, onToggle, onOpenItem, onClose }
           </div>
           <div className="dest-menu-list">
             {items.map((it) => {
-              const media = destacadaIconInfo(it);
-              const tipo  = tipoStyle(it.tipo);
-              const iconCls = media ? media.cls : tipo.cls;
-              const iconName = media ? media.svg : tipo.svg;
+              /* Iconos de color removidos por solicitud (ago-2026): la lista se lee
+                 como índice limpio — solo título + flecha, alineados en una columna.
+                 El tipo y la fecha siguen visibles dentro del modal de cada destacada. */
               return (
                 <button
                   key={it.id}
@@ -14921,9 +14924,6 @@ function DestacadasMenu({ depKey, items, openId, onToggle, onOpenItem, onClose }
                   className="dest-menu-item"
                   role="menuitem"
                   onClick={() => onOpenItem(it.id)}>
-                  <span className={'dest-menu-item-icon ' + iconCls} aria-hidden="true">
-                    <MediaIcon name={iconName} />
-                  </span>
                   <span className="dest-menu-item-body">
                     <span className="dest-menu-item-title">{it.titulo}</span>
                     {/* Meta (tag de tipo · fecha) removido por solicitud — el
