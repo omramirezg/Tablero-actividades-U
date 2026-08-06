@@ -275,7 +275,7 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 
 /* Section title */
 .st{font-size:14.5px;font-weight:700;margin-bottom:14px;color:var(--text);display:flex;align-items:center;gap:10px;letter-spacing:-.2px}
-.st::before{content:'';width:4px;height:18px;background:linear-gradient(180deg,var(--gold),var(--gold-dark));border-radius:2px;flex-shrink:0;box-shadow:0 1px 3px rgba(249,174,0,.3)}
+/* Barra dorada de los títulos de sección removida por solicitud (ago-2026). */
 .st-sub{font-size:11.5px;font-weight:400;color:var(--text3);margin-left:4px}
 
 /* Section title — variante "hero" centrada, para separadores principales
@@ -515,9 +515,9 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 
 /* Project card — fondo blanco, solo barra lateral coloreada */
 .pc{position:relative;background:var(--bg2);border-radius:var(--radius-lg);border:1px solid var(--border);margin-bottom:11px;overflow:hidden;box-shadow:var(--shadow);animation:fu .45s var(--ease) both;transition:transform .2s var(--ease),box-shadow .2s var(--ease),border-color .2s var(--ease)}
-.pc::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent,var(--gold));opacity:.9;transition:width .2s var(--ease)}
+/* Barra lateral de color removida por solicitud (ago-2026): las tarjetas de
+   proyecto quedan limpias, sin borde de color a la izquierda. */
 .pc:hover{box-shadow:var(--shadow-md);transform:translateY(-1px);border-color:#d6dae3}
-.pc:hover::before{width:5px}
 .ph{padding:14px 20px 14px 22px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;gap:12px;transition:background .15s var(--ease)}
 .ph:hover{background:var(--bg4)}
 .pl{display:flex;align-items:center;gap:10px;flex:1;min-width:0}
@@ -545,7 +545,9 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 .bg-pgd{background:var(--blue-light);color:var(--blue);font-weight:500;border-color:rgba(2,132,199,.2)}
 
 /* Activity table */
-.atw{border-top:1px solid var(--border);overflow-x:auto;-webkit-overflow-scrolling:touch;background:var(--bg4)}
+/* `overscroll-behavior-x:contain` evita que el arrastre horizontal sobre la
+   tabla se propague a la página (bug de "drag" en móvil). */
+.atw{border-top:1px solid var(--border);overflow-x:auto;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;background:var(--bg4)}
 /* Fila de actividad clickeable (abre el modal de descripción del avance). */
 .at-row-click{cursor:pointer}
 /* Letrero "toca una actividad…" — oculto en desktop, visible solo en móvil. */
@@ -625,7 +627,7 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 
 /* ─── Modal de descripción de actividad (popup al hacer click) ─── */
 .adscm-overlay{position:fixed;inset:0;z-index:var(--z-overlay);background:rgba(15,23,42,.5);backdrop-filter:blur(6px) saturate(120%);-webkit-backdrop-filter:blur(6px) saturate(120%);display:flex;align-items:center;justify-content:center;padding:20px;animation:adscmFade .22s var(--ease) both}
-.adscm-card{position:relative;width:min(560px,100%);max-height:calc(100vh - 60px);overflow-y:auto;background:#fff;border-radius:var(--radius-lg);box-shadow:0 25px 60px -12px rgba(15,23,42,.4),0 8px 20px -8px rgba(15,23,42,.2),0 0 0 1px rgba(15,23,42,.05);animation:adscmPop .28s var(--ease) both}
+.adscm-card{position:relative;width:min(560px,100%);max-height:calc(100vh - 60px);overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;background:#fff;border-radius:var(--radius-lg);box-shadow:0 25px 60px -12px rgba(15,23,42,.4),0 8px 20px -8px rgba(15,23,42,.2),0 0 0 1px rgba(15,23,42,.05);animation:adscmPop .28s var(--ease) both}
 .adscm-head{position:relative;padding:22px 26px 16px;border-bottom:1px solid var(--border-soft);background:linear-gradient(180deg,#fbfbfc,#fff)}
 .adscm-head::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold-dark),var(--gold),var(--gold-dark));border-radius:var(--radius-lg) var(--radius-lg) 0 0}
 .adscm-eyebrow{font-size:10px;font-weight:700;color:var(--gold-dark);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px}
@@ -673,8 +675,9 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 @keyframes adscmFade{from{opacity:0}to{opacity:1}}
 @keyframes adscmPop{from{opacity:0;transform:translateY(12px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
 @media (max-width:520px){
-  .adscm-card{border-radius:var(--radius-lg) var(--radius-lg) 0 0;align-self:flex-end;max-height:88vh}
-  .adscm-overlay{padding:0;align-items:flex-end}
+  /* En móvil el modal también va CENTRADO (antes era hoja inferior). */
+  .adscm-card{border-radius:var(--radius-lg);align-self:center;max-height:82vh}
+  .adscm-overlay{padding:14px;align-items:center}
   .adscm-head{padding:20px 20px 14px}
   .adscm-meta{padding:12px 20px}
   .adscm-body{padding:16px 20px 20px}
@@ -1005,7 +1008,7 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
      scroll interno y barra de navegación pegada abajo (flechas + puntos). ── */
 .gd-overlay{position:fixed;inset:0;z-index:1200;display:flex;align-items:center;justify-content:center;
     padding:24px;background:rgba(10,10,12,.72);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);animation:welFade .4s ease both}
-.gd-card{position:relative;width:100%;max-width:760px;max-height:92vh;overflow-y:auto;
+.gd-card{position:relative;width:100%;max-width:760px;max-height:92vh;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;
     background:#18181b;border:1px solid #2f2f31;border-radius:var(--radius-xl);
     box-shadow:0 30px 80px rgba(0,0,0,.55);animation:welRise .5s var(--ease) both}
 .gd-card::before{content:'';position:absolute;left:0;right:0;top:0;height:4px;z-index:3;
@@ -15370,7 +15373,7 @@ function App() {
   /* Cerrar popover con tecla Escape + bloquear scroll del body mientras está
      abierto (mismo patrón que los modales de Linear / Notion). */
   useEffect(() => {
-    const anyModal = dirOpen || centroOpen || gestOpen || mcOpen || lgrOpen || destItemOpen || descOpen;
+    const anyModal = dirOpen || centroOpen || gestOpen || mcOpen || lgrOpen || destItemOpen || descOpen || gdOpen;
     const anyOpen = anyModal || destMenuOpen;
     if (!anyOpen) return;
     const onKey = (e) => {
@@ -15389,18 +15392,33 @@ function App() {
       else if (destMenuOpen) setDestMenuOpen(null);
     };
     document.addEventListener('keydown', onKey);
-    /* Solo bloquear scroll del body cuando hay un MODAL abierto (no para el
-       sidebar de destacadas, que es un panel lateral, no un overlay). */
-    let prevOverflow;
+    /* Bloqueo de scroll del body cuando hay un MODAL abierto (no para el
+       sidebar de destacadas, que es un panel lateral, no un overlay).
+       `overflow:hidden` NO funciona en iOS Safari (el fondo sigue haciendo
+       scroll detrás del modal), así que se fija el body con position:fixed
+       conservando la posición y se restaura al cerrar. */
+    let prev = null;
     if (anyModal) {
-      prevOverflow = document.body.style.overflow;
-      document.body.style.overflow = 'hidden';
+      const y = window.scrollY || window.pageYOffset || 0;
+      const s = document.body.style;
+      prev = { position: s.position, top: s.top, left: s.left, right: s.right, width: s.width, overflow: s.overflow, y };
+      s.position = 'fixed';
+      s.top = -y + 'px';
+      s.left = '0';
+      s.right = '0';
+      s.width = '100%';
+      s.overflow = 'hidden';
     }
     return () => {
       document.removeEventListener('keydown', onKey);
-      if (anyModal) document.body.style.overflow = prevOverflow;
+      if (anyModal && prev) {
+        const s = document.body.style;
+        s.position = prev.position; s.top = prev.top; s.left = prev.left;
+        s.right = prev.right; s.width = prev.width; s.overflow = prev.overflow;
+        window.scrollTo(0, prev.y);
+      }
     };
-  }, [dirOpen, centroOpen, gestOpen, mcOpen, lgrOpen, destItemOpen, destMenuOpen, descOpen]);
+  }, [dirOpen, centroOpen, gestOpen, mcOpen, lgrOpen, destItemOpen, destMenuOpen, descOpen, gdOpen]);
 
   /* ─── Carga desde Apps Script (lee el Sheet UNAL con identidad del script) ─── */
   function doFetch(isR) {
@@ -16390,30 +16408,29 @@ function App() {
               {(() => {
                 const evs = parseEvidencias(descOpen.evidencias);
                 if (!evs.length) return null;
-                /* Separa fotos (Drive/imagen → miniatura) de los demás
-                   enlaces (YouTube, Hermes, web → link de texto). */
-                const imgs = [], links = [];
-                evs.forEach(u => { const im = evidenciaImg(u); if (im) imgs.push(im); else links.push(u); });
+                /* TODAS las evidencias se muestran como ENLACE (solicitud
+                   ago-2026): las fotos de Drive no siempre se pueden incrustar
+                   y dejaban un recuadro vacío dentro del modal. Cada enlace
+                   lleva una etiqueta legible según el tipo de destino. */
+                const etiqueta = (u) => {
+                  if (/drive\.google|docs\.google/i.test(u)) return 'Abrir evidencia en Google Drive';
+                  if (/youtube\.com|youtu\.be/i.test(u)) return 'Ver video de la evidencia';
+                  if (/\.(png|jpe?g|gif|webp)(\?|$)/i.test(u)) return 'Ver imagen de la evidencia';
+                  return 'Abrir evidencia';
+                };
                 return (
                   <div className="adscm-section">
                     <div className="adscm-sec-h">{evs.length === 1 ? 'Evidencia' : `Evidencias (${evs.length})`}</div>
-                    {imgs.length > 0 && (
-                      <div className="adscm-evs-imgs">
-                        {imgs.map((im, i) => <EvidImg key={i} thumbs={im.thumbs} full={im.full} />)}
-                      </div>
-                    )}
-                    {links.length > 0 && (
-                      <ul className="adscm-evs">
-                        {links.map((u, i) => (
-                          <li key={i}>
-                            <a href={u} target="_blank" rel="noopener noreferrer" title={u}>
-                              <span className="adscm-evs-ico" aria-hidden="true">↗</span>
-                              <span className="adscm-evs-url">{u.length > 64 ? u.substring(0, 64) + '…' : u}</span>
-                            </a>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
+                    <ul className="adscm-evs">
+                      {evs.map((u, i) => (
+                        <li key={i}>
+                          <a href={u} target="_blank" rel="noopener noreferrer" title={u}>
+                            <span className="adscm-evs-ico" aria-hidden="true">↗</span>
+                            <span className="adscm-evs-url">{etiqueta(u)}</span>
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 );
               })()}
