@@ -67,8 +67,10 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
    y centrado — sin el vacío enorme del full-width ni quedar apretados como a
    1360 (donde el contenido grande casi se tocaba). 1480 también aprovecha
    mejor el espacio en pantallas anchas. */
-.hd-in{max-width:1480px;margin:0 auto;padding:14px 32px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
-.hd-brand{display:flex;align-items:center;gap:14px}
+/* Encabezado CENTRADO: la marca (sello + título + Decana) va arriba y la fila
+   de botones debajo, ambos centrados horizontalmente. */
+.hd-in{max-width:1480px;margin:0 auto;padding:14px 32px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:14px}
+.hd-brand{display:flex;align-items:center;gap:14px;justify-content:center}
 .hd-logo{width:100px;height:100px;display:flex;align-items:center;justify-content:center;flex-shrink:0;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35))}.hd-logo img{width:100%;height:100%;object-fit:contain;display:block}
 .hd-t h1{color:#fff;font-size:19.5px;font-weight:600;letter-spacing:-.3px;line-height:1.3}
 .hd-t h1 em{font-style:normal;color:var(--gold)}
@@ -76,7 +78,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
 /* Título y línea de la Decana en UNA sola fila horizontal (la línea se va al
    costado del h1, separada por un divisor sutil). En pantallas angostas
    vuelve a caer debajo del título. */
-.hd-t-row{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.hd-t-row{display:flex;align-items:baseline;justify-content:center;gap:14px;flex-wrap:wrap}
 .hd-t-row .hd-decana-line{margin-top:0;padding-left:14px;border-left:1px solid rgba(255,255,255,.2)}
 .hd-decana-line{color:#cfcfd2;font-size:12.5px;margin-top:4px;letter-spacing:.1px}
 .hd-decana-line .hd-decana-role{color:var(--gold);font-weight:600;text-transform:uppercase;letter-spacing:1.2px;font-size:10.5px;margin-right:6px}
@@ -135,8 +137,8 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
   .dpv-contact{align-items:flex-start;text-align:left}
   .dpv-cta{align-self:center}
 }
-.hd-r{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
-.hd-acts{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.hd-r{display:flex;flex-direction:column;align-items:center;gap:6px}
+.hd-acts{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap}
 .btn{border:none;padding:8px 16px;border-radius:8px;font-size:12.5px;font-weight:500;cursor:pointer;font-family:inherit;transition:all .2s var(--ease);display:inline-flex;align-items:center;gap:6px}
 .btn-ref{background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(6px)}
 .btn-ref:hover{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.22);transform:translateY(-1px)}
@@ -2493,8 +2495,8 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
      Visualmente: header siempre visible al cargar, se va al hacer
      scroll, y las tabs quedan accesibles permanentemente. */
   .hd{position:static}
-  .hd-in{padding:14px 16px 12px;gap:14px;flex-direction:column;align-items:stretch}
-  .hd-brand{gap:11px;align-self:flex-start}
+  .hd-in{padding:14px 16px 12px;gap:14px;flex-direction:column;align-items:center}
+  .hd-brand{gap:11px;align-self:center}
   .hd-logo{width:60px;height:60px}
   /* Letras del header un punto más grandes en móvil (por solicitud) — el
      título y la línea de la Decana se leen mejor sin desbordar. */
@@ -2503,7 +2505,7 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
   .hd-decana-line{font-size:11.5px;margin-top:3px}
   .hd-decana-line .hd-decana-role{font-size:9.5px;letter-spacing:.9px;margin-right:5px}
   /* En móvil la línea de la Decana vuelve a caer debajo del título. */
-  .hd-t-row{flex-direction:column;align-items:flex-start;gap:0}
+  .hd-t-row{flex-direction:column;align-items:center;gap:0;text-align:center}
   .hd-t-row .hd-decana-line{margin-top:3px;padding-left:0;border-left:none}
 
   /* CTA strip — grid 4-col uniforme y compacto: los 4 botones (Minas Contigo,
