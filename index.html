@@ -1087,10 +1087,13 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 .gd-ig{margin:22px auto 4px;padding:0 34px;max-width:520px}
 .gd-ig-cap{text-align:center;color:#7c766d;font-size:10.5px;letter-spacing:1.4px;text-transform:uppercase;font-weight:700;margin-bottom:10px}
 .gd-ig-frame{background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 10px 30px -8px rgba(0,0,0,.6)}
-.gd-ig-frame iframe{width:100%;height:660px;border:0;display:block;background:#fafafa}
+/* Alto PROVISIONAL: rige solo hasta que llega el MEASURE de Instagram, que fija
+   el alto real vía style inline (ver GestionDestacada). Se deja cerca del alto
+   típico del post para que no se vea un salto. */
+.gd-ig-frame iframe{width:100%;height:520px;border:0;display:block;background:#fafafa;transition:height .25s var(--ease)}
 @media(max-width:640px){
   .gd-ig{padding:0 18px}
-  .gd-ig-frame iframe{height:580px}
+  .gd-ig-frame iframe{height:460px}
 }
 .gd-cierre{text-align:center;color:var(--gold);font-size:13.5px;font-style:italic;font-weight:600;padding:14px 44px 0}
 .gd-links{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 22px;padding:16px 30px 0}
@@ -6607,6 +6610,29 @@ const GD_SLIDES = [
 function GestionDestacada({ open, onClose }) {
   const [idx, setIdx] = useState(0);
   const cardRef = useRef(null);
+  /* Alto REAL del embed de Instagram. Con alto fijo sobraba mucho blanco debajo
+     del post (el iframe medía 650px y el contenido 509px). Instagram publica su
+     alto por postMessage — {"type":"MEASURE","details":{"height":N}} — que es
+     justo lo que usa su embed.js oficial; lo escuchamos aquí y evitamos cargar
+     ese script externo. Mientras llega el mensaje rige el alto del CSS. */
+  const [igH, setIgH] = useState(null);
+  useEffect(() => { setIgH(null); }, [idx]);
+  useEffect(() => {
+    if (!open) return;
+    const ORIGENES = ['https://www.instagram.com', 'https://instagram.com'];
+    const onMsg = (e) => {
+      if (ORIGENES.indexOf(e.origin) === -1) return;
+      let d = e.data;
+      try { d = typeof d === 'string' ? JSON.parse(d) : d; } catch (_) { return; }
+      if (!d || d.type !== 'MEASURE' || !d.details) return;
+      const h = Number(d.details.height);
+      /* El dato viene de un tercero: se acota para que un valor absurdo (o
+         manipulado) no deforme la tarjeta. */
+      if (h > 200 && h < 1400) setIgH(Math.round(h));
+    };
+    window.addEventListener('message', onMsg);
+    return () => window.removeEventListener('message', onMsg);
+  }, [open]);
   /* Al cambiar de flyer, la tarjeta vuelve al tope para leer desde el inicio. */
   useEffect(() => { if (cardRef.current) cardRef.current.scrollTop = 0; }, [idx, open]);
   if (!open) return null;
@@ -6644,8 +6670,10 @@ function GestionDestacada({ open, onClose }) {
             <div className="gd-ig-cap">La publicación</div>
             <div className="gd-ig-frame">
               <iframe
+                key={s.ig}
                 src={'https://www.instagram.com/p/' + s.ig + '/embed'}
                 title="Publicación de la Facultad de Minas en Instagram"
+                style={igH ? { height: igH + 'px' } : undefined}
                 loading="lazy"
                 scrolling="no"
                 allowtransparency="true"
