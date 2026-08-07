@@ -2659,7 +2659,13 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
      Alianzas, Otros logros, Impacto) en UNA sola fila horizontal, repartidos
      en proporciones iguales. Antes era 3-col y el 4º (Impacto) caía a otra fila. */
   .hd-r{width:100%;align-items:stretch;gap:0}
-  .hd-acts{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;width:100%}
+  /* align-items:stretch es imprescindible acá. El valor heredado era `center`
+     (viene de la regla base .hd-acts, pensada para el layout flex de escritorio):
+     con él, cada botón tomaba su altura natural y quedaba centrado — los de dos
+     renglones median 48px y los de uno solo 38px, así que "Alianzas" mostraba
+     sus bordes 5px más adentro que los vecinos. Con stretch los cuatro miden
+     igual sin importar cuántos renglones ocupe su rótulo. */
+  .hd-acts{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;width:100%;align-items:stretch}
   .btn-mc,.btn-gest,.btn-lgr{
     justify-content:center;
     padding:9px 6px;
