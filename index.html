@@ -270,16 +270,22 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 /* Rótulo "Proyectos del Plan de Acción" en las pestañas de dependencia. Los 4px
    de sangría lo alinean exactamente con el rótulo "Gestión" del marquee, que
    lleva ese mismo margen — sin esto quedaban desfasados.
-   El margen inferior baja de 14px a 6px porque debajo va la nota explicativa:
-   título y nota deben leerse como un bloque, no como dos elementos sueltos. */
-.st-proyectos{margin-left:4px;margin-bottom:6px}
-/* Nota que explica qué son estos proyectos (solicitud ago-2026). max-width en
-   ch acota el renglón a una medida cómoda de lectura: a lo ancho completo de la
-   pantalla el ojo pierde el hilo al saltar de línea. */
-.st-nota{margin:0 0 18px 4px;max-width:78ch;font-size:12.5px;line-height:1.55;color:var(--text2)}
+   El margen inferior deja aire antes del bloque centrado que sigue. */
+.st-proyectos{margin-left:4px;margin-bottom:12px}
+/* Nota que explica qué son estos proyectos (solicitud ago-2026).
+   CENTRADA y con el MISMO ancho que .kg-2 (640px): alineada a la izquierda
+   terminaba a mitad de pantalla, justo sobre el centro de las tarjetas, y se
+   leía como un descuadre. Ahora sus bordes coinciden exactamente con los de las
+   dos tarjetas de abajo, así que nota + tarjetas forman un solo bloque centrado
+   bajo el rótulo. */
+.st-nota{margin:0 auto 16px;max-width:640px;text-align:center;font-size:12.5px;line-height:1.6;color:var(--text2)}
 .st-nota b{color:var(--text);font-weight:600}
 @media(max-width:640px){
-  .st-nota{margin-left:2px;font-size:12px}
+  /* En móvil las tarjetas ya ocupan todo el ancho, así que centrar el texto no
+     aporta nada y en 4 renglones se lee peor: vuelve a la izquierda, con la
+     misma sangría de 4px del rótulo para que ambos arranquen en la misma línea
+     vertical. */
+  .st-nota{font-size:12px;text-align:left;margin-left:4px;margin-right:4px;padding:0}
 }
 /* Barra dorada de los títulos de sección removida por solicitud (ago-2026). */
 .st-sub{font-size:11.5px;font-weight:400;color:var(--text3);margin-left:4px}
