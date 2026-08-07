@@ -550,7 +550,13 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 .ph:hover .ch{background:var(--gold-light);color:var(--gold-dark);border-color:rgba(249,174,0,.45)}
 .pi{min-width:0;flex:1}
 .pid{font-size:10.5px;font-weight:700;color:var(--gold);letter-spacing:.3px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.pnm{font-size:13.5px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:560px;margin-top:2px;letter-spacing:-.1px}
+/* Nombre del proyecto SIN recorte, también en escritorio (solicitud ago-2026).
+   Antes llevaba white-space:nowrap + overflow:hidden + text-overflow:ellipsis y
+   un max-width de 560px: los nombres largos (P24, P25…) terminaban en "…" y no
+   se podían leer. Ahora envuelve en las líneas que necesite. El contenedor .pi
+   ya trae flex:1 y min-width:0, así que el texto usa el ancho disponible sin
+   empujar el porcentaje de la derecha. */
+.pnm{font-size:13.5px;font-weight:600;color:var(--text);margin-top:2px;letter-spacing:-.1px;line-height:1.35}
 /* Prefijo "P{id}:" inline en el nombre del proyecto — dorado bold para mantener
    la identidad del ID, separador ":" antes del nombre del proyecto en negro. */
 .pnm-id{color:var(--gold);font-weight:700;margin-right:4px}
@@ -2594,7 +2600,9 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 @media(max-width:900px){
   .cgrid{grid-template-columns:1fr}
   .kg{grid-template-columns:repeat(2,1fr)}
-  .pnm{max-width:280px}
+  /* max-width:none — el recorte ya se eliminó en la regla base; dejar aquí un
+     tope de 280px volvería a estrangular el nombre en tablets. */
+  .pnm{max-width:none}
   .ct{padding:20px 20px}
   .hd-in{padding:12px 20px}
   .tbs{padding:0 20px}
@@ -3333,7 +3341,7 @@ const KPI_MARQUEE = [
   { num: '590',       periodo: '2025',     lbl: 'asesorías psicosociales realizadas',                            cat: 'care'     },
   { num: '2.685',                          lbl: 'asistencias a talleres psicoeducativos',                        cat: 'care'     },
   /* 💰 Inversión en gente / becas */
-  { num: '$1.682,5M', periodo: '2025',     lbl: 'dejados de percibir por la Facultad en becas BEDAS',            cat: 'money'    },
+  { num: '$1.682,5M', periodo: '2025',     lbl: 'dejados de recibir por la Facultad en becas BEDAS',            cat: 'money'    },
   { num: '103',       periodo: '2026-1S',  lbl: 'becas BEDAS otorgadas (67 maestrías + 36 doctorados)',          cat: 'money'    },
   { num: '5.851',                          lbl: 'almuerzos subsidiados por Fundación Fraternidad',               cat: 'food'     },
   { num: '426',       periodo: '2025',     lbl: 'estudiantes auxiliares contratados',                            cat: 'money'    },
@@ -3417,7 +3425,7 @@ const KPI_BY_DEP = {
     { num: '29',          periodo: '2026-1S', lbl: 'practicantes en Bancolombia — empresa líder del semestre',          cat: 'alliance' },
     /* ─── Cifras 2025 (anuales) — siguen vigentes mientras no haya nuevas ─── */
     { num: '197',         periodo: '2025',    lbl: 'becas BEDAS otorgadas sobre 554 candidatos',                        cat: 'money'    },
-    { num: '$1.682,5M',   periodo: '2025',    lbl: 'dejados de percibir por la Facultad en becas BEDAS',                cat: 'money'    },
+    { num: '$1.682,5M',   periodo: '2025',    lbl: 'dejados de recibir por la Facultad en becas BEDAS',                cat: 'money'    },
     { num: '$176,4M',     periodo: '2025',    lbl: 'invertidos en Programa Minas Contigo (matemáticas)',                cat: 'money'    },
     { num: '223',         periodo: '2025',    lbl: 'estudiantes en Sedes de Presencia Nacional (119 1S + 104 2S)',      cat: 'territory'},
     { num: '426',         periodo: '2025',    lbl: 'estudiantes auxiliares contratados',                                cat: 'money'    },
@@ -4391,9 +4399,9 @@ const DESTACADAS_POR_DEP = {
     },
     {
       id: 'D-VICA-5',
-      titulo: 'BEDAS — 103 becas otorgadas en 2026-1S y 197 en 2025 · $1.682,5M dejados de percibir por la Facultad',
+      titulo: 'BEDAS — 103 becas otorgadas en 2026-1S y 197 en 2025 · $1.682,5M dejados de recibir por la Facultad',
       tipo: 'Becas',
-      descripcion: 'Las Becas de Exención de Derechos Académicos de Posgrado (BEDAS) son una de las apuestas más relevantes de la Vicedecanatura para la financiación de los estudiantes de posgrado. En 2026-1S se otorgaron 103 becas (67 a maestrías + 36 a doctorados). La concentración mayor estuvo en el Doctorado en Ingeniería · Sistemas e Informática con 17 BEDAS (16,50% del total). Históricamente en 2025 se otorgaron 197 becas a 554 candidatos, cubriendo cerca de tres cuartas partes de los cupos disponibles. Cada BEDA equivale a 180 puntos del costo de matrícula para maestrías y doctorados. Tomando como base el salario mínimo legal mensual vigente del año 2025, el dinero que la Facultad dejó de percibir por concepto de BEDAS ascendió a $1.682.577.000 COP.',
+      descripcion: 'Las Becas de Exención de Derechos Académicos de Posgrado (BEDAS) son una de las apuestas más relevantes de la Vicedecanatura para la financiación de los estudiantes de posgrado. En 2026-1S se otorgaron 103 becas (67 a maestrías + 36 a doctorados). La concentración mayor estuvo en el Doctorado en Ingeniería · Sistemas e Informática con 17 BEDAS (16,50% del total). Históricamente en 2025 se otorgaron 197 becas a 554 candidatos, cubriendo cerca de tres cuartas partes de los cupos disponibles. Cada BEDA equivale a 180 puntos del costo de matrícula para maestrías y doctorados. Tomando como base el salario mínimo legal mensual vigente del año 2025, el dinero que la Facultad dejó de recibir por concepto de BEDAS ascendió a $1.682.577.000 COP.',
       monto: '$1.682,5M',
       proyectoLink: 'P3',
       bullets: [
@@ -10835,7 +10843,7 @@ function VizVICABedas() {
         </div>
         <div className="dviz-hero-stat dviz-hero-vica-alt">
           <div className="dviz-hero-stat-num">$1.682,5M</div>
-          <div className="dviz-hero-stat-lbl">dejados de percibir por la Facultad (cálculo SMMLV 2025)</div>
+          <div className="dviz-hero-stat-lbl">dejados de recibir por la Facultad (cálculo SMMLV 2025)</div>
         </div>
       </div>
       <div className="dviz-stats-row">
@@ -16387,11 +16395,27 @@ function App() {
                 Acción. Se abre reconociendo la operación cotidiana a propósito
                 — el mensaje suma a la gestión sin restarle al trabajo diario
                 de las dependencias. */}
-            <p className="st-nota">
-              Los siguientes proyectos son <b>adicionales a la operación cotidiana</b> de
-              la dependencia: fueron formulados dentro del <b>Plan de Acción 2024–2026</b> de
-              la Decanatura y buscan mejorar la Facultad.
-            </p>
+            {aDep === 'Decanatura' ? (
+              /* Nota propia de Decanatura (solicitud ago-2026). Explica por qué
+                 aparece con un solo proyecto: su papel es dirigir el Plan
+                 completo, y solo asumió de forma directa la creación de los
+                 Centros de Pensamiento. Redactada para sumar sin restarle a las
+                 demás dependencias — la conducción del Plan se presenta como
+                 función, no como jerarquía sobre el trabajo ajeno. */
+              <p className="st-nota">
+                La Decanatura <b>orienta y articula el Plan de Acción de toda la Facultad</b>:
+                los proyectos de cada dependencia se formulan, se acompañan y avanzan bajo su
+                dirección. Además de esa labor, en este bienio asumió de manera directa la
+                <b> creación de los Centros de Pensamiento</b>, la apuesta con la que la Facultad
+                se dotó de espacios propios para pensar, desde la ingeniería, los retos del país.
+              </p>
+            ) : (
+              <p className="st-nota">
+                Los siguientes proyectos son <b>adicionales a la operación cotidiana</b> de
+                la dependencia: fueron formulados dentro del <b>Plan de Acción 2024–2026</b> de
+                la Decanatura y buscan mejorar la Facultad.
+              </p>
+            )}
           </>
         )}
 
