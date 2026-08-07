@@ -6615,6 +6615,37 @@ function ReelLightbox({ media, onClose }) {
    nuevo basta agregar un objeto a GD_SLIDES — el componente lo renderiza solo.
    Contenido = versiones resumidas aprobadas de los flyers (ago-2026). */
 const GD_SLIDES = [
+  /* ── Flyer 0 · SALUDO — es lo primero que ve quien abre el tablero ─────────
+     Mensaje de apertura de la gestión 2024–2026 (solicitud ago-2026).
+     REGLA DE FIDELIDAD: todas las cifras de aquí ya existen en el tablero y
+     provienen de los informes públicos de gestión. No se agregó ninguna nueva.
+     Se descartó a propósito el Green Gown Award: es de 2021, o sea de la
+     administración anterior, y citarlo acá sería atribuirse algo ajeno. */
+  {
+    eye: 'Facultad de Minas · Gestión 2024–2026 · Eva Cristina Manotas Rodríguez',
+    titulo: <>Primero, las <em>personas</em></>,
+    sub: 'Un saludo a la comunidad de la Facultad de Minas. Esto es lo que construimos juntos en el bienio 2024–2026.',
+    secciones: [
+      { t: 'Nuestra manera de gobernar', intro: <>Partimos de una convicción: <b>una Facultad se mide por cómo trata a su gente</b>. Por eso la Decanatura mantuvo las puertas abiertas a estudiantes, profesores, administrativos y contratistas por igual, sin distinción de origen, de género ni de tipo de vinculación. La equidad y la inclusión no se quedaron en el discurso: se volvieron presupuesto, programas y resultados que hoy se pueden auditar uno por uno.</> },
+      { t: 'Lo que significó para cada quien', items: [
+        { b: 'Estudiantes: ', r: '705 acompañados para que no abandonaran sus estudios · 480 salieron del riesgo académico en 2025 · cerca de 4.000 pasaron por Minas Contigo desde 2022 · 118 becas externas gestionadas · 5.851 almuerzos subsidiados · 936 títulos otorgados en 2025.' },
+        { b: 'Profesores: ', r: '50 apoyos en convocatorias académicas y 110 más por vía NOMO · alianzas que traen financiación internacional, coautorías y codirección de tesis · 96% de los programas acreditados en alta calidad (27 de 28).' },
+        { b: 'Administrativos y contratistas: ', r: 'un proyecto del Plan dedicado expresamente a transformar las relaciones humanas en la Facultad, que los nombra e incluye · 2.364 participantes en la estrategia de equidad de género · 22 obras de modernización académico-administrativa por $2.047 millones.' },
+        { b: 'Campus: ', r: '344.490 botellas plásticas evitadas en 2025 · más de 700 individuos vegetales sembrados · 83.688 visitas a las calculadoras de huella ambiental.' }
+      ]},
+      { t: 'Y hacia afuera', items: [
+        { b: 'Referentes en el mundo: ', r: '306 movilidades apoyadas —el 63% internacionales— · cerca de $2.200 millones gestionados con aliados internacionales · convocatoria conjunta con el CSIC de España · única universidad latinoamericana en el consorcio OPTIMALMINE de Horizonte Europa · seis instituciones de cuatro continentes escribieron para felicitar los 139 años de la Facultad.' },
+        { b: 'Presencia en el país: ', r: 'Premio «Gestión Internacional» en la Cumbre Smart Cities Medellín 2026 · codirección de eventos nacionales como Hackea tu Mente y «Economía de la Longevidad» · dos Centros de Pensamiento creados para aportar, desde la ingeniería, a las discusiones que le importan a Colombia.' }
+      ]},
+      { t: 'Todo esto se puede verificar', intro: <>Ninguna cifra de este tablero es una afirmación suelta. Cada una proviene de los <b>informes públicos de gestión</b> de la Facultad y de los registros oficiales de la Decanatura, y puede rastrearse hasta el proyecto y la actividad que la produjo. Aquí hacemos seguimiento a los <b>31 proyectos del Plan de Acción 2024–2026</b>: proyectos <b>adicionales a la operación cotidiana</b> de cada dependencia, creados para mejorar la Facultad, cada uno con su responsable, su meta y su porcentaje de avance abierto a consulta permanente.</> }
+    ],
+    cierre: 'Desliza para ver lo más destacado de la gestión →',
+    links: [
+      { label: 'Informe de Gestión 2025', url: 'https://minas.medellin.unal.edu.co/images/InformesGestion/Informe_de_gestion_2025_Fcaultad_de_Minas.pdf' },
+      { label: 'Informe de Gestión 2024', url: 'https://minas.medellin.unal.edu.co/images/InformesGestion/Informe_2024_V2.pdf' }
+    ],
+    fuente: 'Cifras: informes públicos de gestión de la Facultad de Minas (2024 y 2025) y registros de la gestión de la Decanatura.'
+  },
   {
     eye: 'Facultad de Minas · Gestión 2024–2026 · Eva Cristina Manotas Rodríguez',
     titulo: <>Una Facultad <em>conectada</em> con el mundo</>,
