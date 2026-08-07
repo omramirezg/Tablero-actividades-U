@@ -872,7 +872,9 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 /* Desvanecido (fade) SOLO en el track de las cards — difumina los KPIs en
    las puntas izquierda/derecha sin afectar la etiqueta "Gestión" (que vive
    en .kpim-tag, fuera del track). */
-.kpim-track{display:flex;gap:12px;padding:6px 0;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;-ms-overflow-style:none;scroll-behavior:auto;-webkit-overflow-scrolling:touch;-webkit-mask-image:linear-gradient(to right,transparent 0,#000 50px,#000 calc(100% - 50px),transparent 100%);mask-image:linear-gradient(to right,transparent 0,#000 50px,#000 calc(100% - 50px),transparent 100%)}
+/* overscroll-behavior-x:contain — al llegar a un extremo deslizando, evita que
+   el gesto se propague y dispare el "volver atrás" del navegador en iOS. */
+.kpim-track{display:flex;gap:12px;padding:6px 0;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;-ms-overflow-style:none;scroll-behavior:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;-webkit-mask-image:linear-gradient(to right,transparent 0,#000 50px,#000 calc(100% - 50px),transparent 100%);mask-image:linear-gradient(to right,transparent 0,#000 50px,#000 calc(100% - 50px),transparent 100%)}
 .kpim-track::-webkit-scrollbar{display:none;width:0;height:0}
 
 /* Etiqueta "Gestión" arriba-izquierda del marquee — mismo estilo que
@@ -7349,6 +7351,12 @@ function KpiMarquee({ items, ariaLabel }) {
   const stateRef  = useRef({
     paused: false, lastTime: 0, resumeTimeout: null,
     targetFactor: 1, factor: 1,
+    /* touching: true mientras hay un dedo sobre el track. Es el equivalente
+       táctil de `hovering` — sin él, la red de seguridad reanudaba el
+       auto-scroll a mitad de un arrastre largo.
+       lastSelfScrollAt: marca del último scrollLeft escrito por el rAF, para
+       poder distinguir nuestro movimiento del del usuario. */
+    touching: false, lastSelfScrollAt: 0,
     /* lastInteraction: timestamp del último evento del USUARIO sobre el
        marquee (hover, click, swipe, wheel). Si el state `paused=true`
        persiste más de SAFETY_MS sin interacción nueva Y NO está hovering,
@@ -7446,6 +7454,7 @@ function KpiMarquee({ items, ariaLabel }) {
          que el usuario quiere mirar las cards quieto). */
       if (stateRef.current.paused
           && !stateRef.current.hovering
+          && !stateRef.current.touching
           && stateRef.current.lastInteraction
           && (now - stateRef.current.lastInteraction) > SAFETY_MS) {
         stateRef.current.paused = false;
@@ -7479,16 +7488,45 @@ function KpiMarquee({ items, ariaLabel }) {
           if (setW > 0 && track.scrollLeft >= setW) {
             track.scrollLeft -= setW;
           }
+          /* Marca de tiempo del ÚLTIMO scroll escrito por nosotros. El listener
+             de abajo la usa para distinguir "esto lo moví yo" de "esto lo movió
+             el dedo del usuario". */
+          stateRef.current.lastSelfScrollAt = now;
         }
       }
       rafRef.current = requestAnimationFrame(tick);
     };
     rafRef.current = requestAnimationFrame(tick);
 
+    /* ── Deslizamiento con el dedo (solicitud ago-2026) ────────────────────
+       En iOS el scroll por inercia sigue corriendo bastante después de que el
+       dedo se levanta. Con solo onTouchEnd + 800ms, el rAF se reanudaba en
+       plena inercia y volvía a escribir scrollLeft — y en Safari escribir
+       scrollLeft durante la inercia la CANCELA. Resultado: el carrusel se
+       "trababa" a mitad del gesto.
+       Este listener escucha el scroll real del track: si no lo produjimos
+       nosotros (más de 120ms desde nuestra última escritura), es del usuario,
+       así que se mantiene en pausa y se reanuda 1,2s después del último
+       movimiento — ya sin inercia viva. */
+    const onScroll = () => {
+      const ahora = performance.now();
+      if (ahora - (stateRef.current.lastSelfScrollAt || 0) < 120) return;
+      stateRef.current.paused = true;
+      stateRef.current.lastInteraction = ahora;
+      clearTimeout(stateRef.current.resumeTimeout);
+      stateRef.current.resumeTimeout = setTimeout(() => {
+        if (!stateRef.current.hovering && !stateRef.current.touching) {
+          stateRef.current.paused = false;
+        }
+      }, 1200);
+    };
+    track.addEventListener('scroll', onScroll, { passive: true });
+
     return () => {
       cancelAnimationFrame(rafRef.current);
       clearTimeout(stateRef.current.resumeTimeout);
       window.removeEventListener('resize', onResize);
+      track.removeEventListener('scroll', onScroll);
     };
   }, []);
 
@@ -7535,8 +7573,13 @@ function KpiMarquee({ items, ariaLabel }) {
         ref={trackRef}
         onMouseEnter={() => { stateRef.current.hovering = true; pause(); }}
         onMouseLeave={() => { stateRef.current.hovering = false; resumeLater(60); }}
-        onTouchStart={pause}
-        onTouchEnd={() => resumeLater(800)}
+        onTouchStart={() => { stateRef.current.touching = true; pause(); }}
+        /* onTouchMove refresca lastInteraction en cada movimiento del dedo: sin
+           esto, un arrastre de más de SAFETY_MS (1,5s) disparaba la red de
+           seguridad y el auto-scroll arrancaba PELEANDO contra el dedo. */
+        onTouchMove={pause}
+        onTouchEnd={() => { stateRef.current.touching = false; resumeLater(1400); }}
+        onTouchCancel={() => { stateRef.current.touching = false; resumeLater(1400); }}
         onWheel={() => { pause(); resumeLater(500); }}>
         {doubled.map((k, i) => (
           /* aria-hidden a partir del segundo set en adelante: las cards
@@ -16279,19 +16322,9 @@ function App() {
           <KpiMarquee items={KPI_MARQUEE} ariaLabel="Cifras destacadas del Plan de Acción 2024-2026" />
         )}
 
-        {/* Hero "Sello de la Decanatura" — solo en pestaña General. Va arriba
-            de los KPIs porque es el sello distintivo del bienio 2024-2026. */}
-        {tab === 'General' && (
-          <CentroHero projects={proj} getAv={getAv} onOpen={(k) => setCentroOpen(k)} />
-        )}
-
-        {/* Constelación visual proyectos ↔ Centros — solo en General.
-            Va justo después del Hero porque amplía la narrativa: el Hero
-            cuenta "qué son los Centros" y la Constelación cuenta "cómo se
-            conectan con cada uno de los 32 proyectos del Plan". */}
-        {tab === 'General' && (
-          <CentroConstelacion projects={proj} onOpenCentro={(k) => setCentroOpen(k)} />
-        )}
+        {/* El bloque de Centros de Pensamiento y el Mapa de conexiones ya NO van
+            acá: bajaron al final de la vista General por solicitud (ago-2026).
+            Ver más abajo, después de "Avance por dependencia". */}
 
         {/* Separador de sección — corta visualmente la narrativa de los Centros
             y abre el bloque de métricas operativas. Variante "hero" centrada
@@ -16452,6 +16485,15 @@ function App() {
             {/* Gestión Estratégica de la Decanatura ya NO va aquí.
                 Se accede desde el botón "Alianzas estratégicas" en el header,
                 visible desde cualquier pestaña del dashboard. */}
+
+            {/* ── Centros de Pensamiento — bajaron hasta acá (solicitud ago-2026).
+                Antes abrían la pestaña General, justo debajo del marquee de
+                cifras. Ahora la vista arranca con las métricas del Plan (avance
+                por eje y por dependencia) y los Centros cierran la narrativa.
+                El Hero cuenta "qué son los Centros"; el Mapa, "cómo se conectan
+                con cada uno de los 32 proyectos del Plan". */}
+            <CentroHero projects={proj} getAv={getAv} onOpen={(k) => setCentroOpen(k)} />
+            <CentroConstelacion projects={proj} onOpenCentro={(k) => setCentroOpen(k)} />
           </div>
         )}
 
