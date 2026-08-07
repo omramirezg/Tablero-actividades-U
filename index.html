@@ -269,8 +269,18 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 .st{font-size:14.5px;font-weight:700;margin-bottom:14px;color:var(--text);display:flex;align-items:center;gap:10px;letter-spacing:-.2px}
 /* Rótulo "Proyectos del Plan de Acción" en las pestañas de dependencia. Los 4px
    de sangría lo alinean exactamente con el rótulo "Gestión" del marquee, que
-   lleva ese mismo margen — sin esto quedaban desfasados. */
-.st-proyectos{margin-left:4px}
+   lleva ese mismo margen — sin esto quedaban desfasados.
+   El margen inferior baja de 14px a 6px porque debajo va la nota explicativa:
+   título y nota deben leerse como un bloque, no como dos elementos sueltos. */
+.st-proyectos{margin-left:4px;margin-bottom:6px}
+/* Nota que explica qué son estos proyectos (solicitud ago-2026). max-width en
+   ch acota el renglón a una medida cómoda de lectura: a lo ancho completo de la
+   pantalla el ojo pierde el hilo al saltar de línea. */
+.st-nota{margin:0 0 18px 4px;max-width:78ch;font-size:12.5px;line-height:1.55;color:var(--text2)}
+.st-nota b{color:var(--text);font-weight:600}
+@media(max-width:640px){
+  .st-nota{margin-left:2px;font-size:12px}
+}
 /* Barra dorada de los títulos de sección removida por solicitud (ago-2026). */
 .st-sub{font-size:11.5px;font-weight:400;color:var(--text3);margin-left:4px}
 
@@ -16319,7 +16329,19 @@ function App() {
             Solo en pestañas de dependencia — la vista General tiene su propia
             estructura de secciones. */}
         {tab !== 'General' && !VIRTUAL_DEPS.includes(aDep) && (
-          <div className="st st-proyectos">Proyectos del Plan de Acción</div>
+          <>
+            <div className="st st-proyectos">Proyectos del Plan de Acción</div>
+            {/* Nota explicativa: aclara que estos proyectos NO son la operación
+                diaria de la dependencia sino iniciativas nuevas del Plan de
+                Acción. Se abre reconociendo la operación cotidiana a propósito
+                — el mensaje suma a la gestión sin restarle al trabajo diario
+                de las dependencias. */}
+            <p className="st-nota">
+              Los siguientes proyectos son <b>adicionales a la operación cotidiana</b> de
+              la dependencia: fueron formulados dentro del <b>Plan de Acción 2024–2026</b> de
+              la Decanatura y buscan mejorar la Facultad.
+            </p>
+          </>
         )}
 
         {!VIRTUAL_DEPS.includes(aDep) && (
