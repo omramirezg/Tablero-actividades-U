@@ -197,7 +197,20 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 
 /* Tabs — pestañas con afordancia clickable clara */
 .tw{background:rgba(255,255,255,.85);backdrop-filter:saturate(180%) blur(10px);-webkit-backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid var(--border);position:static;z-index:var(--z-sticky-tabs);box-shadow:0 1px 3px rgba(15,23,42,.03)}
-.tbs{max-width:1480px;margin:0 auto;padding:6px 32px;display:flex;gap:4px;justify-content:safe center;overflow-x:auto;scrollbar-width:none}
+/* BARRA DE PESTAÑAS — centrada cuando cabe, deslizable cuando no.
+   Antes usaba `justify-content:safe center`. El problema (reportado desde
+   iPhone, ago-2026): Safari no aplica bien la palabra `safe`, así que centra de
+   verdad — y cuando el contenido desborda un contenedor flex CENTRADO, la parte
+   que se sale por la IZQUIERDA queda en un área que el scroll no alcanza. En el
+   iPhone eso dejaba "General" y "DEC" inaccesibles por más que uno arrastrara.
+   Solución portable: alineación al inicio + dos pseudo-elementos con
+   `margin:auto`. Cuando sobra espacio, esos márgenes lo reparten y el grupo
+   queda centrado; cuando falta, colapsan a 0 y todo el contenido es alcanzable.
+   Funciona igual en Safari, Chrome y Firefox, sin depender de `safe`. */
+.tbs{max-width:1480px;margin:0 auto;padding:6px 32px;display:flex;gap:4px;justify-content:flex-start;
+     overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;
+     scroll-padding-inline:32px}
+.tbs::before,.tbs::after{content:'';margin:auto;flex-shrink:0}
 .tbs::-webkit-scrollbar{display:none}
 .tb{padding:10px 16px;margin:4px 0;font-size:12.5px;font-weight:700;cursor:pointer;border:1px solid transparent;background:transparent;color:var(--text2);font-family:inherit;white-space:nowrap;transition:background .18s var(--ease),color .18s var(--ease),border-color .18s var(--ease),transform .18s var(--ease),box-shadow .18s var(--ease);position:relative;border-radius:8px;display:inline-flex;align-items:center;gap:8px}
 .tb:hover{color:var(--text);background:var(--gold-50);border-color:rgba(249,174,0,.18);transform:translateY(-1px);box-shadow:0 2px 6px rgba(249,174,0,.08)}
@@ -16194,18 +16207,37 @@ function App() {
       <div className="tw">
         <div className="tbs">
           {tabList.map(t => (
-            <button key={t} className={'tb' + (tab === t ? ' on' : '')} onClick={() => {
+            <button key={t} className={'tb' + (tab === t ? ' on' : '')} onClick={(e) => {
               /* Al cambiar de pestaña: resetear filtros, cerrar el sidebar de
                  destacadas (destMenuOpen) y cualquier modal de destacada que
                  esté abierto (destItemOpen). Sin esto, el sidebar queda
                  renderizando los hitos de la pestaña anterior cuando se hace
                  click en otra dependencia. */
+              const btn = e.currentTarget;
+              const bar = btn.closest('.tbs');
               setTab(t);
               setExp({});
               setFEje('Todos'); setFEst('Todos'); setFPGD('Todos'); setFResp('Todos'); setFCentro('Todos');
               setSearch('');
               setDestMenuOpen(null);
               setDestItemOpen(null);
+              /* Centrar la pestaña recién elegida dentro de la barra deslizable.
+                 Se calcula con getBoundingClientRect en vez de offsetLeft porque
+                 .tbs no es un offsetParent posicionado. Solo mueve el scroll
+                 HORIZONTAL de la barra — no toca el de la página.
+                 Asignación directa a scrollLeft, NO scrollTo({behavior:'smooth'}):
+                 el desplazamiento suave sobre un elemento no existe en Safari
+                 anteriores a 15.4 y ahí la llamada se ignora en silencio. */
+              if (bar && bar.scrollWidth > bar.clientWidth) {
+                const x = btn.getBoundingClientRect().left - bar.getBoundingClientRect().left + bar.scrollLeft;
+                bar.scrollLeft = x - (bar.clientWidth - btn.offsetWidth) / 2;
+              }
+              /* Volver arriba. En iOS Safari, si venías de una pestaña larga
+                 (Secretaría mide ~3.500px) y saltabas a una corta (~1.000px), el
+                 scroll NO siempre se recorta solo y quedabas mirando una franja
+                 en blanco debajo del pie de página. Chrome sí lo recorta; Safari
+                 no durante el rebote. Reposicionar arriba lo evita en ambos. */
+              window.scrollTo(0, 0);
             }}>
               {t}
             </button>
