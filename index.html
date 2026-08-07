@@ -279,8 +279,14 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
    leía como un descuadre. Ahora sus bordes coinciden exactamente con los de las
    dos tarjetas de abajo, así que nota + tarjetas forman un solo bloque centrado
    bajo el rótulo. */
-.st-nota{margin:0 auto 16px;max-width:640px;text-align:center;font-size:12.5px;line-height:1.6;color:var(--text2)}
+/* Texto JUSTIFICADO también en escritorio (solicitud ago-2026) — antes iba
+   centrado. hyphens:auto acompaña siempre a la justificación: el documento es
+   lang="es" y sin partir palabras se abren huecos entre ellas. */
+.st-nota{margin:0 auto 16px;max-width:640px;text-align:justify;hyphens:auto;-webkit-hyphens:auto;font-size:12.5px;line-height:1.6;color:var(--text2)}
 .st-nota b{color:var(--text);font-weight:600}
+/* La explicación general de la pestaña General es más larga, así que se le da
+   algo más de ancho para que no quede en un bloque demasiado alto y angosto. */
+.st-nota-gral{max-width:760px;margin-bottom:22px}
 @media(max-width:640px){
   /* En móvil las tarjetas ya ocupan todo el ancho, así que centrar el texto no
      aporta nada: pasa a JUSTIFICADO (solicitud ago-2026), con la misma sangría
@@ -288,6 +294,11 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
      hyphens:auto es obligatorio acá — el documento es lang="es" y justificar en
      una columna de ~350px sin partir palabras abre huecos enormes entre ellas. */
   .st-nota{font-size:12px;text-align:justify;hyphens:auto;-webkit-hyphens:auto;margin-left:4px;margin-right:4px;padding:0}
+  /* En móvil la nota genérica de cada dependencia se OCULTA (solicitud
+     ago-2026): repetida en 10 pestañas ocupaba demasiada pantalla. Su contenido
+     pasó, ampliado, a la explicación de la pestaña General. Siguen visibles la
+     explicación general y la nota propia de Decanatura, que no es genérica. */
+  .st-nota-gen{display:none}
 }
 /* Barra dorada de los títulos de sección removida por solicitud (ago-2026). */
 .st-sub{font-size:11.5px;font-weight:400;color:var(--text3);margin-left:4px}
@@ -16372,6 +16383,24 @@ function App() {
           </div>
         )}
 
+        {/* Explicación general del Plan (solicitud ago-2026). Vive SOLO en la
+            pestaña General y cuenta con detalle qué son estos proyectos. En
+            móvil la nota corta de cada dependencia se oculta para no ocupar
+            espacio, así que esta pasa a ser la explicación de referencia: por
+            eso está redactada completa y no como resumen. */}
+        {tab === 'General' && (
+          <p className="st-nota st-nota-gral">
+            Cada dependencia de la Facultad tiene sus <b>funciones permanentes</b>: lo que hace
+            todos los días para que la Facultad funcione. El <b>Plan de Acción 2024–2026</b> es
+            algo distinto y adicional: un conjunto de proyectos nuevos que la Decanatura formuló
+            para este bienio, cada uno con responsable, meta y porcentaje de avance verificable.
+            Aquí se reportan los <b>{TOTAL_PROYECTOS_PLAN} proyectos</b> del Plan, agrupados en
+            cinco ejes y repartidos entre las dependencias que los ejecutan. El avance de cada uno
+            se actualiza con las actividades que lo componen, y puede consultarse abriendo su
+            pestaña o haciendo clic sobre el proyecto.
+          </p>
+        )}
+
         {/* KPIs — solo 2 cards (Avance ponderado + Proyectos) por solicitud.
             Los KPIs "Actividades registradas" y "Al 100%" se removieron porque
             no aportaban valor accionable. Quedan los dos esenciales: la
@@ -16410,7 +16439,10 @@ function App() {
                 se dotó de espacios propios para pensar, desde la ingeniería, los retos del país.
               </p>
             ) : (
-              <p className="st-nota">
+              /* st-nota-gen: la nota genérica. Solo esta se oculta en móvil —
+                 la de Decanatura NO, porque explica algo que de otro modo
+                 confunde (por qué aparece con un único proyecto). */
+              <p className="st-nota st-nota-gen">
                 Los siguientes proyectos son <b>adicionales a la operación cotidiana</b> de
                 la dependencia: fueron formulados dentro del <b>Plan de Acción 2024–2026</b> de
                 la Decanatura y buscan mejorar la Facultad.
