@@ -426,7 +426,10 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 .dest-menu-item-body{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px;padding-top:1px}
 /* Al quitar el icono el título gana ~48px de ancho; se sube el clamp a 3 líneas
    para que los títulos largos se lean completos en vez de cortarse con "…". */
-.dest-menu-item-title{font:650 13.5px/1.4 'Inter',system-ui,sans-serif;color:var(--text);letter-spacing:-.15px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+/* Peso 650 → 400 por solicitud (ago-2026): la negrita queda SOLO en el título
+   "LO QUE DESTACAMOS". Con toda la lista en negrita no había jerarquía — todo
+   pesaba igual y nada resaltaba. */
+.dest-menu-item-title{font:400 13.5px/1.4 'Inter',system-ui,sans-serif;color:var(--text);letter-spacing:-.15px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .dest-menu-item-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 
 /* CHIP DE TIPO — usa la misma clase de color del icono para sincronizarse.
