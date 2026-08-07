@@ -2709,7 +2709,16 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
   .fs,.fi{width:100%;max-width:100%}
   .fc{display:none}
   .eh{flex-direction:column;align-items:flex-start;gap:6px}
-  .pnm{max-width:200px;font-size:12.5px}
+  /* MÓVIL: el nombre del proyecto se muestra COMPLETO (solicitud ago-2026).
+     Antes iba en una sola línea recortada con "…" y debajo la meta-línea
+     "Eje del Plan de Acción: N". Ese renglón se oculta acá y su espacio lo
+     ocupa el resto del nombre, que ahora envuelve en varias líneas.
+     Hay que anular las TRES propiedades que producían el recorte (nowrap,
+     overflow:hidden y text-overflow) y liberar el max-width: dejar solo una no
+     sirve de nada. El dato del eje no se pierde — sigue visible en la pestaña
+     General, en "Avance ponderado por eje del Plan de Acción". */
+  .pnm{max-width:none;font-size:12.5px;white-space:normal;overflow:visible;text-overflow:clip;line-height:1.35}
+  .pmeta{display:none}
   /* Móvil: porcentajes y nombre de dependencia más pequeños (por solicitud). */
   .ppct{font-size:18px}            /* % de cada proyecto en la lista */
   .ep{font-size:20px}              /* % de cada eje (pestaña General) */
