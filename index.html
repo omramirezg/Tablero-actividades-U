@@ -633,7 +633,8 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 .adscm-overlay{position:fixed;inset:0;z-index:var(--z-overlay);background:rgba(15,23,42,.5);backdrop-filter:blur(6px) saturate(120%);-webkit-backdrop-filter:blur(6px) saturate(120%);display:flex;align-items:center;justify-content:center;padding:20px;animation:adscmFade .22s var(--ease) both}
 .adscm-card{position:relative;width:min(560px,100%);max-height:calc(100vh - 60px);overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;background:#fff;border-radius:var(--radius-lg);box-shadow:0 25px 60px -12px rgba(15,23,42,.4),0 8px 20px -8px rgba(15,23,42,.2),0 0 0 1px rgba(15,23,42,.05);animation:adscmPop .28s var(--ease) both}
 .adscm-head{position:relative;padding:22px 26px 16px;border-bottom:1px solid var(--border-soft);background:linear-gradient(180deg,#fbfbfc,#fff)}
-.adscm-head::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold-dark),var(--gold),var(--gold-dark));border-radius:var(--radius-lg) var(--radius-lg) 0 0}
+/* Barra dorada superior del modal de actividad removida por solicitud (ago-2026):
+   la ventana arranca limpia con el rótulo "ACTIVIDAD". */
 .adscm-eyebrow{font-size:10px;font-weight:700;color:var(--gold-dark);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px}
 .adscm-title{font-size:17px;font-weight:600;color:var(--text);line-height:1.35;letter-spacing:-.2px;margin:0;padding-right:32px;text-wrap:balance}
 .adscm-close{position:absolute;top:14px;right:14px;width:30px;height:30px;border-radius:50%;border:0;background:rgba(15,23,42,.05);color:var(--text2);font-size:18px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s var(--ease),color .15s var(--ease),transform .15s var(--ease)}
@@ -3432,6 +3433,29 @@ const KPI_BY_DEP = {
   ]
   /* "Secretaría" — sin KPIs aún (placeholder dependency, sin destacadas) */
 };
+
+/* Decanatura es la cabeza de la Facultad, así que su marquee muestra TODAS las
+   cifras (solicitud ago-2026): primero las propias y a continuación las de cada
+   dependencia, en el orden en que están declaradas arriba.
+   Se arma POR CÓDIGO y no a mano a propósito: cualquier KPI que se agregue
+   mañana a otra dependencia aparece solo en Decanatura, sin tener que acordarse
+   de copiarlo. Se deduplica por num+lbl por si algún día una cifra se repite en
+   dos dependencias (hoy no ocurre en ninguna de las 69). */
+(function armarKpisDecanatura() {
+  const propias = KPI_BY_DEP['Decanatura'] || [];
+  const vistas = new Set(propias.map(k => k.num + '|' + k.lbl));
+  const ajenas = [];
+  Object.keys(KPI_BY_DEP).forEach(dep => {
+    if (dep === 'Decanatura') return;
+    (KPI_BY_DEP[dep] || []).forEach(k => {
+      const firma = k.num + '|' + k.lbl;
+      if (vistas.has(firma)) return;
+      vistas.add(firma);
+      ajenas.push(k);
+    });
+  });
+  KPI_BY_DEP['Decanatura'] = propias.concat(ajenas);
+})();
 
 /* Testimonios — array vacío hasta que se recolecten testimonios reales (con
    permiso explícito del estudiante). Mientras esté vacío, la sección "Voces
