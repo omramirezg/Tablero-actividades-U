@@ -1094,7 +1094,11 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
      scroll interno y barra de navegación pegada abajo (flechas + puntos). ── */
 .gd-overlay{position:fixed;inset:0;z-index:1200;display:flex;align-items:center;justify-content:center;
     padding:24px;background:rgba(10,10,12,.72);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);animation:welFade .4s ease both}
-.gd-card{position:relative;width:100%;max-width:760px;max-height:92vh;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;
+/* touch-action:pan-y — la tarjeta solo se desplaza en vertical; al declararlo,
+   el navegador deja de reservarse el gesto horizontal (nada de rebote elástico
+   ni de "atrás" por deslizamiento) y ese gesto queda libre para el swipe que
+   cambia de flyer. Ver GestionDestacada. */
+.gd-card{position:relative;width:100%;max-width:760px;max-height:92vh;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;touch-action:pan-y;
     background:#18181b;border:1px solid #2f2f31;border-radius:var(--radius-xl);
     box-shadow:0 30px 80px rgba(0,0,0,.55);animation:welRise .5s var(--ease) both}
 .gd-card::before{content:'';position:absolute;left:0;right:0;top:0;height:4px;z-index:3;
@@ -6799,6 +6803,9 @@ const GD_SLIDES = GD_SLIDES_TODAS.filter(s => SALUDO_VISIBLE || !s.esSaludo);
 function GestionDestacada({ open, onClose }) {
   const [idx, setIdx] = useState(0);
   const cardRef = useRef(null);
+  /* Punto donde arrancó el dedo, para el swipe que cambia de flyer. Va acá
+     arriba con el resto de hooks, antes del `if (!open) return null`. */
+  const swipeRef = useRef(null);
   /* Alto REAL del embed de Instagram. Con alto fijo sobraba mucho blanco debajo
      del post (el iframe medía 650px y el contenido 509px). Instagram publica su
      alto por postMessage — {"type":"MEASURE","details":{"height":N}} — que es
@@ -6827,9 +6834,41 @@ function GestionDestacada({ open, onClose }) {
   if (!open) return null;
   const s = GD_SLIDES[idx];
   const go = (d) => setIdx((idx + d + GD_SLIDES.length) % GD_SLIDES.length);
+
+  /* ── Deslizar con el dedo para cambiar de flyer (solicitud ago-2026) ──────
+     La tarjeta también hace scroll VERTICAL, así que solo se acepta el gesto
+     cuando es claramente horizontal: al menos 55px de recorrido en X y que ese
+     recorrido supere en 1,5 veces al de Y. Sin ese doble filtro, leer el texto
+     hacia abajo saltaría de diapositiva a cada rato.
+     No se llama preventDefault en ningún momento: el scroll vertical tiene que
+     seguir siendo el nativo del sistema. El CSS pone touch-action:pan-y, que le
+     avisa al navegador que en horizontal no hay nada que desplazar y evita el
+     tirón elástico de la página al deslizar de lado.
+     Arrastrar hacia la IZQUIERDA avanza (como pasar la hoja de una revista) y
+     hacia la DERECHA retrocede.
+     OJO: `swipeRef` se declara ARRIBA, junto a los demás hooks — acá abajo ya
+     pasamos el `if (!open) return null`, y un hook después de un return
+     condicional rompe React (error #310: "rendered more hooks than expected"). */
+  const onSwipeStart = (e) => {
+    if (!e.touches || e.touches.length !== 1) { swipeRef.current = null; return; }
+    swipeRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+  };
+  const onSwipeEnd = (e) => {
+    const ini = swipeRef.current;
+    swipeRef.current = null;
+    if (!ini || !e.changedTouches || e.changedTouches.length !== 1) return;
+    const dx = e.changedTouches[0].clientX - ini.x;
+    const dy = e.changedTouches[0].clientY - ini.y;
+    if (Math.abs(dx) < 55 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
+    go(dx < 0 ? 1 : -1);
+  };
+
   return (
     <div className="gd-overlay" role="dialog" aria-modal="true" aria-label="Gestión destacada de la Decanatura" onClick={onClose}>
-      <div className="gd-card" ref={cardRef} onClick={(e) => e.stopPropagation()}>
+      <div className="gd-card" ref={cardRef} onClick={(e) => e.stopPropagation()}
+           onTouchStart={onSwipeStart}
+           onTouchEnd={onSwipeEnd}
+           onTouchCancel={() => { swipeRef.current = null; }}>
         <button className="wel-close" onClick={onClose} aria-label="Cerrar">×</button>
         <div className="gd-head">
           <div className="gd-head-logo" aria-hidden="true">
