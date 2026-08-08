@@ -938,21 +938,27 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
    sin perder coherencia institucional. */
 /* Cada categoría solo tiñe el NÚMERO — los bordes izquierdos de color se
    removieron por solicitud (ago-2026). */
-.kpim-cat-edu .kpim-num{color:#0369a1}
-.kpim-cat-care .kpim-num{color:#047857}
-.kpim-cat-money .kpim-num{color:var(--gold-dark)}
-.kpim-cat-food .kpim-num{color:#b45309}
-.kpim-cat-family .kpim-num{color:#be185d}
-.kpim-cat-equity .kpim-num{color:#9f1239}
-.kpim-cat-green .kpim-num{color:#15803d}
-.kpim-cat-award .kpim-num{color:#7e22ce}
-.kpim-cat-research .kpim-num{color:#1e40af}
-.kpim-cat-kids .kpim-num{color:#c2410c}
-.kpim-cat-alliance .kpim-num{color:#4338ca}
-.kpim-cat-comms .kpim-num{color:#1e3a8a}
-.kpim-cat-infra .kpim-num{color:#334155}
-.kpim-cat-culture .kpim-num{color:#5b21b6}
-.kpim-cat-territory .kpim-num{color:#0f766e}
+/* VERDE, AZUL y ROJO QUEDAN RESERVADOS (solicitud ago-2026) para el porcentaje
+   de avance de los proyectos (ver pColor: --green ≥70%, --amber que en realidad
+   es azul 40-70%, --red <40%). Si las tarjetas de KPI también los usaran, el
+   lector leería un "590" verde como si fuera un avance alto, que es justo la
+   confusión que se quiere evitar. Por eso esta paleta se mueve solo entre
+   dorados, ámbares, naranjas, magentas, violetas, marrones y neutros. */
+.kpim-cat-edu .kpim-num{color:#7c3aed}       /* violeta          */
+.kpim-cat-care .kpim-num{color:#be185d}      /* rosa intenso     */
+.kpim-cat-money .kpim-num{color:var(--gold-dark)} /* dorado      */
+.kpim-cat-food .kpim-num{color:#b45309}      /* ámbar oscuro     */
+.kpim-cat-family .kpim-num{color:#a21caf}    /* fucsia           */
+.kpim-cat-equity .kpim-num{color:#9d174d}    /* rosa oscuro      */
+.kpim-cat-green .kpim-num{color:#a16207}     /* mostaza          */
+.kpim-cat-award .kpim-num{color:#7e22ce}     /* púrpura          */
+.kpim-cat-research .kpim-num{color:#6b21a8}  /* púrpura oscuro   */
+.kpim-cat-kids .kpim-num{color:#c2410c}      /* naranja          */
+.kpim-cat-alliance .kpim-num{color:#86198f}  /* magenta oscuro   */
+.kpim-cat-comms .kpim-num{color:#57534e}     /* piedra           */
+.kpim-cat-infra .kpim-num{color:#3f3f46}     /* grafito          */
+.kpim-cat-culture .kpim-num{color:#5b21b6}   /* violeta oscuro   */
+.kpim-cat-territory .kpim-num{color:#78350f} /* marrón           */
 
 /* Mobile: cards más compactas + flechas más chicas + fade lateral más
    estrecho para aprovechar mejor el viewport limitado. */
@@ -1055,8 +1061,11 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 .wel-actions{text-align:center;padding:0 30px 30px}
 .wel-enter{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:#1a1a1a;font-weight:700;
     font-size:14.5px;padding:12px 28px;border:none;border-radius:var(--radius);cursor:pointer;
-    box-shadow:0 6px 20px rgba(249,174,0,.32);transition:all .2s var(--ease)}
-.wel-enter:hover{background:#ffb71a;transform:translateY(-2px);box-shadow:0 10px 28px rgba(249,174,0,.42)}
+    box-shadow:0 2px 6px rgba(0,0,0,.26);transition:all .2s var(--ease)}
+/* Sin halo dorado (solicitud ago-2026): el box-shadow de color hacía que al
+   pasar el mouse el botón pareciera iluminado por dentro. Queda una sombra
+   neutra y el mismo leve levantamiento. */
+.wel-enter:hover{background:#ffb71a;transform:translateY(-2px);box-shadow:0 4px 10px rgba(0,0,0,.30)}
 
 @media(max-width:640px){
   .wel-overlay{padding:12px}
@@ -1103,7 +1112,11 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 /* Sello 62 → 70px por solicitud (ago-2026). Al crecer 8px se corre su borde
    derecho, así que el padding lateral SUBE en paralelo (88 → 98px) o el título
    lo pisaría. */
-.gd-head-logo{position:absolute;left:18px;top:22px;width:70px;height:70px;z-index:2;
+/* Escudo AGRANDADO (ago-2026): 70 -> 88px. Para que quepa sin chocar con el
+   título hubo que bajar .gd-title de 28 a 26px — con 28px el título más largo
+   ("Una Facultad conectada con el mundo") medía 543px de los 548 disponibles y
+   arrancaba a 8px del escudo. A 26px mide ~504px y deja ~15px de aire. */
+.gd-head-logo{position:absolute;left:12px;top:18px;width:88px;height:88px;z-index:2;
     display:flex;align-items:center;justify-content:center;
     filter:drop-shadow(0 2px 6px rgba(0,0,0,.5))}
 .gd-head-logo img{width:100%;height:100%;object-fit:contain;display:block}
@@ -1117,7 +1130,7 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
    palabra suelta abajo. */
 .gd-eye{text-align:center;color:#e6b54a;font-size:10.5px;letter-spacing:1.8px;text-transform:uppercase;
     font-weight:700;padding:30px 92px 0;margin-bottom:13px}
-.gd-title{text-align:center;font-family:'Playfair Display',Georgia,serif;font-size:28px;line-height:1.15;
+.gd-title{text-align:center;font-family:'Playfair Display',Georgia,serif;font-size:26px;line-height:1.15;
     color:#f6f5f3;font-weight:700;padding:0 92px;margin-bottom:0;text-wrap:balance}
 .gd-title em{font-style:italic;color:var(--gold)}
 /* El margen inferior del subtítulo pasó al padding de .gd-head (para que el aire
