@@ -282,11 +282,13 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 /* Texto JUSTIFICADO también en escritorio (solicitud ago-2026) — antes iba
    centrado. hyphens:auto acompaña siempre a la justificación: el documento es
    lang="es" y sin partir palabras se abren huecos entre ellas. */
-.st-nota{margin:0 auto 16px;max-width:640px;text-align:justify;hyphens:auto;-webkit-hyphens:auto;font-size:12.5px;line-height:1.6;color:var(--text2)}
+/* ANCHO COMPLETO (solicitud ago-2026): antes las notas iban limitadas a 640px
+   (760px la de General) y quedaban como una columna angosta en medio de una
+   sección que sí ocupa todo el ancho. Ahora se extienden de borde a borde del
+   contenedor, alineadas con el rótulo y con las tarjetas de abajo. */
+.st-nota{margin:0 0 16px;max-width:none;text-align:justify;hyphens:auto;-webkit-hyphens:auto;font-size:12.5px;line-height:1.6;color:var(--text2)}
 .st-nota b{color:var(--text);font-weight:600}
-/* La explicación general de la pestaña General es más larga, así que se le da
-   algo más de ancho para que no quede en un bloque demasiado alto y angosto. */
-.st-nota-gral{max-width:760px;margin-bottom:22px}
+.st-nota-gral{margin-bottom:22px}
 @media(max-width:640px){
   /* En móvil las tarjetas ya ocupan todo el ancho, así que centrar el texto no
      aporta nada: pasa a JUSTIFICADO (solicitud ago-2026), con la misma sangría
