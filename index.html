@@ -286,7 +286,12 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
    (760px la de General) y quedaban como una columna angosta en medio de una
    sección que sí ocupa todo el ancho. Ahora se extienden de borde a borde del
    contenedor, alineadas con el rótulo y con las tarjetas de abajo. */
-.st-nota{margin:0 0 16px;max-width:none;text-align:justify;hyphens:auto;-webkit-hyphens:auto;font-size:12.5px;line-height:1.6;color:var(--text2)}
+/* CENTRADO en vez de justificado (solicitud ago-2026): al ocupar todo el ancho,
+   las líneas completas ya llegan de borde a borde solas, y la última —que casi
+   nunca llena el renglón— queda centrada en vez de dejar un hueco a la derecha.
+   Se quita hyphens:auto: partir palabras solo tenía sentido para evitar los
+   "ríos" de la justificación. En móvil sigue justificado (ver media query). */
+.st-nota{margin:0 0 16px;max-width:none;text-align:center;font-size:12.5px;line-height:1.6;color:var(--text2)}
 .st-nota b{color:var(--text);font-weight:600}
 .st-nota-gral{margin-bottom:22px}
 @media(max-width:640px){
@@ -16447,7 +16452,9 @@ function App() {
             contexto del .dep-hero. */}
         {tab === 'General' && (
           <div className="st-hero">
-            <div className="st-hero-title">Indicadores generales del <em>Plan</em></div>
+            {/* Sin <em> (solicitud ago-2026): el título va completo y todo en
+                negro, sin la palabra final resaltada en dorado. */}
+            <div className="st-hero-title">Indicadores generales del Plan de Acción</div>
             {/* Barra dorada con puntos decorativos removida por solicitud. */}
             {/* Subtítulo "Resumen ejecutivo del avance · N proyectos en seguimiento"
                 removido por solicitud — los KPIs grandes abajo ya comunican
