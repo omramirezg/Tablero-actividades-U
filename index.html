@@ -949,21 +949,21 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
    lector leería un "590" verde como si fuera un avance alto, que es justo la
    confusión que se quiere evitar. Por eso esta paleta se mueve solo entre
    dorados, ámbares, naranjas, magentas, violetas, marrones y neutros. */
-.kpim-cat-edu .kpim-num{color:#7c3aed}       /* violeta          */
-.kpim-cat-care .kpim-num{color:#be185d}      /* rosa intenso     */
-.kpim-cat-money .kpim-num{color:var(--gold-dark)} /* dorado      */
-.kpim-cat-food .kpim-num{color:#b45309}      /* ámbar oscuro     */
-.kpim-cat-family .kpim-num{color:#a21caf}    /* fucsia           */
-.kpim-cat-equity .kpim-num{color:#9d174d}    /* rosa oscuro      */
-.kpim-cat-green .kpim-num{color:#a16207}     /* mostaza          */
-.kpim-cat-award .kpim-num{color:#7e22ce}     /* púrpura          */
-.kpim-cat-research .kpim-num{color:#6b21a8}  /* púrpura oscuro   */
-.kpim-cat-kids .kpim-num{color:#c2410c}      /* naranja          */
-.kpim-cat-alliance .kpim-num{color:#86198f}  /* magenta oscuro   */
-.kpim-cat-comms .kpim-num{color:#57534e}     /* piedra           */
-.kpim-cat-infra .kpim-num{color:#3f3f46}     /* grafito          */
-.kpim-cat-culture .kpim-num{color:#5b21b6}   /* violeta oscuro   */
-.kpim-cat-territory .kpim-num{color:#78350f} /* marrón           */
+/* SECUENCIA DE 5 COLORES POR POSICIÓN (solicitud ago-2026), en reemplazo del
+   color por categoría. La categoría producía rachas: cinco KPIs de bienestar
+   seguidos salían los cinco del mismo color. Ahora el color depende del lugar
+   que ocupa la tarjeta en la fila —c1, c2, c3, c4, c5, c1, c2…— así que dos
+   vecinas nunca coinciden y el ojo percibe ritmo al desfilar.
+   El índice se calcula sobre la lista ORIGINAL, no sobre la duplicada del loop
+   infinito, para que la copia de cada tarjeta conserve su mismo color y no se
+   vea un salto cromático cuando el carrusel da la vuelta.
+   Ninguno de los cinco cae en verde, azul ni rojo: esos siguen reservados para
+   el porcentaje de avance de los proyectos. */
+.kpim-c1 .kpim-num{color:#6d28d9}   /* violeta     */
+.kpim-c2 .kpim-num{color:#c2410c}   /* naranja     */
+.kpim-c3 .kpim-num{color:#a21caf}   /* fucsia      */
+.kpim-c4 .kpim-num{color:#3f3f46}   /* grafito     */
+.kpim-c5 .kpim-num{color:#9d174d}   /* rosa oscuro */
 
 /* Mobile: cards más compactas + flechas más chicas + fade lateral más
    estrecho para aprovechar mejor el viewport limitado. */
@@ -2756,7 +2756,11 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
      overflow:hidden y text-overflow) y liberar el max-width: dejar solo una no
      sirve de nada. El dato del eje no se pierde — sigue visible en la pestaña
      General, en "Avance ponderado por eje del Plan de Acción". */
-  .pnm{max-width:none;font-size:12.5px;white-space:normal;overflow:visible;text-overflow:clip;line-height:1.35}
+  /* JUSTIFICADO en móvil (solicitud ago-2026): al envolver en 4-6 renglones
+     dentro de una columna angosta, el borde derecho quedaba muy dentado.
+     hyphens:auto es obligatorio acá — el documento es lang="es" y justificar
+     sin partir palabras abre huecos enormes entre ellas. */
+  .pnm{max-width:none;font-size:12.5px;white-space:normal;overflow:visible;text-overflow:clip;line-height:1.35;text-align:justify;hyphens:auto;-webkit-hyphens:auto}
   .pmeta{display:none}
   /* Móvil: porcentajes y nombre de dependencia más pequeños (por solicitud). */
   .ppct{font-size:18px}            /* % de cada proyecto en la lista */
@@ -7515,6 +7519,13 @@ function KpiMarquee({ items, ariaLabel }) {
   const doubled = [];
   for (let s = 0; s < sets; s++) doubled.push(...items);
 
+  /* Largo del ciclo de colores (kpim-c1..c5). Por defecto 5, pero si el número
+     de KPIs deja resto 1 al dividirlo, la última tarjeta del set y la primera
+     del set siguiente caen en el mismo color y se ven dos vecinas iguales justo
+     en el empalme del loop. Caso real: DBUFM tiene 6 KPIs y 6 % 5 = 1. Por eso
+     se prueba 5, luego 4, luego 3, y se toma el primero que no deje resto 1. */
+  const cicloColor = (n => { for (const L of [5, 4, 3]) if (n % L !== 1) return L; return 5; })(items.length);
+
   useEffect(() => {
     const track = trackRef.current;
     if (!track) return;
@@ -7704,7 +7715,11 @@ function KpiMarquee({ items, ariaLabel }) {
           /* aria-hidden a partir del segundo set en adelante: las cards
              duplicadas son visuales para el loop, los lectores de pantalla
              solo deberían anunciar el primer set para evitar repetición. */
-          <div key={i} className={'kpim-card kpim-cat-' + (k.cat || 'edu')} aria-hidden={i >= items.length}>
+          /* El color ya NO sale de k.cat sino de la posición: ciclo de 5
+             (kpim-c1..c5). El módulo va sobre items.length primero, para que
+             la tarjeta duplicada del loop reciba el mismo color que su
+             original y el empalme no se note. */
+          <div key={i} className={'kpim-card kpim-c' + ((i % items.length) % cicloColor + 1) + ' kpim-cat-' + (k.cat || 'edu')} aria-hidden={i >= items.length}>
             <div className="kpim-num">
               {k.num}
               {/* Chip "PERIODO" — pequeño y discreto al lado del número
