@@ -875,7 +875,9 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 /* Hero "Sello de la Decanatura": dos paneles lado a lado, gradiente suave en
    cada lado con su color institucional. Tipografía display serif para los
    nombres de los Centros (contraste con la sans del resto del dashboard). */
-.cnh{position:relative;background:#fff;border:1px solid var(--border);border-radius:var(--radius-xl);box-shadow:var(--shadow-md);margin-bottom:24px;overflow:hidden;animation:fu .55s var(--ease) both}
+/* margin-top (ago-2026): el bloque quedaba pegado a la tabla de avance por eje
+   que lo precede en la pestaña General — se leían como una sola pieza. */
+.cnh{position:relative;background:#fff;border:1px solid var(--border);border-radius:var(--radius-xl);box-shadow:var(--shadow-md);margin-top:34px;margin-bottom:24px;overflow:hidden;animation:fu .55s var(--ease) both}
 
 /* ─── Marquee de KPIs humanos (auto-scroll + control manual) ───
    El auto-scroll ahora es JS (requestAnimationFrame) en vez de CSS:
@@ -1402,10 +1404,10 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 .cnseg-btn{background:transparent;border:none;padding:5px 11px;font-size:11.5px;font-weight:600;font-family:inherit;color:var(--text2);cursor:pointer;border-radius:6px;display:inline-flex;align-items:center;gap:6px;transition:background .15s var(--ease),color .15s var(--ease);white-space:nowrap}
 .cnseg-btn:hover{color:var(--text);background:#fff}
 .cnseg-btn.on{background:#fff;color:var(--text);box-shadow:var(--shadow-xs),inset 0 0 0 1px var(--border)}
-.cnseg-btn.on.cnseg-fdp{color:#1e3a8a;box-shadow:var(--shadow-xs),inset 0 0 0 1px #c5d4f4}
+.cnseg-btn.on.cnseg-fdp{color:#09090b;box-shadow:var(--shadow-xs),inset 0 0 0 1px #d4d4d8}
 .cnseg-btn.on.cnseg-tv{color:#14532d;box-shadow:var(--shadow-xs),inset 0 0 0 1px #b7e1c5}
 .cnseg-dot{width:7px;height:7px;border-radius:50%}
-.cnseg-dot-fdp{background:#1d4ed8}
+.cnseg-dot-fdp{background:#18181b}
 .cnseg-dot-tv{background:#15803d}
 
 /* ═══ MODAL PREMIUM DEL CENTRO ═══ */
@@ -1466,7 +1468,7 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 .cntl-title::before{content:'';width:4px;height:16px;background:linear-gradient(180deg,var(--gold),var(--gold-dark));border-radius:2px}
 .cntl-sub{font-size:11px;color:var(--text3);font-weight:500}
 .cntl-list{position:relative;display:flex;flex-direction:column;gap:10px;padding-left:24px;margin-top:6px}
-.cntl-list::before{content:'';position:absolute;left:8px;top:8px;bottom:8px;width:2px;background:linear-gradient(180deg,#1d4ed8 0%,#15803d 100%);border-radius:2px;opacity:.45}
+.cntl-list::before{content:'';position:absolute;left:8px;top:8px;bottom:8px;width:2px;background:linear-gradient(180deg,#18181b 0%,#15803d 100%);border-radius:2px;opacity:.45}
 .cntl-item{position:relative;display:flex;align-items:flex-start;gap:14px;padding:9px 14px 9px 0;border-radius:8px;transition:background .15s var(--ease)}
 .cntl-item:hover{background:var(--bg4)}
 .cntl-item::before{content:'';position:absolute;left:-22px;top:12px;width:13px;height:13px;border-radius:50%;background:#fff;border:3px solid var(--cn-color,var(--gold));box-shadow:0 0 0 3px #fff,0 1px 4px rgba(0,0,0,.12)}
@@ -1794,7 +1796,7 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 .mc-ig-handle-wrap{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
 .mc-ig-handle{font-size:14px;font-weight:600;color:#262626;letter-spacing:-.1px}
 .mc-ig-sub{font-size:11.5px;color:#737373;letter-spacing:.1px}
-.mc-ig-follow{flex-shrink:0;font-size:12px;font-weight:600;color:#0095f6;text-decoration:none;padding:5px 11px;border-radius:6px;transition:background .15s var(--ease)}
+.mc-ig-follow{flex-shrink:0;font-size:12px;font-weight:600;color:#18181b;text-decoration:none;padding:5px 11px;border-radius:6px;transition:background .15s var(--ease)}
 .mc-ig-follow:hover{background:#f0f9ff}
 
 .mc-ig-caption{flex:1;overflow-y:auto;padding:18px 20px 14px;color:#262626;font-size:14px;line-height:1.55;letter-spacing:.1px}
@@ -1920,33 +1922,35 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
    Paleta slate-blue para diferenciarse de Minas Contigo (sage) y
    Alianzas (gold). Cada item tiene un video YouTube responsive 16:9. */
 .lgr-overlay{position:fixed;inset:0;z-index:1100;background:rgba(15,23,42,.55);backdrop-filter:blur(10px) saturate(120%);-webkit-backdrop-filter:blur(10px) saturate(120%);display:flex;align-items:flex-start;justify-content:center;padding:32px 20px;animation:dpvFade .25s var(--ease) both;overflow-y:auto}
-.lgr-modal{position:relative;width:min(900px,100%);max-width:900px;background:#fff;border-radius:18px;border:1px solid rgba(58,77,107,.25);box-shadow:0 30px 80px -20px rgba(15,23,42,.4),0 12px 30px -10px rgba(58,77,107,.18);animation:dpvCardIn .35s var(--ease) both;overflow:hidden;color:var(--text);margin:auto 0}
+.lgr-modal{position:relative;width:min(900px,100%);max-width:900px;background:#fff;border-radius:18px;border:1px solid rgba(24,24,27,.25);box-shadow:0 30px 80px -20px rgba(15,23,42,.4),0 12px 30px -10px rgba(24,24,27,.18);animation:dpvCardIn .35s var(--ease) both;overflow:hidden;color:var(--text);margin:auto 0}
 /* Barra superior — sello editorial Decanatura.
    Paleta azul institucional (slate-blue → azul vivo → cyan) para que se
    destaque sobre el fondo claro del modal; el dorado se perdía. */
-.lgr-modal::before{content:'';position:absolute;left:0;right:0;top:0;height:4px;background:linear-gradient(90deg,#1e3a8a 0%,#3b82f6 50%,#0ea5e9 100%);opacity:.95;z-index:11}
+.lgr-modal::before{content:'';position:absolute;left:0;right:0;top:0;height:4px;background:#18181b;opacity:1;z-index:11}
 .lgr-close{position:absolute;top:16px;right:16px;width:34px;height:34px;border:none;border-radius:10px;background:rgba(255,255,255,.96);color:var(--text);font-size:22px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s var(--ease),transform .15s var(--ease);z-index:10;backdrop-filter:blur(4px);box-shadow:0 2px 8px rgba(15,23,42,.10)}
 .lgr-close:hover{background:#fff;transform:scale(1.05)}
-.lgr-close:focus-visible{outline:2px solid #3a4d6b;outline-offset:2px}
+.lgr-close:focus-visible{outline:2px solid #3f3f46;outline-offset:2px}
 
-.lgr-hero{position:relative;padding:22px 36px 16px;background:linear-gradient(180deg,#e8edf3 0%,#fff 100%);color:var(--text);overflow:hidden;border-bottom:1px solid var(--border-soft)}
+.lgr-hero{position:relative;padding:22px 36px 16px;background:#fff;color:var(--text);overflow:hidden;border-bottom:1px solid var(--border-soft)}
 /* Atmósfera radial: azul vivo en superior-derecha + slate-blue en
    inferior-izquierda. Da profundidad sin invadir el contenido. */
-.lgr-hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 0%,rgba(59,130,246,.10) 0%,transparent 60%),radial-gradient(ellipse at 0% 100%,rgba(30,64,175,.08) 0%,transparent 55%);pointer-events:none;z-index:0}
+.lgr-hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 0%,rgba(24,24,27,.10) 0%,transparent 60%),radial-gradient(ellipse at 0% 100%,rgba(30,64,175,.08) 0%,transparent 55%);pointer-events:none;z-index:0}
 /* Centramos vertical y horizontalmente el bloque de títulos contra el logo.
    Antes con `display:block + min-height:112px` quedaba un hueco vertical
    grande debajo del título cuando el modal no incluía eyebrow, tag ni bar. */
 .lgr-hero-row{position:relative;display:flex;align-items:center;justify-content:center;text-align:center;z-index:1;min-height:88px;padding:0 110px}
 .lgr-hero-logo{position:absolute;top:50%;left:0;transform:translateY(-50%);width:88px;height:88px;display:flex;align-items:center;justify-content:center;z-index:2}
-.lgr-hero-logo img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(58,77,107,.18))}
+.lgr-hero-logo img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(24,24,27,.18))}
 .lgr-hero-titles{display:inline-block;text-align:center}
-.lgr-hero-eye{font-size:9.5px;text-transform:uppercase;letter-spacing:2.4px;font-weight:700;color:#1e40af;margin-bottom:6px;display:inline-flex;align-items:center;gap:8px}
-.lgr-hero-star{color:#3b82f6;font-size:11px;letter-spacing:0;text-shadow:0 0 6px rgba(59,130,246,.4)}
+.lgr-hero-eye{font-size:9.5px;text-transform:uppercase;letter-spacing:2.4px;font-weight:700;color:#18181b;margin-bottom:6px;display:inline-flex;align-items:center;gap:8px}
+.lgr-hero-star{color:#52525b;font-size:11px;letter-spacing:0;text-shadow:0 0 6px rgba(24,24,27,.4)}
 .lgr-hero-name{font-size:24px;font-weight:700;color:var(--text);letter-spacing:-.5px;line-height:1.25;margin:0}
-.lgr-hero-name em{font-style:italic;color:#1e40af;font-weight:700}
+/* Titulo COMPLETO en negro (solicitud ago-2026): el <em> conserva la
+   cursiva pero hereda el color del titulo, sin acento de color. */
+.lgr-hero-name em{font-style:italic;color:inherit;font-weight:700}
 .lgr-hero-tag{font-size:13px;color:var(--text2);font-weight:400;font-style:italic;line-height:1.45;max-width:580px;margin:0 auto}
-.lgr-hero-bar{position:relative;width:80px;height:3px;background:linear-gradient(90deg,transparent,#3b82f6 30%,#3b82f6 70%,transparent);border-radius:2px;margin:16px auto 0;box-shadow:0 1px 4px rgba(59,130,246,.35)}
-.lgr-hero-bar::before,.lgr-hero-bar::after{content:'';position:absolute;top:50%;width:3px;height:3px;border-radius:50%;background:#3b82f6;transform:translateY(-50%);box-shadow:0 0 6px rgba(59,130,246,.6)}
+.lgr-hero-bar{position:relative;width:80px;height:3px;background:linear-gradient(90deg,transparent,#52525b 30%,#52525b 70%,transparent);border-radius:2px;margin:16px auto 0;box-shadow:0 1px 4px rgba(24,24,27,.35)}
+.lgr-hero-bar::before,.lgr-hero-bar::after{content:'';position:absolute;top:50%;width:3px;height:3px;border-radius:50%;background:#52525b;transform:translateY(-50%);box-shadow:0 0 6px rgba(24,24,27,.6)}
 .lgr-hero-bar::before{left:-12px}
 .lgr-hero-bar::after{right:-12px}
 
@@ -1957,16 +1961,16 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 .lgr-news{display:flex;align-items:center;gap:14px;margin:14px 36px 0;padding:14px 18px;
     background:linear-gradient(180deg,#f8fafc,#fff);border:1px solid #bfdbfe;border-radius:12px;
     text-decoration:none;color:var(--text);transition:background .18s var(--ease),border-color .18s var(--ease),transform .18s var(--ease),box-shadow .18s var(--ease)}
-.lgr-news:hover{background:linear-gradient(180deg,#eff6ff,#fff);border-color:#60a5fa;transform:translateY(-1px);box-shadow:0 6px 16px -6px rgba(59,130,246,.28)}
-.lgr-news-ico{flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#3a4d6b,#1d4ed8);color:#fff}
+.lgr-news:hover{background:linear-gradient(180deg,#fafafa,#fff);border-color:#a1a1aa;transform:translateY(-1px);box-shadow:0 6px 16px -6px rgba(24,24,27,.28)}
+.lgr-news-ico{flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#3f3f46,#27272a);color:#fff}
 .lgr-news-txt{flex:1;min-width:0}
 /* display:block obligatorio — son <span> dentro de un <a>, y en línea el
    subtítulo quedaba pegado al título en el mismo renglón (y el margin-top se
    ignoraba, porque los márgenes verticales no aplican a cajas inline). */
 .lgr-news-t{display:block;font-size:13px;font-weight:700;letter-spacing:-.1px;line-height:1.3}
-.lgr-news-t u{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px;color:#1d4ed8}
+.lgr-news-t u{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px;color:#27272a}
 .lgr-news-s{display:block;margin-top:3px;font-size:11.5px;color:var(--text3);line-height:1.4}
-.lgr-news-arrow{flex-shrink:0;color:#1d4ed8;font-size:16px;font-weight:700;transition:transform .18s var(--ease)}
+.lgr-news-arrow{flex-shrink:0;color:#27272a;font-size:16px;font-weight:700;transition:transform .18s var(--ease)}
 .lgr-news:hover .lgr-news-arrow{transform:translateX(3px)}
 @media(max-width:640px){
   .lgr-news{margin:12px 18px 0;padding:12px 14px;gap:11px}
@@ -1976,8 +1980,8 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 .lgr-list{display:grid;grid-template-columns:1fr;gap:24px}
 .lgr-empty{text-align:center;padding:60px 20px;color:var(--text3);font-style:italic}
 
-.lgr-item{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0;background:#fff;border:1px solid var(--border-soft);border-radius:12px;overflow:hidden;transition:transform .2s var(--ease),box-shadow .2s var(--ease);border-left:3px solid #3a4d6b}
-.lgr-item:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(58,77,107,.14)}
+.lgr-item{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0;background:#fff;border:1px solid var(--border-soft);border-radius:12px;overflow:hidden;transition:transform .2s var(--ease),box-shadow .2s var(--ease);border-left:3px solid #3f3f46}
+.lgr-item:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(24,24,27,.14)}
 .lgr-item-video{position:relative;padding-bottom:0;height:100%;min-height:280px;background:#000}
 .lgr-item-video iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
 .lgr-item-photo{position:relative;height:100%;min-height:280px;background:#f5f5f5}
@@ -2019,7 +2023,10 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 /* Variante "vertical" — Instagram reels/posts: embed centrado, texto debajo.
    Instagram embed requiere ~720px de altura para reels (incluye header y caption). */
 .lgr-item-vertical{grid-template-columns:1fr;padding:0}
-.lgr-item-instagram{position:relative;width:100%;max-width:540px;margin:24px auto 4px;justify-self:center;background:#fff}
+/* overflow:hidden es lo que RECORTA la caja de comentarios: el iframe conserva
+   su alto y el contenedor —con el alto que llega por MEASURE menos 56px— lo
+   deja por fuera. Ver LogroCard. */
+.lgr-item-instagram{position:relative;width:100%;max-width:540px;margin:24px auto 4px;justify-self:center;background:#fff;overflow:hidden;border-radius:6px}
 .lgr-item-instagram iframe{width:100%;height:720px;border:0;display:block;background:#fafafa;border-radius:6px;box-shadow:0 1px 3px rgba(0,0,0,.08)}
 .lgr-item-vertical .lgr-item-body{padding:18px 26px 24px;text-align:center}
 .lgr-item-vertical .lgr-item-meta{justify-content:center}
@@ -2027,8 +2034,8 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 
 .lgr-item-body{padding:22px 24px;display:flex;flex-direction:column;gap:10px;justify-content:center}
 .lgr-item-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.lgr-item-tipo{display:inline-flex;align-items:center;gap:5px;font-size:9.5px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;background:#e8edf3;color:#243248;padding:4px 10px 4px 8px;border-radius:14px;border:1px solid color-mix(in srgb,#3a4d6b 22%,transparent)}
-.lgr-item-tipo-ico{display:inline-flex;align-items:center;color:#3a4d6b}
+.lgr-item-tipo{display:inline-flex;align-items:center;gap:5px;font-size:9.5px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;background:#f4f4f5;color:#27272a;padding:4px 10px 4px 8px;border-radius:14px;border:1px solid color-mix(in srgb,#3f3f46 22%,transparent)}
+.lgr-item-tipo-ico{display:inline-flex;align-items:center;color:#3f3f46}
 
 /* ─── Iconos coloreables (componente <Icon/>) ────────────────────
    Aplicados a Minas Contigo, Alianzas Estratégicas y Otros Logros.
@@ -2043,23 +2050,23 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 /* Minas Contigo · Timeline iconos (mismo criterio sage-green) */
 .mc-tl-icon{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;background:linear-gradient(180deg,#eef5ed,#dcebd8);border:1px solid #bcd2b8;border-radius:7px;color:#3d5a36;margin-right:10px;flex-shrink:0;vertical-align:middle;box-shadow:0 1px 2px rgba(61,90,54,.18)}
 .mc-tl-item.highlight .mc-tl-icon{background:linear-gradient(180deg,#dcebd8,#bcd2b8);color:#2c4127;border-color:#a8c4a3}
-.mc-tl-item.current .mc-tl-icon{background:linear-gradient(180deg,#dbeafe,#bfdbfe);color:#1e40af;border-color:#93c5fd}
+.mc-tl-item.current .mc-tl-icon{background:linear-gradient(180deg,#f4f4f5,#e4e4e7);color:#18181b;border-color:#d4d4d8}
 
 /* Alianzas Estratégicas · KPI iconos (paleta azul) */
-.gest-kpi-icon{display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;margin:0 auto 10px;background:linear-gradient(180deg,#eff6ff,#fff);border:1px solid #bfdbfe;border-radius:12px;color:#1d4ed8;box-shadow:0 2px 6px -2px rgba(29,78,216,.18),inset 0 1px 0 rgba(255,255,255,.6);transition:transform .2s var(--ease)}
+.gest-kpi-icon{display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;margin:0 auto 10px;background:linear-gradient(180deg,#fafafa,#fff);border:1px solid #e4e4e7;border-radius:12px;color:#27272a;box-shadow:0 2px 6px -2px rgba(24,24,27,.18),inset 0 1px 0 rgba(255,255,255,.6);transition:transform .2s var(--ease)}
 .gest-kpi:hover .gest-kpi-icon{transform:translateY(-1px) scale(1.04)}
 /* Icono junto al chip de tipo en cada card de Alianzas */
-.gest-card-tipo-ico{display:inline-flex;align-items:center;color:var(--accent,#1d4ed8);margin-right:1px;vertical-align:middle}
+.gest-card-tipo-ico{display:inline-flex;align-items:center;color:var(--accent,#27272a);margin-right:1px;vertical-align:middle}
 
 /* Otros Logros · banner de stats KPI con iconos (paleta azul institucional).
    Pasamos de dorado a azul porque el amarillo se perdía sobre el fondo claro
    y restaba protagonismo al número grande. */
-.lgr-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;padding:12px 28px 4px;background:linear-gradient(180deg,#eff6ff,#fff)}
-.lgr-kpi{display:flex;flex-direction:column;align-items:center;text-align:center;padding:18px 14px 16px;background:#fff;border:1px solid #bfdbfe;border-radius:12px;box-shadow:0 2px 6px -2px rgba(59,130,246,.10),0 1px 2px rgba(15,23,42,.04);transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
-.lgr-kpi:hover{transform:translateY(-2px);box-shadow:0 8px 18px -4px rgba(59,130,246,.22),0 2px 6px rgba(15,23,42,.05);border-color:#93c5fd}
-.lgr-kpi-icon{display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;margin-bottom:10px;background:linear-gradient(180deg,#eff6ff,#dbeafe);border:1px solid #bfdbfe;border-radius:12px;color:#2563eb;box-shadow:0 2px 6px -2px rgba(37,99,235,.22),inset 0 1px 0 rgba(255,255,255,.6)}
-.lgr-kpi-num{font-family:'Playfair Display',Georgia,serif;font-size:38px;font-weight:800;color:#1e40af;line-height:1;letter-spacing:-.5px}
-.lgr-kpi-lbl{font-size:11.5px;font-weight:700;color:#1e40af;letter-spacing:.4px;text-transform:uppercase;margin-top:6px;line-height:1.3}
+.lgr-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;padding:12px 28px 4px;background:linear-gradient(180deg,#fafafa,#fff)}
+.lgr-kpi{display:flex;flex-direction:column;align-items:center;text-align:center;padding:18px 14px 16px;background:#fff;border:1px solid #e4e4e7;border-radius:12px;box-shadow:0 2px 6px -2px rgba(24,24,27,.10),0 1px 2px rgba(15,23,42,.04);transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
+.lgr-kpi:hover{transform:translateY(-2px);box-shadow:0 8px 18px -4px rgba(24,24,27,.22),0 2px 6px rgba(15,23,42,.05);border-color:#d4d4d8}
+.lgr-kpi-icon{display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;margin-bottom:10px;background:linear-gradient(180deg,#fafafa,#f4f4f5);border:1px solid #e4e4e7;border-radius:12px;color:#3f3f46;box-shadow:0 2px 6px -2px rgba(24,24,27,.22),inset 0 1px 0 rgba(255,255,255,.6)}
+.lgr-kpi-num{font-family:'Playfair Display',Georgia,serif;font-size:38px;font-weight:800;color:#18181b;line-height:1;letter-spacing:-.5px}
+.lgr-kpi-lbl{font-size:11.5px;font-weight:700;color:#18181b;letter-spacing:.4px;text-transform:uppercase;margin-top:6px;line-height:1.3}
 @media(max-width:640px){
   /* 4 KPIs en grid 2×2 (2 por fila) por solicitud, en vez de apilados. */
   .lgr-kpis{grid-template-columns:repeat(2,1fr);padding:14px 16px 4px;gap:10px}
@@ -2068,21 +2075,21 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
   .lgr-kpi-icon{width:38px;height:38px;margin-bottom:8px}
   .lgr-kpi-lbl{font-size:10px;letter-spacing:.2px}
 }
-.lgr-item-fecha{font-size:11px;font-weight:700;color:#3a4d6b;letter-spacing:.6px;text-transform:uppercase;font-feature-settings:"tnum"}
+.lgr-item-fecha{font-size:11px;font-weight:700;color:#3f3f46;letter-spacing:.6px;text-transform:uppercase;font-feature-settings:"tnum"}
 .lgr-item-monto{display:inline-flex;align-items:center;font-size:10.5px;font-weight:700;color:#1f4d2a;background:rgba(34,166,82,.10);border:1px solid rgba(34,166,82,.25);padding:3px 9px;border-radius:14px;letter-spacing:.4px;font-feature-settings:"tnum"}
 .lgr-item-title{margin:2px 0 0;font-size:18px;font-weight:700;letter-spacing:-.3px;color:var(--text);line-height:1.25}
 .lgr-item-text .lgr-item-title{font-size:20px}
 .lgr-item-desc{margin:0;font-size:13.5px;line-height:1.55;color:var(--text2);text-align:justify;hyphens:auto;-webkit-hyphens:auto}
-.lgr-item-cta{display:inline-flex;align-items:center;gap:6px;align-self:flex-start;margin-top:4px;padding:8px 16px;border-radius:8px;background:#3a4d6b;color:#fff;text-decoration:none;font-size:12px;font-weight:600;letter-spacing:.2px;transition:background .15s var(--ease),transform .15s var(--ease)}
-.lgr-item-cta:hover{background:#243248;transform:translateY(-1px);box-shadow:0 4px 12px rgba(58,77,107,.25)}
+.lgr-item-cta{display:inline-flex;align-items:center;gap:6px;align-self:flex-start;margin-top:4px;padding:8px 16px;border-radius:8px;background:#3f3f46;color:#fff;text-decoration:none;font-size:12px;font-weight:600;letter-spacing:.2px;transition:background .15s var(--ease),transform .15s var(--ease)}
+.lgr-item-cta:hover{background:#27272a;transform:translateY(-1px);box-shadow:0 4px 12px rgba(24,24,27,.25)}
 /* Badge de fecha de inicio — destacado con icono de calendario */
-.lgr-item-inicio{display:inline-flex;align-items:center;gap:8px;align-self:flex-start;margin-top:2px;padding:8px 14px;border-radius:8px;background:color-mix(in srgb,#3a4d6b 8%,#fff);border:1px solid color-mix(in srgb,#3a4d6b 22%,transparent);color:#243248;font-size:13px;letter-spacing:.1px}
-.lgr-item-inicio b{color:#3a4d6b;font-weight:700;letter-spacing:.3px;text-transform:uppercase;font-size:10.5px;margin-right:2px}
-.lgr-item-inicio svg{color:#3a4d6b;flex-shrink:0}
+.lgr-item-inicio{display:inline-flex;align-items:center;gap:8px;align-self:flex-start;margin-top:2px;padding:8px 14px;border-radius:8px;background:color-mix(in srgb,#3f3f46 8%,#fff);border:1px solid color-mix(in srgb,#3f3f46 22%,transparent);color:#27272a;font-size:13px;letter-spacing:.1px}
+.lgr-item-inicio b{color:#3f3f46;font-weight:700;letter-spacing:.3px;text-transform:uppercase;font-size:10.5px;margin-right:2px}
+.lgr-item-inicio svg{color:#3f3f46;flex-shrink:0}
 /* Lista de bullets — grid 2 columnas, item con punto azul + nombre + detalle */
-.lgr-item-bullets{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 18px;margin-top:6px;padding:14px 16px;background:color-mix(in srgb,#3a4d6b 4%,#fff);border:1px solid var(--border-soft);border-radius:10px}
+.lgr-item-bullets{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 18px;margin-top:6px;padding:14px 16px;background:color-mix(in srgb,#3f3f46 4%,#fff);border:1px solid var(--border-soft);border-radius:10px}
 .lgr-item-bullet{display:flex;align-items:flex-start;gap:10px;padding:2px 0}
-.lgr-item-bullet-dot{flex-shrink:0;width:7px;height:7px;border-radius:50%;background:#3a4d6b;margin-top:6px;box-shadow:0 0 0 3px color-mix(in srgb,#3a4d6b 12%,transparent)}
+.lgr-item-bullet-dot{flex-shrink:0;width:7px;height:7px;border-radius:50%;background:#3f3f46;margin-top:6px;box-shadow:0 0 0 3px color-mix(in srgb,#3f3f46 12%,transparent)}
 .lgr-item-bullet-text{flex:1;min-width:0}
 .lgr-item-bullet-name{font-size:13px;font-weight:600;color:var(--text);line-height:1.3;letter-spacing:-.1px}
 .lgr-item-bullet-detalle{font-size:11.5px;color:var(--text3);line-height:1.35;margin-top:1px}
@@ -2319,7 +2326,7 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 .lgr-item-dep{font-size:11px;color:var(--text3);font-weight:600;letter-spacing:.2px}
 .lgr-item-proj{font-size:11px;color:var(--text3)}
 .lgr-item-proj b{color:var(--text2);font-weight:600;text-transform:uppercase;font-size:9.5px;letter-spacing:.8px;margin-right:4px}
-.lgr-item-link{font-size:11px;color:#3a4d6b;text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px;font-weight:600}
+.lgr-item-link{font-size:11px;color:#3f3f46;text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px;font-weight:600}
 .lgr-item-link:hover{text-decoration-thickness:2px}
 
 /* ≤1080px: el escudo se OCULTA (no forzarlo donde aprieta el título —
@@ -2431,7 +2438,7 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 .cnst::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 30%,rgba(29,78,216,.04) 0%,transparent 55%),radial-gradient(ellipse at 80% 70%,rgba(21,128,61,.04) 0%,transparent 55%);pointer-events:none;z-index:0}
 .cnst-hd{position:relative;display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:6px;flex-wrap:wrap;z-index:1}
 .cnst-title{font-size:13px;font-weight:700;color:var(--text);letter-spacing:-.1px;display:flex;align-items:center;gap:9px}
-.cnst-title::before{content:'';width:4px;height:16px;background:linear-gradient(180deg,#1d4ed8,#15803d);border-radius:2px}
+.cnst-title::before{content:'';width:4px;height:16px;background:linear-gradient(180deg,#18181b,#15803d);border-radius:2px}
 .cnst-sub{font-size:11px;color:var(--text3);font-weight:500}
 .cnst-legend{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:6px;font-size:10.5px;color:var(--text3);position:relative;z-index:1}
 .cnst-legend-item{display:inline-flex;align-items:center;gap:5px}
@@ -2452,7 +2459,7 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 .cnst-node-p.glow{filter:drop-shadow(0 0 7px currentColor) brightness(1.12)}
 /* Líneas */
 .cnst-line{fill:none;stroke-linecap:round;transition:stroke-opacity .25s var(--ease),stroke-width .25s var(--ease)}
-.cnst-line-fdp{stroke:#1d4ed8}
+.cnst-line-fdp{stroke:#18181b}
 .cnst-line-tv{stroke:#15803d}
 .cnst-line.dim{stroke-opacity:.05}
 .cnst-line.bright{stroke-opacity:.7;stroke-width:1.7}
@@ -2473,7 +2480,7 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 .cnst-tip-meta{color:#94a3b8;font-size:10.5px;margin-top:3px}
 .cnst-tip-cents{display:flex;gap:4px;margin-top:5px}
 .cnst-tip-cent{display:inline-block;padding:1px 7px;border-radius:8px;font-size:9px;font-weight:700;letter-spacing:.4px;text-transform:uppercase}
-.cnst-tip-cent-fdp{background:#1d4ed8}
+.cnst-tip-cent-fdp{background:#18181b}
 .cnst-tip-cent-tv{background:#15803d}
 .cnst-tip-cent-star{background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:#1a1a1a}
 /* Móvil: la constelación es complicada en pantallas pequeñas; en lugar de
@@ -2497,8 +2504,8 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 .gest-close:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 .gest{position:relative;background:#fff;padding:36px 36px 36px;overflow:hidden}
 .gest .gest-hd{padding-top:4px}
-.gest::before{content:'';position:absolute;left:0;right:0;top:0;height:4px;background:linear-gradient(90deg,#1d4ed8 0%,var(--gold) 50%,#15803d 100%);opacity:.95}
-.gest::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 0%,rgba(249,174,0,.05) 0%,transparent 60%),radial-gradient(ellipse at 0% 100%,rgba(29,78,216,.04) 0%,transparent 50%);pointer-events:none;z-index:0}
+.gest::before{content:'';position:absolute;left:0;right:0;top:0;height:4px;background:linear-gradient(90deg,#18181b 0%,var(--gold) 50%,#15803d 100%);opacity:.95}
+.gest::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 0%,rgba(249,174,0,.05) 0%,transparent 60%),radial-gradient(ellipse at 0% 100%,rgba(24,24,27,.04) 0%,transparent 50%);pointer-events:none;z-index:0}
 .gest-hd{position:relative;display:flex;flex-direction:column;justify-content:center;text-align:center;margin-bottom:18px;z-index:1;min-height:100px;padding:0 120px}
 .gest-hd-logo{position:absolute;top:50%;left:0;transform:translateY(-50%);width:100px;height:100px;display:flex;align-items:center;justify-content:center;z-index:2}
 .gest-hd-logo img{width:100%;height:100%;object-fit:contain}
@@ -2540,7 +2547,7 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 .gest-card-body{min-width:0}
 /* Banner-foto de la alianza (extraída de su noticia) — arriba del cuerpo de
    la card, clickeable. Proporción panorámica para no alargar demasiado. */
-.gest-card-img{display:block;margin-bottom:12px;border-radius:10px;overflow:hidden;border:1px solid var(--border-soft);box-shadow:0 2px 10px -4px rgba(15,23,42,.18);aspect-ratio:16/6;background:#eef1f5;cursor:pointer}
+.gest-card-img{color:inherit;display:block;margin-bottom:12px;border-radius:10px;overflow:hidden;border:1px solid var(--border-soft);box-shadow:0 2px 10px -4px rgba(15,23,42,.18);aspect-ratio:16/6;background:#eef1f5;cursor:pointer}
 .gest-card-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s var(--ease)}
 .gest-card-img:hover img{transform:scale(1.04)}
 .gest-card-loc{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:2px}
@@ -2572,7 +2579,10 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 .gest-card-aside{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0;min-width:90px}
 .gest-card-status{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:14px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;line-height:1.2}
 .gest-card-status-ok{background:var(--green-light);color:var(--green-dark);border:1px solid rgba(22,163,74,.2)}
-.gest-card-status-gest{background:var(--amber-light);color:var(--amber-dark);border:1px solid rgba(59,130,246,.2)}
+/* El chip "En gestión" usaba --amber-light/--amber-dark, que pese al nombre
+   son AZULES (#3b82f6 / #1e40af) y estan reservados para el avance de los
+   proyectos. Pasa al dorado del propio modal (ago-2026). */
+.gest-card-status-gest{background:var(--gold-light);color:var(--gold-dark);border:1px solid rgba(24,24,27,.2)}
 .gest-card-status-proy{background:#f1f5f9;color:var(--text2);border:1px solid var(--border)}
 .gest-card-cents{display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end}
 
@@ -3035,9 +3045,11 @@ const CENTROS = {
     name: 'Formación y Desarrollo Profesional',
     tag:  'Acompañamiento integral a la trayectoria profesional',
     desc: 'Articula iniciativas de formación, orientación y proyección profesional, conectando a estudiantes, egresados y empleadores para fortalecer las capacidades del talento humano en ingeniería y áreas afines.',
-    color:     '#1d4ed8',
-    colorSoft: '#e0ebff',
-    colorDark: '#1e3a8a',
+    /* Negro en vez del azul original (solicitud ago-2026). Territorios de
+       Vida sigue en verde, asi que los dos Centros se distinguen igual. */
+    color:     '#18181b',
+    colorSoft: '#e4e4e7',
+    colorDark: '#09090b',
     url:  'https://minas.medellin.unal.edu.co/centros-de-pensamientos',
     lines: [
       'Orientación vocacional y acompañamiento a la trayectoria académica y profesional',
@@ -7883,7 +7895,7 @@ function GestionEstrategica({ data, onOpenCentro }) {
 
   /* Color por tipo de logro — para el chip de la card */
   const tipoStyle = {
-    'Convenio':  { color: '#1d4ed8', soft: '#e0ebff', dark: '#1e3a8a' },
+    'Convenio':  { color: '#18181b', soft: '#e4e4e7', dark: '#09090b' },
     'Proyecto':  { color: '#15803d', soft: '#dcfce7', dark: '#14532d' },
     'Movilidad': { color: '#f9ae00', soft: '#fef3c7', dark: '#b87a00' },
     'Red':       { color: '#8b5cf6', soft: '#ede9fe', dark: '#5b21b6' }
@@ -14890,6 +14902,38 @@ function LogroCard({ logro, hideTipo }) {
     return (meses[+m - 1] || '') + ' ' + y;
   };
   const isGal = Array.isArray(logro.fotos) && fotosArr.length > 0;
+
+  /* ── Recorte del embed de Instagram (solicitud ago-2026) ──────────────────
+     El /embed/ de IG termina siempre con: barra de acciones · "N likes" ·
+     caja "Add a comment…". Esa caja no aporta nada acá y, con el alto fijo de
+     720px del CSS, además sobraba un manchón blanco debajo.
+     Instagram publica su alto real por postMessage {"type":"MEASURE"} — el
+     mismo dato que usa su embed.js oficial — así que lo escuchamos y NO
+     cargamos ese script externo. `e.source` identifica QUÉ iframe habla, que
+     es indispensable porque el modal monta tres embeds a la vez.
+     Al alto recibido se le restan los ~56px de la caja de comentarios y el
+     recorte lo hace overflow:hidden del contenedor. Si el mensaje no llega
+     (bloqueo de terceros), rige el alto del CSS y se ve como antes. */
+  const igRef = useRef(null);
+  const [igH, setIgH] = useState(null);
+  const ALTO_COMENTARIOS = 56;
+  useEffect(() => {
+    if (!hasInstagram) return;
+    const ORIGENES = ['https://www.instagram.com', 'https://instagram.com'];
+    const onMsg = (e) => {
+      if (ORIGENES.indexOf(e.origin) === -1) return;
+      if (!igRef.current || e.source !== igRef.current.contentWindow) return;
+      let d = e.data;
+      try { d = typeof d === 'string' ? JSON.parse(d) : d; } catch (_) { return; }
+      if (!d || d.type !== 'MEASURE' || !d.details) return;
+      const h = Number(d.details.height);
+      /* Dato de un tercero: se acota para que un valor absurdo no deforme la tarjeta. */
+      if (h > 200 && h < 1400) setIgH(Math.round(h));
+    };
+    window.addEventListener('message', onMsg);
+    return () => window.removeEventListener('message', onMsg);
+  }, [hasInstagram]);
+
   const cls = 'lgr-item'
     + (isGal ? ' lgr-item-doc' : (hasMedia ? '' : ' lgr-item-text'))
     + (hasInstagram ? ' lgr-item-vertical' : '');
@@ -14906,8 +14950,14 @@ function LogroCard({ logro, hideTipo }) {
         </div>
       )}
       {hasInstagram && (
-        <div className="lgr-item-instagram">
+        <div className="lgr-item-instagram"
+             style={igH ? { height: Math.max(240, igH - ALTO_COMENTARIOS) + 'px' } : undefined}>
           <iframe
+            ref={igRef}
+            /* El iframe toma el alto REAL medido; el contenedor toma ese alto
+               menos la caja de comentarios. Sin esto, los posts más altos que
+               los 720px del CSS dejaban un hueco blanco DEBAJO del iframe. */
+            style={igH ? { height: igH + 'px' } : undefined}
             src={'https://www.instagram.com/reel/' + igCode + '/embed'}
             title={logro.titulo}
             loading="lazy"
@@ -15503,7 +15553,7 @@ function CentroConstelacion({ projects, onOpenCentro }) {
   function colorOf(id) {
     const f = fdpSet.has(id), t = tvSet.has(id);
     if (f && t) return '#f9ae00';   // dorado: en ambos Centros
-    if (f)      return '#1d4ed8';   // azul institucional FDP
+    if (f)      return '#18181b';   // negro FDP (antes azul, ago-2026)
     if (t)      return '#15803d';   // verde institucional TV
     return '#cbd5e1';               // gris suave: sin Centro
   }
@@ -15583,7 +15633,7 @@ function CentroConstelacion({ projects, onOpenCentro }) {
         <div className="cnst-sub">Pasa el cursor sobre un Centro o un proyecto para ver el detalle</div>
       </div>
       <div className="cnst-legend">
-        <span className="cnst-legend-item"><span className="cnst-legend-dot" style={{background:'#1d4ed8'}}></span>Solo FDP</span>
+        <span className="cnst-legend-item"><span className="cnst-legend-dot" style={{background:'#18181b'}}></span>Solo FDP</span>
         <span className="cnst-legend-item"><span className="cnst-legend-dot" style={{background:'#15803d'}}></span>Solo TV</span>
         <span className="cnst-legend-item"><span className="cnst-legend-dot" style={{background:'#f9ae00'}}></span>Ambos Centros</span>
         <span className="cnst-legend-item"><span className="cnst-legend-dot" style={{background:'#cbd5e1'}}></span>Sin Centro (operativos)</span>
@@ -15666,7 +15716,7 @@ function CentroConstelacion({ projects, onOpenCentro }) {
           <defs>
             <radialGradient id="cnstGradFDP" cx="35%" cy="35%" r="70%">
               <stop offset="0%" stopColor="#3b6fe5" />
-              <stop offset="100%" stopColor="#1d4ed8" />
+              <stop offset="100%" stopColor="#18181b" />
             </radialGradient>
             <radialGradient id="cnstGradTV" cx="35%" cy="35%" r="70%">
               <stop offset="0%" stopColor="#22a652" />
@@ -15682,7 +15732,7 @@ function CentroConstelacion({ projects, onOpenCentro }) {
               setHover({ kind: 'centro', id: 'FDP', x: pos.x, y: pos.y });
             }}
             onClick={() => onOpenCentro && onOpenCentro('FDP')}>
-            <circle className="cnst-node-c-circle" cx="0" cy="0" r={cFDP.r} fill="url(#cnstGradFDP)" stroke="#1e3a8a" strokeWidth="2" />
+            <circle className="cnst-node-c-circle" cx="0" cy="0" r={cFDP.r} fill="url(#cnstGradFDP)" stroke="#09090b" strokeWidth="2" />
             <text className="cnst-c-eye" x="0" y="-22">CENTRO</text>
             <text className="cnst-c-name" x="0" y="-4">FDP</text>
             <text className="cnst-c-num" x="0" y="22">{fdpCount}</text>
@@ -16745,8 +16795,9 @@ function App() {
                       {/* Letrero solo-móvil: en celular la columna "Descripción
                           del avance" se oculta (para no requerir scroll lateral),
                           y se invita a tocar la actividad para ver esa descripción. */}
+                      {/* Ícono de la mano removido por solicitud (ago-2026): el
+                          letrero se lee solo y el pictograma recargaba la fila. */}
                       <div className="at-hint" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 11.24V7.5a2.5 2.5 0 0 1 5 0V12"/><path d="M14 10.5a2.5 2.5 0 0 1 5 0v1.5"/><path d="M19 12a2.5 2.5 0 0 1 5 0V16a6 6 0 0 1-6 6h-2a8 8 0 0 1-6.5-3.3l-2.7-3.7a2 2 0 0 1 3.2-2.4l1.7 2"/></svg>
                         Toca una actividad para ver la descripción del avance
                       </div>
                       <table className="at">
