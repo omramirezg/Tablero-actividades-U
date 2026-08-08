@@ -292,7 +292,12 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
    Se quita hyphens:auto: partir palabras solo tenía sentido para evitar los
    "ríos" de la justificación. En móvil sigue justificado (ver media query). */
 .st-nota{margin:0 0 16px;max-width:none;text-align:center;font-size:12.5px;line-height:1.6;color:var(--text2)}
-.st-nota b{color:var(--text);font-weight:600}
+/* SIN NEGRITA (solicitud ago-2026): las notas explicativas se leen como un
+   párrafo parejo. Se neutraliza el <b> desde el CSS en vez de borrar la
+   etiqueta en cada texto — así el marcado semántico queda intacto por si
+   alguna vez se quiere volver a resaltar. Aplica a las tres notas: la de
+   General, la de Decanatura y la genérica de cada dependencia. */
+.st-nota b{color:inherit;font-weight:inherit}
 .st-nota-gral{margin-bottom:22px}
 @media(max-width:640px){
   /* En móvil las tarjetas ya ocupan todo el ancho, así que centrar el texto no
