@@ -14978,6 +14978,27 @@ function LogroCard({ logro, hideTipo }) {
     return () => window.removeEventListener('message', onMsg);
   }, [hasInstagram]);
 
+  /* Reintento del MEASURE. En el celular el mensaje a veces no llega —red lenta,
+     el iframe carga tarde por loading="lazy", o el navegador bloquea contenido
+     de terceros— y entonces regía el alto fijo del CSS: se veía la caja de
+     comentarios y debajo un manchón blanco de casi 300px.
+     El embed de Instagram vuelve a medirse ante CUALQUIER cambio de tamaño, así
+     que si a los 2,5s (y de nuevo a los 6s) seguimos sin dato, se le mueve el
+     ancho 1px y con eso reenvía el mensaje. Es un empujón barato y sin efecto
+     visible. */
+  useEffect(() => {
+    if (!hasInstagram || igH) return;
+    const empujar = () => {
+      const f = igRef.current;
+      if (!f) return;
+      f.style.width = 'calc(100% - 1px)';
+      setTimeout(() => { if (igRef.current) igRef.current.style.width = ''; }, 80);
+    };
+    const t1 = setTimeout(empujar, 2500);
+    const t2 = setTimeout(empujar, 6000);
+    return () => { clearTimeout(t1); clearTimeout(t2); };
+  }, [hasInstagram, igH]);
+
   const cls = 'lgr-item'
     + (isGal ? ' lgr-item-doc' : (hasMedia ? '' : ' lgr-item-text'))
     + (hasInstagram ? ' lgr-item-vertical' : '');
