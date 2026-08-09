@@ -1813,14 +1813,8 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
    más que el recuadro del video (si creciera, estiraría la fila del grid
    y correría el recorte). Scroll interno si el texto es más largo. */
 .mc-reel-card--featured .mc-ig-caption{max-height:230px}
-/* El alto lo fija JS con la medida que publica Instagram (ver MinasContigo).
-   El aspect-ratio 4/3 y el recorte por porcentajes se removieron: dependían de
-   que el embed mantuviera su maqueta y dejaron de cuadrar. Los valores de aquí
-   son solo el respaldo mientras llega la medida. */
-/* height y no min-height: min-height GANA sobre el height en línea que fija JS,
-   y el recuadro se quedaba en 420px ignorando la medida real del embed. */
-.mc-reel-stage{position:relative;overflow:hidden;height:420px;background:#000;border-right:1px solid #efefef;min-width:0}
-.mc-reel-stage .mc-reel-iframe{position:absolute;left:0;top:-54px;width:100%;height:900px;display:block;border:0;box-shadow:none;border-radius:0;max-width:none}
+.mc-reel-stage{position:relative;overflow:hidden;aspect-ratio:4/3;background:#000;border-right:1px solid #efefef;min-width:0}
+.mc-reel-stage .mc-reel-iframe{position:absolute;left:0;top:calc(-33.33% - 54px);width:100%;height:calc(237% + 1000px);display:block;border:0;box-shadow:none;border-radius:0;max-width:none}
 /* Póster propio del reel destacado (reemplaza el /embed/ de IG). */
 .mc-reel-poster{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
     text-decoration:none;background-color:#0b1220;background-size:cover;background-position:center;transition:filter .25s var(--ease)}
@@ -8581,46 +8575,6 @@ function CursoSym({ id, simbolo }) {
 }
 
 function MinasContigo({ programa, cursos, hitos, testimonios, fotos, reels, onOpenLider }) {
-  /* ── Alto REAL del reel destacado (ago-2026) ──────────────────────────────
-     Antes el recuadro era 4:3 fijo y el embed se recortaba con porcentajes
-     calibrados a mano. Esa calibración dependía de que Instagram siguiera
-     maquetando su embed igual, y dejó de cuadrar: el renglón "View more on
-     Instagram" quedaba ENCIMA del video, tapando el botón de play.
-     Ahora se usa la misma técnica que ya funciona en "Otros logros": Instagram
-     publica su alto por postMessage {"type":"MEASURE"} y con eso se dimensiona
-     el recuadro. Solo se recortan dos zonas de alto CONOCIDO y constante —la
-     cabecera del embed arriba y la caja de comentarios abajo—, sin adivinar
-     dónde termina el video. */
-  const reelRef = useRef(null);
-  const [reelH, setReelH] = useState(null);
-  const ALTO_CABECERA = 54;   /* avatar + handle + "View profile" */
-  const ALTO_COMENTARIOS = 56;
-  useEffect(() => {
-    const ORIGENES = ['https://www.instagram.com', 'https://instagram.com'];
-    const onMsg = (e) => {
-      if (ORIGENES.indexOf(e.origin) === -1) return;
-      if (!reelRef.current || e.source !== reelRef.current.contentWindow) return;
-      let d = e.data;
-      try { d = typeof d === 'string' ? JSON.parse(d) : d; } catch (_) { return; }
-      if (!d || d.type !== 'MEASURE' || !d.details) return;
-      const h = Number(d.details.height);
-      if (h > 200 && h < 2000) setReelH(Math.round(h));
-    };
-    window.addEventListener('message', onMsg);
-    return () => window.removeEventListener('message', onMsg);
-  }, []);
-  /* Si el mensaje no llega, se reintenta moviendo el ancho 1px: el embed se
-     vuelve a medir ante cualquier resize. */
-  useEffect(() => {
-    if (reelH) return;
-    const empujar = () => { const f = reelRef.current; if (!f) return;
-      f.style.width = 'calc(100% - 1px)';
-      setTimeout(() => { if (reelRef.current) reelRef.current.style.width = ''; }, 80); };
-    const t1 = setTimeout(empujar, 2500);
-    const t2 = setTimeout(empujar, 6000);
-    return () => { clearTimeout(t1); clearTimeout(t2); };
-  }, [reelH]);
-
   return (
     <>
       <div className="mc-hero">
@@ -8677,13 +8631,10 @@ function MinasContigo({ programa, cursos, hitos, testimonios, fotos, reels, onOp
                     Instagram (clic en ▶ → play inline). El recorte proporcional
                     (ver .mc-reel-stage en CSS) oculta el header/footer del embed
                     y deja el metraje del reel. */}
-                <div className="mc-reel-stage"
-                     style={reelH ? { height: Math.max(320, reelH - ALTO_CABECERA - ALTO_COMENTARIOS) + 'px' } : undefined}>
+                <div className="mc-reel-stage">
                   <iframe
-                    ref={reelRef}
                     src={`${igUrl}embed/`}
                     className="mc-reel-iframe"
-                    style={reelH ? { top: -ALTO_CABECERA + 'px', height: reelH + 'px' } : undefined}
                     title={destacado.titulo}
                     frameBorder="0"
                     scrolling="no"
