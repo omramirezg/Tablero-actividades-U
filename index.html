@@ -1512,9 +1512,12 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 /* Modal con sombra más profunda y dramática para sensación premium */
 /* Hairline como el de Otros logros: semitransparente, asi que contra el
    header casi negro se lee como un filo claro (ago-2026). */
-.mc-modal{position:relative;width:min(940px,100%);background:#fff;border-radius:var(--radius-xl);border:1px solid rgba(24,24,27,.25);box-shadow:0 32px 80px -18px rgba(15,23,42,.42),0 14px 36px -12px rgba(15,23,42,.18),0 0 0 1px rgba(15,23,42,.05);overflow:hidden;animation:dpvPop .3s var(--ease) both;margin:auto;/* Del verde salvia al dorado del tablero (ago-2026): al cambiar las cuatro
-   variables aca, todas las reglas que las usan quedan alineadas de una vez. */
---mc-color:#f9ae00;--mc-color-soft:#fffaf0;--mc-color-dark:#b87a00;--mc-accent:#f9ae00}
+.mc-modal{position:relative;width:min(940px,100%);background:#fff;border-radius:var(--radius-xl);border:1px solid rgba(24,24,27,.25);box-shadow:0 32px 80px -18px rgba(15,23,42,.42),0 14px 36px -12px rgba(15,23,42,.18),0 0 0 1px rgba(15,23,42,.05);overflow:hidden;animation:dpvPop .3s var(--ease) both;margin:auto;/* Blanco y negro en el CUERPO (ago-2026). Estas cuatro variables alimentan
+   titulos de seccion, numeros, capitulares y bordes; ponerlas en neutro deja
+   el cuerpo como el de "Otros logros" sin tocar regla por regla.
+   El header NO usa estas variables sino var(--gold), asi que conserva el
+   dorado del patron negro+dorado. */
+--mc-color:#18181b;--mc-color-soft:#fafafa;--mc-color-dark:#18181b;--mc-accent:#18181b}
 /* Barra tricolor superior — sello editorial Decanatura.
    Verde Minas Contigo + dorado UNAL + azul-gris institucional. */
 /* Como en Otros logros: la franja existe pero va del color del header, o sea
@@ -1578,7 +1581,7 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
    "acumulado" (cuando no hay informe propio del semestre). */
 .mc-curso-periodo{position:absolute;top:8px;right:8px;font-size:8.5px;font-weight:700;color:var(--mc-color-dark);background:var(--mc-color-soft);padding:2px 7px;border-radius:4px;letter-spacing:.5px;border:1px solid color-mix(in srgb,var(--mc-color) 22%,transparent)}
 .mc-curso-periodo-acum{color:#8a6d3b;background:#fdf6e3;border-color:#f0d97c}
-.mc-section-title::before{content:'';width:22px;height:2px;background:var(--gold);border-radius:1px;flex-shrink:0;box-shadow:0 1px 3px color-mix(in srgb,var(--mc-color) 35%,transparent)}
+.mc-section-title::before{content:'';width:22px;height:2px;background:#18181b;border-radius:1px;flex-shrink:0;box-shadow:0 1px 3px color-mix(in srgb,var(--mc-color) 35%,transparent)}
 .mc-section-title::after{content:'';width:4px;height:4px;border-radius:50%;background:var(--mc-accent);flex-shrink:0;margin-left:-4px;box-shadow:0 0 6px color-mix(in srgb,var(--mc-accent) 55%,transparent)}
 
 /* Sección "Síguenos" — links sociales del programa (Instagram + sitio web).
@@ -1586,7 +1589,7 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
    modal. Grid 2 cols en desktop, 1 col en mobile. */
 .mc-redes{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
 .mc-red{display:flex;align-items:center;gap:14px;padding:14px 16px;background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);text-decoration:none;color:var(--text);transition:transform .2s var(--ease),box-shadow .2s var(--ease),border-color .2s var(--ease),background .2s var(--ease)}
-.mc-red:hover{transform:translateY(-2px);border-color:var(--gold);background:#fff;box-shadow:0 6px 18px -6px color-mix(in srgb,var(--mc-color) 32%,transparent)}
+.mc-red:hover{transform:translateY(-2px);border-color:#18181b;background:#fff;box-shadow:0 6px 18px -6px color-mix(in srgb,var(--mc-color) 32%,transparent)}
 .mc-red-ico{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:11px;flex-shrink:0;color:#fff;transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
 /* Gradient oficial de Instagram (rosa→naranja→amarillo) para evocar la marca
    sin reproducirla literalmente. */
@@ -1608,7 +1611,7 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 .mc-kpi{position:relative;text-align:center;padding:20px 16px 16px;background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:0 2px 8px -2px rgba(15,23,42,.06),inset 0 1px 0 rgba(255,255,255,.8);overflow:hidden;transition:transform .25s var(--ease),box-shadow .25s var(--ease),border-color .25s var(--ease)}
 .mc-kpi:hover{transform:translateY(-3px);box-shadow:0 10px 24px -8px color-mix(in srgb,var(--mc-color) 28%,transparent),0 4px 10px -4px rgba(15,23,42,.08);border-color:color-mix(in srgb,var(--mc-color) 35%,var(--border))}
 /* Barra superior gradient dorado→sage — sello institucional */
-.mc-kpi::before{content:'';position:absolute;left:50%;top:0;transform:translateX(-50%);width:44px;height:3px;background:var(--gold);border-radius:0 0 3px 3px;box-shadow:0 1px 4px color-mix(in srgb,var(--mc-accent) 35%,transparent)}
+.mc-kpi::before{content:'';position:absolute;left:50%;top:0;transform:translateX(-50%);width:44px;height:3px;background:#18181b;border-radius:0 0 3px 3px;box-shadow:0 1px 4px color-mix(in srgb,var(--mc-accent) 35%,transparent)}
 /* Halo radial sutil al hacer hover */
 .mc-kpi::after{content:none;background:radial-gradient(circle at 50% 0%,color-mix(in srgb,var(--mc-color) 8%,transparent) 0%,transparent 50%);opacity:0;transition:opacity .25s var(--ease);pointer-events:none}
 .mc-kpi:hover::after{opacity:1}
@@ -1626,7 +1629,7 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 .mc-curso{position:relative;background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px 16px 18px;box-shadow:0 2px 8px -3px rgba(15,23,42,.06);transition:transform .25s var(--ease),box-shadow .25s var(--ease),border-color .25s var(--ease);overflow:hidden;text-align:center}
 .mc-curso:hover{transform:translateY(-3px);box-shadow:0 12px 28px -10px color-mix(in srgb,var(--mc-color) 30%,transparent),0 4px 10px -4px rgba(15,23,42,.08);border-color:color-mix(in srgb,var(--mc-color) 35%,var(--border))}
 /* Borde superior gradient dorado→sage */
-.mc-curso::before{content:'';position:absolute;left:0;right:0;top:0;height:3px;background:var(--gold);opacity:.7;transition:opacity .25s var(--ease)}
+.mc-curso::before{content:'';position:absolute;left:0;right:0;top:0;height:3px;background:#18181b;opacity:.7;transition:opacity .25s var(--ease)}
 .mc-curso:hover::before{opacity:1}
 /* Símbolos matemáticos VECTORIALES (SVG inline, ver <CursoSym/>).
    Se abandonaron los glifos de fuente porque: (1) el degradado con
@@ -1867,7 +1870,7 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 .mc-reel-title{font-size:13.5px;font-weight:700;color:var(--text);line-height:1.32;letter-spacing:-.15px;margin-bottom:10px;flex:0 0 auto}
 .mc-reel-quote{font-family:'Playfair Display','Georgia',serif;font-style:italic;font-size:14.5px;line-height:1.5;color:var(--mc-color-dark);font-weight:500;letter-spacing:-.1px;margin-bottom:16px;flex:1}
 .mc-reel-meta > .mc-reel-btn:nth-child(3){margin-top:auto}  /* sin cita: empuja el botón al fondo */
-.mc-reel-btn{display:inline-flex;align-items:center;align-self:flex-start;padding:9px 16px;background:var(--gold-dark);color:#fff;text-decoration:none;font-size:12px;font-weight:700;letter-spacing:.3px;border-radius:8px;box-shadow:0 3px 10px -2px color-mix(in srgb,var(--mc-color-dark) 45%,transparent),inset 0 1px 0 rgba(255,255,255,.18);transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
+.mc-reel-btn{display:inline-flex;align-items:center;align-self:flex-start;padding:9px 16px;background:#18181b;color:#fff;text-decoration:none;font-size:12px;font-weight:700;letter-spacing:.3px;border-radius:8px;box-shadow:0 3px 10px -2px color-mix(in srgb,var(--mc-color-dark) 45%,transparent),inset 0 1px 0 rgba(255,255,255,.18);transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
 .mc-reel-btn:hover{transform:translateY(-1px);box-shadow:0 5px 14px -3px color-mix(in srgb,var(--mc-color-dark) 55%,transparent),inset 0 1px 0 rgba(255,255,255,.22)}
 @media(max-width:760px){
   .mc-reels-grid{grid-template-columns:1fr;gap:16px}
