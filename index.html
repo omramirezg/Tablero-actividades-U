@@ -1106,8 +1106,9 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 .gd-card{position:relative;width:100%;max-width:760px;max-height:92vh;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;touch-action:pan-y;
     background:#18181b;border:1px solid #2f2f31;border-radius:var(--radius-xl);
     box-shadow:0 30px 80px rgba(0,0,0,.55);animation:welRise .5s var(--ease) both}
+/* Sin franja dorada, igual que Otros logros: va del color del header. */
 .gd-card::before{content:'';position:absolute;left:0;right:0;top:0;height:4px;z-index:3;
-    background:linear-gradient(90deg,var(--gold-dark),var(--gold) 50%,var(--gold-dark));
+    background:#18181b;
     border-radius:var(--radius-xl) var(--radius-xl) 0 0}
 /* Cabecera con el ESCUDO de la Facultad a la izquierda (solicitud ago-2026),
    siguiendo el mismo patrón que los heroes de "Gestión estratégica" y "Otros
@@ -1144,14 +1145,19 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
    por la misma razón. text-wrap:balance es la red de seguridad: si en algún
    ancho el título igual se parte, las dos líneas quedan parejas y no con una
    palabra suelta abajo. */
+/* 110px de padding lateral (antes 92): al pasar el titulo de Playfair 26px a
+   Inter 24px dejo de partirse en dos lineas y el renglon unico se metia 4px
+   por debajo del escudo. Con 110 vuelve a partirse y queda holgura. */
 .gd-eye{text-align:center;color:#e6b54a;font-size:10.5px;letter-spacing:1.8px;text-transform:uppercase;
-    font-weight:700;padding:30px 92px 0;margin-bottom:13px}
-.gd-title{text-align:center;font-family:'Playfair Display',Georgia,serif;font-size:26px;line-height:1.15;
-    color:#f6f5f3;font-weight:700;padding:0 92px;margin-bottom:0;text-wrap:balance}
+    font-weight:700;padding:30px 110px 0;margin-bottom:13px}
+/* Sans-serif 24px/700, igual que .lgr-hero-name (solicitud ago-2026).
+   Antes era Playfair serif a 26px. */
+.gd-title{text-align:center;font-size:24px;line-height:1.25;letter-spacing:-.5px;
+    color:#f6f5f3;font-weight:700;padding:0 110px;margin-bottom:0;text-wrap:balance}
 .gd-title em{font-style:italic;color:var(--gold)}
 /* El margen inferior del subtítulo pasó al padding de .gd-head (para que el aire
    sea el mismo haya o no subtítulo); acá solo queda la separación con el título. */
-.gd-sub{text-align:center;color:#a8a29e;font-size:13px;font-style:italic;line-height:1.5;max-width:540px;margin:10px auto 0;padding:0 30px}
+.gd-sub{text-align:center;color:#a8a29e;font-size:13px;font-style:italic;line-height:1.45;max-width:540px;margin:10px auto 0;padding:0 30px}
 .gd-section{padding:0 34px;margin-top:15px}
 .gd-section-title{color:var(--gold);font-size:12px;letter-spacing:1.6px;text-transform:uppercase;font-weight:700;
     margin-bottom:9px;display:flex;align-items:center;gap:10px}
@@ -1215,7 +1221,8 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
      estrangular el título (misma decisión que en los heroes ≤1080px). */
   .gd-head-logo{display:none}
   .gd-eye{padding:24px 46px 0;font-size:9.5px;letter-spacing:1.6px}
-  .gd-title{font-size:21px;padding:0 18px}
+  /* 19px, el mismo tamano movil de .lgr-hero-name (patron unificado ago-2026). */
+  .gd-title{font-size:19px;padding:0 18px}
   .gd-sub{padding:0 18px}
   .gd-section{padding:0 18px}
   .gd-navbar{padding:12px 14px 14px;flex-wrap:wrap}
@@ -1503,7 +1510,9 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 .mc-modal{position:relative;width:min(940px,100%);background:#fff;border-radius:var(--radius-xl);box-shadow:0 32px 80px -18px rgba(15,23,42,.42),0 14px 36px -12px rgba(15,23,42,.18),0 0 0 1px rgba(15,23,42,.05);overflow:hidden;animation:dpvPop .3s var(--ease) both;margin:auto;--mc-color:#6f8e6c;--mc-color-soft:#f1f5ef;--mc-color-dark:#4a614a;--mc-accent:#c9b178}
 /* Barra tricolor superior — sello editorial Decanatura.
    Verde Minas Contigo + dorado UNAL + azul-gris institucional. */
-.mc-modal::before{content:'';position:absolute;left:0;right:0;top:0;height:4px;background:linear-gradient(90deg,var(--gold-dark),var(--gold) 50%,var(--gold-dark));opacity:1;z-index:11}
+/* Como en Otros logros: la franja existe pero va del color del header, o sea
+   no se ve. Se conserva el pseudo-elemento por si se quiere reactivar. */
+.mc-modal::before{content:'';position:absolute;left:0;right:0;top:0;height:4px;background:#18181b;opacity:1;z-index:11}
 .mc-close{position:absolute;top:16px;right:16px;width:34px;height:34px;border:none;border-radius:10px;background:rgba(255,255,255,.96);color:var(--text);font-size:22px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s var(--ease),transform .15s var(--ease);z-index:10;backdrop-filter:blur(4px);box-shadow:0 2px 8px rgba(15,23,42,.10)}
 .mc-close:hover{background:#fff;transform:scale(1.05)}
 .mc-close:focus-visible{outline:2px solid var(--mc-color);outline-offset:2px}
@@ -1515,7 +1524,7 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 .mc-hero::after{content:'';position:absolute;inset:0;background:none;pointer-events:none;z-index:0}
 .mc-hero-row{position:relative;display:flex;align-items:center;justify-content:center;text-align:center;z-index:1;min-height:96px;padding:0 110px}
 /* Sello con halo radial dorado sutil — destaca como medallón */
-.mc-hero-logo{position:absolute;top:50%;left:0;transform:translateY(-50%);width:92px;height:92px;display:flex;align-items:center;justify-content:center;z-index:2}
+.mc-hero-logo{position:absolute;top:50%;left:0;transform:translateY(-50%);width:88px;height:88px;display:flex;align-items:center;justify-content:center;z-index:2}
 /* Sin halo dorado detras del sello (solicitud ago-2026). */
 .mc-hero-logo::before{content:none}
 /* Sello line-art negro invertido a blanco, igual que en Alianzas. */
@@ -1525,13 +1534,14 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 .mc-hero-eye{font-size:10px;text-transform:uppercase;letter-spacing:2.6px;font-weight:700;color:var(--gold);margin-bottom:10px;display:inline-flex;align-items:center;gap:9px;justify-content:center;opacity:1}
 .mc-hero-eye-star{color:var(--gold);font-size:12px;letter-spacing:0}
 /* Title más grande con énfasis serif italic en el em — feel editorial */
-.mc-hero-name{font-size:30px;font-weight:700;letter-spacing:-.7px;line-height:1.15;margin-bottom:6px;color:#f6f5f3}
+.mc-hero-name{font-size:24px;font-weight:700;letter-spacing:-.5px;line-height:1.25;margin-bottom:6px;color:#f6f5f3}
 /* Sobre el fondo oscuro el verde quedaba en 2,6:1 — ilegible. Pasa a dorado
    (9,4:1) y el subrayado de resalte se hace dorado translucido. */
 /* Sin la banda dorada de resalte detras del texto: queda solo la cursiva
    dorada sobre el fondo oscuro. */
-.mc-hero-name em{font-family:'Playfair Display','Georgia',serif;font-style:italic;color:var(--gold);font-weight:600;letter-spacing:-.2px}
-.mc-hero-tag{font-size:13px;line-height:1.55;color:#a8a29e;font-weight:400;max-width:560px;margin:0 auto}
+/* Sin la serif: hereda la sans del titulo, como el <em> de Otros logros. */
+.mc-hero-name em{font-style:italic;color:var(--gold);font-weight:700}
+.mc-hero-tag{font-size:13px;line-height:1.45;color:#a8a29e;font-style:italic;font-weight:400;max-width:560px;margin:0 auto}
 .mc-hero-bar{position:relative;width:80px;height:3px;background:linear-gradient(90deg,transparent,var(--gold) 30%,var(--gold) 70%,transparent);border-radius:2px;margin:16px auto 0}
 .mc-hero-bar::before,.mc-hero-bar::after{content:'';position:absolute;top:50%;width:3px;height:3px;border-radius:50%;background:var(--gold);transform:translateY(-50%)}
 .mc-hero-bar::before{left:-12px}
@@ -1915,7 +1925,7 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
   /* .mc-galeria y .mc-foto-hero ya no se usan — reemplazados por
      el componente <MinasFotosCarousel> con su propio CSS .mc-carrusel-*. */
   .mc-hero{padding:24px 22px 22px}
-  .mc-hero-name{font-size:22px}
+  .mc-hero-name{font-size:19px}
   .mc-hero-row{padding:0;min-height:0}
   /* Sello: oculto desde ≤1080px (regla de arriba). */
   .mc-hero-titles{display:block;padding-right:0}
@@ -2527,10 +2537,10 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
    Ahora comparte superficie con el carrusel de Gestion destacada. */
 .gest{position:relative;background:#18181b;padding:36px 36px 36px;overflow:hidden}
 .gest .gest-hd{padding-top:4px}
-.gest::before{content:'';position:absolute;left:0;right:0;top:0;height:4px;background:linear-gradient(90deg,var(--gold-dark),var(--gold) 50%,var(--gold-dark));opacity:1}
+.gest::before{content:'';position:absolute;left:0;right:0;top:0;height:4px;background:#18181b;opacity:1}
 .gest::after{content:'';position:absolute;inset:0;background:none;pointer-events:none;z-index:0}
 .gest-hd{position:relative;display:flex;flex-direction:column;justify-content:center;text-align:center;margin-bottom:18px;z-index:1;min-height:100px;padding:0 120px}
-.gest-hd-logo{position:absolute;top:50%;left:0;transform:translateY(-50%);width:100px;height:100px;display:flex;align-items:center;justify-content:center;z-index:2}
+.gest-hd-logo{position:absolute;top:50%;left:0;transform:translateY(-50%);width:88px;height:88px;display:flex;align-items:center;justify-content:center;z-index:2}
 /* El sello es line-art negro: invertido se dibuja blanco sobre el fondo oscuro. */
 .gest-hd-logo img{width:100%;height:100%;object-fit:contain;filter:invert(1)}
 .gest-eyebrow{font-size:9.5px;text-transform:uppercase;letter-spacing:2.4px;font-weight:700;color:var(--gold);margin-bottom:6px;display:inline-flex;align-items:center;gap:8px;align-self:center}
@@ -2620,7 +2630,7 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
   .gest-card-flag-emoji{font-size:32px}
   .gest-flag-img{width:40px}
   .gest{padding:24px 22px 26px}
-  .gest-title{font-size:21px}
+  .gest-title{font-size:19px}
   .gest-hd{min-height:0;padding:0}
   /* Escudo: oculto desde ≤1080px (regla de arriba) — acá ya no se toca. */
 }
