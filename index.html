@@ -2082,11 +2082,12 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
    y restaba protagonismo al número grande. */
 .lgr-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:10px;padding:12px 28px 14px;background:#18181b}
 /* Compacta en fila, igual que Alianzas. */
-.lgr-kpi{display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-areas:'ico num' 'ico lbl';align-items:center;column-gap:9px;text-align:left;padding:9px 11px;background:linear-gradient(180deg,rgba(249,174,0,.15),rgba(249,174,0,.06));border:1px solid rgba(249,174,0,.45);border-radius:12px;box-shadow:none;transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
+/* Sin icono (ago-2026): bloque simple centrado, igual que Alianzas. */
+.lgr-kpi{display:block;text-align:center;padding:10px 11px;background:linear-gradient(180deg,rgba(249,174,0,.15),rgba(249,174,0,.06));border:1px solid rgba(249,174,0,.45);border-radius:12px;box-shadow:none;transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
 .lgr-kpi:hover{transform:translateY(-2px);box-shadow:0 4px 14px rgba(249,174,0,.28);border-color:var(--gold)}
 .lgr-kpi-icon{grid-area:ico;display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;margin:0;background:rgba(255,255,255,.06);border:1px solid rgba(249,174,0,.38);border-radius:9px;color:var(--gold);box-shadow:0 2px 6px -2px rgba(24,24,27,.22),inset 0 1px 0 rgba(255,255,255,.6)}
-.lgr-kpi-num{grid-area:num;font-family:'Playfair Display',Georgia,serif;font-size:22px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.4px}
-.lgr-kpi-lbl{grid-area:lbl;font-size:8.5px;font-weight:700;color:rgba(255,255,255,.72);letter-spacing:.4px;text-transform:uppercase;margin-top:2px;line-height:1.25}
+.lgr-kpi-num{font-family:'Playfair Display',Georgia,serif;font-size:22px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.4px}
+.lgr-kpi-lbl{font-size:8.5px;font-weight:700;color:rgba(255,255,255,.72);letter-spacing:.4px;text-transform:uppercase;margin-top:2px;line-height:1.25}
 @media(max-width:640px){
   /* 4 KPIs en grid 2×2 (2 por fila) por solicitud, en vez de apilados. */
   .lgr-kpis{grid-template-columns:repeat(2,1fr);padding:14px 16px 4px;gap:10px}
@@ -2548,12 +2549,13 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 .gest-kpi{flex:0 1 190px;min-width:170px}
 /* Mismo tratamiento del boton .btn-gest: velo dorado sobre oscuro + borde dorado. */
 /* Compacta en fila: icono a la izquierda, numero y etiqueta a la derecha. */
-.gest-kpi{position:relative;display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-areas:'ico num' 'ico lbl';align-items:center;column-gap:9px;text-align:left;padding:9px 11px;background:linear-gradient(180deg,rgba(249,174,0,.15),rgba(249,174,0,.06));border:1px solid rgba(249,174,0,.45);border-radius:var(--radius);box-shadow:none;overflow:hidden;transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
+/* Sin icono (ago-2026): vuelve a bloque simple centrado. */
+.gest-kpi{position:relative;display:block;text-align:center;padding:10px 11px;background:linear-gradient(180deg,rgba(249,174,0,.15),rgba(249,174,0,.06));border:1px solid rgba(249,174,0,.45);border-radius:var(--radius);box-shadow:none;overflow:hidden;transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
 .gest-kpi:hover{transform:translateY(-2px);box-shadow:0 4px 14px rgba(249,174,0,.28);border-color:var(--gold)}
 .gest-kpi::before{content:none}
-.gest-kpi-num{grid-area:num;font-size:20px;font-weight:800;letter-spacing:-.7px;line-height:1;color:#fff;font-feature-settings:"tnum"}
+.gest-kpi-num{font-size:20px;font-weight:800;letter-spacing:-.7px;line-height:1;color:#fff;font-feature-settings:"tnum"}
 .gest-kpi-num em{font-style:normal;font-size:13px;color:var(--gold);font-weight:700;margin-left:2px}
-.gest-kpi-lbl{grid-area:lbl;font-size:8.5px;text-transform:uppercase;letter-spacing:.4px;color:rgba(255,255,255,.72);margin-top:2px;font-weight:600;line-height:1.25}
+.gest-kpi-lbl{font-size:8.5px;text-transform:uppercase;letter-spacing:.4px;color:rgba(255,255,255,.72);margin-top:2px;font-weight:600;line-height:1.25}
 
 /* Cards de viaje */
 .gest-list{position:relative;display:flex;flex-direction:column;gap:14px;z-index:1}
@@ -2638,7 +2640,7 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
   /* En movil las 3 caben a lo ancho solo si el contenido vuelve a apilarse:
      el formato en fila (icono + texto al lado) no entra en ~96px. */
   .gest-kpis{gap:6px;flex-wrap:nowrap}
-  .gest-kpi{flex:1 1 0;min-width:0;padding:9px 5px 8px;grid-template-columns:1fr;grid-template-areas:'ico' 'num' 'lbl';justify-items:center;text-align:center;column-gap:0;row-gap:2px}
+  .gest-kpi{flex:1 1 0;min-width:0;padding:9px 5px 8px}
   .gest-kpi-icon{width:26px;height:26px;margin:0 auto 4px;border-radius:8px}
   .gest-kpi-num{font-size:16px;letter-spacing:-.4px}
   .gest-kpi-num em{font-size:11px}
@@ -7996,12 +7998,10 @@ function GestionEstrategica({ data, onOpenCentro }) {
 
       <div className="gest-kpis">
         <div className="gest-kpi">
-          <div className="gest-kpi-icon" aria-hidden="true"><Icon name="globe" size={15}/></div>
           <div className="gest-kpi-num">{total}</div>
           <div className="gest-kpi-lbl">Visitas de gestión</div>
         </div>
         <div className="gest-kpi">
-          <div className="gest-kpi-icon" aria-hidden="true"><Icon name="handshake" size={15}/></div>
           <div className="gest-kpi-num">{convenios}</div>
           <div className="gest-kpi-lbl">Convenios firmados</div>
         </div>
@@ -8009,7 +8009,6 @@ function GestionEstrategica({ data, onOpenCentro }) {
             aliados internacionales en el bienio. Antes se mostraba la suma de montoCop
             de las alianzas listadas ($1.100M), que se conserva como dato interno. */}
         <div className="gest-kpi">
-          <div className="gest-kpi-icon" aria-hidden="true"><Icon name="trophy" size={15}/></div>
           <div className="gest-kpi-num">$2.200M</div>
           <div className="gest-kpi-lbl">Recursos internacionales gestionados</div>
         </div>
@@ -15181,27 +15180,23 @@ function LogrosVisibles({ logros }) {
       {total > 0 && (
         <div className="lgr-kpis">
           <div className="lgr-kpi">
-            <div className="lgr-kpi-icon" aria-hidden="true"><Icon name="trophy" size={15}/></div>
             <div className="lgr-kpi-num">{total}</div>
             <div className="lgr-kpi-lbl">Entregas registradas</div>
           </div>
           {renov > 0 && (
             <div className="lgr-kpi">
-              <div className="lgr-kpi-icon" aria-hidden="true"><Icon name="wrench" size={15}/></div>
               <div className="lgr-kpi-num">{renov}</div>
               <div className="lgr-kpi-lbl">Renovaciones e infraestructura</div>
             </div>
           )}
           {inaug > 0 && (
             <div className="lgr-kpi">
-              <div className="lgr-kpi-icon" aria-hidden="true"><Icon name="building" size={15}/></div>
               <div className="lgr-kpi-num">{inaug}</div>
               <div className="lgr-kpi-lbl">Inauguraciones y entregas</div>
             </div>
           )}
           {progs > 0 && (
             <div className="lgr-kpi">
-              <div className="lgr-kpi-icon" aria-hidden="true"><Icon name="star" size={15}/></div>
               <div className="lgr-kpi-num">{progs}</div>
               <div className="lgr-kpi-lbl">Programas e iniciativas</div>
             </div>
