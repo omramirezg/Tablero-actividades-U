@@ -1104,7 +1104,7 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
    ni de "atrás" por deslizamiento) y ese gesto queda libre para el swipe que
    cambia de flyer. Ver GestionDestacada. */
 .gd-card{position:relative;width:100%;max-width:760px;max-height:92vh;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;touch-action:pan-y;
-    background:#18181b;border:1px solid #2f2f31;border-radius:var(--radius-xl);
+    background:#18181b;border:1px solid rgba(24,24,27,.25);border-radius:var(--radius-xl);
     box-shadow:0 30px 80px rgba(0,0,0,.55);animation:welRise .5s var(--ease) both}
 /* Sin franja dorada, igual que Otros logros: va del color del header. */
 .gd-card::before{content:'';position:absolute;left:0;right:0;top:0;height:4px;z-index:3;
@@ -1507,7 +1507,9 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
                                    símbolo matemático para calidez sutil) */
 .mc-overlay{position:fixed;inset:0;z-index:1100;background:rgba(15,23,42,.58);backdrop-filter:blur(12px) saturate(130%);-webkit-backdrop-filter:blur(12px) saturate(130%);display:flex;align-items:flex-start;justify-content:center;padding:32px 20px;animation:dpvFade .25s var(--ease) both;overflow-y:auto}
 /* Modal con sombra más profunda y dramática para sensación premium */
-.mc-modal{position:relative;width:min(940px,100%);background:#fff;border-radius:var(--radius-xl);box-shadow:0 32px 80px -18px rgba(15,23,42,.42),0 14px 36px -12px rgba(15,23,42,.18),0 0 0 1px rgba(15,23,42,.05);overflow:hidden;animation:dpvPop .3s var(--ease) both;margin:auto;--mc-color:#6f8e6c;--mc-color-soft:#f1f5ef;--mc-color-dark:#4a614a;--mc-accent:#c9b178}
+/* Hairline como el de Otros logros: semitransparente, asi que contra el
+   header casi negro se lee como un filo claro (ago-2026). */
+.mc-modal{position:relative;width:min(940px,100%);background:#fff;border-radius:var(--radius-xl);border:1px solid rgba(24,24,27,.25);box-shadow:0 32px 80px -18px rgba(15,23,42,.42),0 14px 36px -12px rgba(15,23,42,.18),0 0 0 1px rgba(15,23,42,.05);overflow:hidden;animation:dpvPop .3s var(--ease) both;margin:auto;--mc-color:#6f8e6c;--mc-color-soft:#f1f5ef;--mc-color-dark:#4a614a;--mc-accent:#c9b178}
 /* Barra tricolor superior — sello editorial Decanatura.
    Verde Minas Contigo + dorado UNAL + azul-gris institucional. */
 /* Como en Otros logros: la franja existe pero va del color del header, o sea
@@ -2529,7 +2531,7 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
    desde cualquier pestaña del dashboard. Tono editorial con KPIs duros
    arriba y cards narrativas debajo. */
 .gest-overlay{position:fixed;inset:0;z-index:1100;background:rgba(15,23,42,.55);backdrop-filter:blur(8px) saturate(120%);-webkit-backdrop-filter:blur(8px) saturate(120%);display:flex;align-items:flex-start;justify-content:center;padding:32px 20px;animation:dpvFade .25s var(--ease) both;overflow-y:auto}
-.gest-modal{position:relative;width:min(900px,100%);background:#fff;border-radius:var(--radius-xl);box-shadow:0 28px 80px -16px rgba(15,23,42,.4),0 10px 28px -10px rgba(15,23,42,.18),0 0 0 1px rgba(15,23,42,.05);overflow:hidden;animation:dpvPop .3s var(--ease) both;margin:auto}
+.gest-modal{position:relative;width:min(900px,100%);background:#fff;border-radius:var(--radius-xl);border:1px solid rgba(24,24,27,.25);box-shadow:0 28px 80px -16px rgba(15,23,42,.4),0 10px 28px -10px rgba(15,23,42,.18),0 0 0 1px rgba(15,23,42,.05);overflow:hidden;animation:dpvPop .3s var(--ease) both;margin:auto}
 .gest-close{position:absolute;top:16px;right:16px;width:36px;height:36px;border:none;border-radius:10px;background:rgba(255,255,255,.95);color:var(--text);font-size:24px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s var(--ease),transform .15s var(--ease);z-index:10;backdrop-filter:blur(4px);box-shadow:0 2px 8px rgba(15,23,42,.12)}
 .gest-close:hover{background:#fff;transform:scale(1.05)}
 .gest-close:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
