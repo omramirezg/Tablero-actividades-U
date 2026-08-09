@@ -1104,7 +1104,10 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
    ni de "atrás" por deslizamiento) y ese gesto queda libre para el swipe que
    cambia de flyer. Ver GestionDestacada. */
 .gd-card{position:relative;width:100%;max-width:760px;max-height:92vh;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;touch-action:pan-y;
-    background:#18181b;border:1px solid rgba(24,24,27,.25);border-radius:var(--radius-xl);
+    /* Blanco al 14% y no el rgba(24,24,27,.25) de los otros modales: el velo
+       de este es mas oscuro (.72 vs .55) y alli un filo oscuro desaparece.
+       Compuesto da ~rgb(99,99,101), casi identico al de Otros logros. */
+    background:#18181b;border:1px solid rgba(255,255,255,.14);border-radius:var(--radius-xl);
     box-shadow:0 30px 80px rgba(0,0,0,.55);animation:welRise .5s var(--ease) both}
 /* Sin franja dorada, igual que Otros logros: va del color del header. */
 .gd-card::before{content:'';position:absolute;left:0;right:0;top:0;height:4px;z-index:3;
