@@ -8578,51 +8578,6 @@ function CursoSym({ id, simbolo }) {
 }
 
 function MinasContigo({ programa, cursos, hitos, testimonios, fotos, reels, onOpenLider }) {
-  /* ── Encuadre del reel destacado (ago-2026) ───────────────────────────────
-     La idea sigue siendo la misma que antes: asomarse SOLO al metraje para que
-     el video llene la caja, en vez de mostrar el embed completo (donde el reel
-     se ve chico y rodeado de negro).
-     Lo que cambia es de dónde salen las medidas. Antes eran porcentajes fijos
-     calibrados a mano contra la maqueta que Instagram tenía entonces; al
-     cambiarla, la ventana dejó de coincidir y el renglón "View more on
-     Instagram" quedó DENTRO, a media altura.
-     Ahora la ventana se calcula con el alto que el propio Instagram publica por
-     postMessage: se le descuenta la cabecera (arriba) y todo el pie —enlace,
-     botones, likes y comentarios— para que el recuadro termine justo donde
-     termina el video. */
-  const reelRef = useRef(null);
-  const [reelH, setReelH] = useState(null);
-  const ALTO_CABECERA = 54;
-  /* Pie del embed: enlace 44 + botones 48 + likes 28 + caja de comentarios 52.
-     Se redondea a 176 para pecar de recortar 4px de video antes que dejar
-     asomar el enlace — el reel tiene franjas negras abajo, así que no se nota. */
-  const ALTO_PIE = 176;
-  useEffect(() => {
-    const ORIGENES = ['https://www.instagram.com', 'https://instagram.com'];
-    const onMsg = (e) => {
-      if (ORIGENES.indexOf(e.origin) === -1) return;
-      if (!reelRef.current || e.source !== reelRef.current.contentWindow) return;
-      let d = e.data;
-      try { d = typeof d === 'string' ? JSON.parse(d) : d; } catch (_) { return; }
-      if (!d || d.type !== 'MEASURE' || !d.details) return;
-      const h = Number(d.details.height);
-      if (h > 200 && h < 2000) setReelH(Math.round(h));
-    };
-    window.addEventListener('message', onMsg);
-    return () => window.removeEventListener('message', onMsg);
-  }, []);
-  /* Si el mensaje no llega, se le mueve el ancho 1px: el embed se remide ante
-     cualquier resize. Sin dato rige el recuadro del CSS. */
-  useEffect(() => {
-    if (reelH) return;
-    const empujar = () => { const f = reelRef.current; if (!f) return;
-      f.style.width = 'calc(100% - 1px)';
-      setTimeout(() => { if (reelRef.current) reelRef.current.style.width = ''; }, 80); };
-    const t1 = setTimeout(empujar, 2500);
-    const t2 = setTimeout(empujar, 6000);
-    return () => { clearTimeout(t1); clearTimeout(t2); };
-  }, [reelH]);
-
   return (
     <>
       <div className="mc-hero">
@@ -8679,11 +8634,8 @@ function MinasContigo({ programa, cursos, hitos, testimonios, fotos, reels, onOp
                     Instagram (clic en ▶ → play inline). El recorte proporcional
                     (ver .mc-reel-stage en CSS) oculta el header/footer del embed
                     y deja el metraje del reel. */}
-                <div className="mc-reel-stage"
-                     style={reelH ? { aspectRatio: 'auto', height: Math.max(120, reelH - ALTO_CABECERA - ALTO_PIE) + 'px' } : undefined}>
+                <div className="mc-reel-stage">
                   <iframe
-                    ref={reelRef}
-                    style={reelH ? { top: -ALTO_CABECERA + 'px', height: reelH + 'px' } : undefined}
                     src={`${igUrl}embed/`}
                     className="mc-reel-iframe"
                     title={destacado.titulo}
