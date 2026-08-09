@@ -1512,7 +1512,9 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 /* Modal con sombra más profunda y dramática para sensación premium */
 /* Hairline como el de Otros logros: semitransparente, asi que contra el
    header casi negro se lee como un filo claro (ago-2026). */
-.mc-modal{position:relative;width:min(940px,100%);background:#fff;border-radius:var(--radius-xl);border:1px solid rgba(24,24,27,.25);box-shadow:0 32px 80px -18px rgba(15,23,42,.42),0 14px 36px -12px rgba(15,23,42,.18),0 0 0 1px rgba(15,23,42,.05);overflow:hidden;animation:dpvPop .3s var(--ease) both;margin:auto;--mc-color:#6f8e6c;--mc-color-soft:#f1f5ef;--mc-color-dark:#4a614a;--mc-accent:#c9b178}
+.mc-modal{position:relative;width:min(940px,100%);background:#fff;border-radius:var(--radius-xl);border:1px solid rgba(24,24,27,.25);box-shadow:0 32px 80px -18px rgba(15,23,42,.42),0 14px 36px -12px rgba(15,23,42,.18),0 0 0 1px rgba(15,23,42,.05);overflow:hidden;animation:dpvPop .3s var(--ease) both;margin:auto;/* Del verde salvia al dorado del tablero (ago-2026): al cambiar las cuatro
+   variables aca, todas las reglas que las usan quedan alineadas de una vez. */
+--mc-color:#f9ae00;--mc-color-soft:#fffaf0;--mc-color-dark:#b87a00;--mc-accent:#f9ae00}
 /* Barra tricolor superior — sello editorial Decanatura.
    Verde Minas Contigo + dorado UNAL + azul-gris institucional. */
 /* Como en Otros logros: la franja existe pero va del color del header, o sea
@@ -1576,7 +1578,7 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
    "acumulado" (cuando no hay informe propio del semestre). */
 .mc-curso-periodo{position:absolute;top:8px;right:8px;font-size:8.5px;font-weight:700;color:var(--mc-color-dark);background:var(--mc-color-soft);padding:2px 7px;border-radius:4px;letter-spacing:.5px;border:1px solid color-mix(in srgb,var(--mc-color) 22%,transparent)}
 .mc-curso-periodo-acum{color:#8a6d3b;background:#fdf6e3;border-color:#f0d97c}
-.mc-section-title::before{content:'';width:22px;height:2px;background:linear-gradient(90deg,var(--mc-accent),var(--mc-color));border-radius:1px;flex-shrink:0;box-shadow:0 1px 3px color-mix(in srgb,var(--mc-color) 35%,transparent)}
+.mc-section-title::before{content:'';width:22px;height:2px;background:var(--gold);border-radius:1px;flex-shrink:0;box-shadow:0 1px 3px color-mix(in srgb,var(--mc-color) 35%,transparent)}
 .mc-section-title::after{content:'';width:4px;height:4px;border-radius:50%;background:var(--mc-accent);flex-shrink:0;margin-left:-4px;box-shadow:0 0 6px color-mix(in srgb,var(--mc-accent) 55%,transparent)}
 
 /* Sección "Síguenos" — links sociales del programa (Instagram + sitio web).
@@ -1584,13 +1586,14 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
    modal. Grid 2 cols en desktop, 1 col en mobile. */
 .mc-redes{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
 .mc-red{display:flex;align-items:center;gap:14px;padding:14px 16px;background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);text-decoration:none;color:var(--text);transition:transform .2s var(--ease),box-shadow .2s var(--ease),border-color .2s var(--ease),background .2s var(--ease)}
-.mc-red:hover{transform:translateY(-2px);border-color:var(--mc-color);background:linear-gradient(180deg,var(--mc-color-soft) 0%,#fff 100%);box-shadow:0 6px 18px -6px color-mix(in srgb,var(--mc-color) 32%,transparent)}
+.mc-red:hover{transform:translateY(-2px);border-color:var(--gold);background:#fff;box-shadow:0 6px 18px -6px color-mix(in srgb,var(--mc-color) 32%,transparent)}
 .mc-red-ico{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:11px;flex-shrink:0;color:#fff;transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
 /* Gradient oficial de Instagram (rosa→naranja→amarillo) para evocar la marca
    sin reproducirla literalmente. */
-.mc-red-ico-ig{background:linear-gradient(135deg,#833ab4 0%,#fd1d1d 50%,#fcb045 100%);box-shadow:0 3px 10px -2px rgba(253,29,29,.35)}
+/* Sin el degradado de marca de Instagram: oscuro neutro como el resto. */
+.mc-red-ico-ig{background:#18181b;box-shadow:none}
 /* Sage-green del programa para el web — refuerza la identidad MC. */
-.mc-red-ico-web{background:linear-gradient(135deg,var(--mc-color) 0%,var(--mc-color-dark) 100%);box-shadow:0 3px 10px -2px color-mix(in srgb,var(--mc-color-dark) 40%,transparent)}
+.mc-red-ico-web{background:#18181b;box-shadow:0 3px 10px -2px color-mix(in srgb,var(--mc-color-dark) 40%,transparent)}
 .mc-red:hover .mc-red-ico{transform:scale(1.06)}
 .mc-red-body{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
 .mc-red-label{font-size:9.5px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1px}
@@ -1601,12 +1604,13 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 
 /* KPIs duros — cards con barra dorada superior + número grande + halo sage */
 .mc-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.mc-kpi{position:relative;text-align:center;padding:28px 16px 22px;background:linear-gradient(180deg,#fff 0%,#fdfdfb 100%);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:0 2px 8px -2px rgba(15,23,42,.06),inset 0 1px 0 rgba(255,255,255,.8);overflow:hidden;transition:transform .25s var(--ease),box-shadow .25s var(--ease),border-color .25s var(--ease)}
+/* Superficies planas: fuera los degradados (ago-2026). */
+.mc-kpi{position:relative;text-align:center;padding:20px 16px 16px;background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:0 2px 8px -2px rgba(15,23,42,.06),inset 0 1px 0 rgba(255,255,255,.8);overflow:hidden;transition:transform .25s var(--ease),box-shadow .25s var(--ease),border-color .25s var(--ease)}
 .mc-kpi:hover{transform:translateY(-3px);box-shadow:0 10px 24px -8px color-mix(in srgb,var(--mc-color) 28%,transparent),0 4px 10px -4px rgba(15,23,42,.08);border-color:color-mix(in srgb,var(--mc-color) 35%,var(--border))}
 /* Barra superior gradient dorado→sage — sello institucional */
-.mc-kpi::before{content:'';position:absolute;left:50%;top:0;transform:translateX(-50%);width:44px;height:3px;background:linear-gradient(90deg,var(--mc-accent),var(--mc-color));border-radius:0 0 3px 3px;box-shadow:0 1px 4px color-mix(in srgb,var(--mc-accent) 35%,transparent)}
+.mc-kpi::before{content:'';position:absolute;left:50%;top:0;transform:translateX(-50%);width:44px;height:3px;background:var(--gold);border-radius:0 0 3px 3px;box-shadow:0 1px 4px color-mix(in srgb,var(--mc-accent) 35%,transparent)}
 /* Halo radial sutil al hacer hover */
-.mc-kpi::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,color-mix(in srgb,var(--mc-color) 8%,transparent) 0%,transparent 50%);opacity:0;transition:opacity .25s var(--ease);pointer-events:none}
+.mc-kpi::after{content:none;background:radial-gradient(circle at 50% 0%,color-mix(in srgb,var(--mc-color) 8%,transparent) 0%,transparent 50%);opacity:0;transition:opacity .25s var(--ease);pointer-events:none}
 .mc-kpi:hover::after{opacity:1}
 /* Número MUCHO más grande, peso black, con acento dorado en em/sup */
 .mc-kpi-num{font-size:42px;font-weight:800;letter-spacing:-1.8px;line-height:1;color:var(--mc-color-dark);font-feature-settings:"tnum";position:relative;z-index:1}
@@ -1619,10 +1623,10 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 /* Cursos cobijados — cards premium con símbolos matemáticos serif grandes,
    feel libro académico. Hover con tinte sage y elevación pronunciada. */
 .mc-cursos{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.mc-curso{position:relative;background:linear-gradient(180deg,#fff 0%,#fdfcf8 100%);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px 16px 18px;box-shadow:0 2px 8px -3px rgba(15,23,42,.06);transition:transform .25s var(--ease),box-shadow .25s var(--ease),border-color .25s var(--ease);overflow:hidden;text-align:center}
+.mc-curso{position:relative;background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px 16px 18px;box-shadow:0 2px 8px -3px rgba(15,23,42,.06);transition:transform .25s var(--ease),box-shadow .25s var(--ease),border-color .25s var(--ease);overflow:hidden;text-align:center}
 .mc-curso:hover{transform:translateY(-3px);box-shadow:0 12px 28px -10px color-mix(in srgb,var(--mc-color) 30%,transparent),0 4px 10px -4px rgba(15,23,42,.08);border-color:color-mix(in srgb,var(--mc-color) 35%,var(--border))}
 /* Borde superior gradient dorado→sage */
-.mc-curso::before{content:'';position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,var(--mc-accent),var(--mc-color));opacity:.7;transition:opacity .25s var(--ease)}
+.mc-curso::before{content:'';position:absolute;left:0;right:0;top:0;height:3px;background:var(--gold);opacity:.7;transition:opacity .25s var(--ease)}
 .mc-curso:hover::before{opacity:1}
 /* Símbolos matemáticos VECTORIALES (SVG inline, ver <CursoSym/>).
    Se abandonaron los glifos de fuente porque: (1) el degradado con
@@ -1660,7 +1664,7 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 /* Sección "Minas Contigo en 2025" — cifras agregadas costo-eficiencia. */
 .mc-agg{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
 .mc-agg--2{grid-template-columns:repeat(2,minmax(0,300px));justify-content:center}
-.mc-agg-item{background:linear-gradient(180deg,#fff,color-mix(in srgb,var(--mc-color-soft) 55%,#fff));border:1px solid color-mix(in srgb,var(--mc-color) 18%,var(--border-soft));border-radius:var(--radius-lg);padding:16px 14px;text-align:center}
+.mc-agg-item{background:#fff;border:1px solid color-mix(in srgb,var(--mc-color) 18%,var(--border-soft));border-radius:var(--radius-lg);padding:16px 14px;text-align:center}
 .mc-agg-num{font-size:25px;font-weight:800;color:var(--mc-color-dark);letter-spacing:-1px;font-feature-settings:"tnum";line-height:1}
 .mc-agg-lbl{font-size:10.5px;color:var(--text2);line-height:1.35;margin-top:9px;font-weight:600}
 .mc-agg-lbl span{display:block;font-weight:500;color:var(--text3);font-size:9.5px;margin-top:3px}
@@ -1676,7 +1680,7 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 .mc-carrusel{position:relative;display:flex;flex-direction:column;gap:14px}
 
 /* Stage: contenedor del slide actual + flechas + barra de progreso */
-.mc-carrusel-stage{position:relative;overflow:hidden;border-radius:14px;background:linear-gradient(135deg,var(--mc-color-soft) 0%,#fff 100%);aspect-ratio:16/9;box-shadow:0 6px 24px rgba(74,97,74,.14),0 2px 6px rgba(74,97,74,.06);border:1px solid color-mix(in srgb,var(--mc-color) 18%,var(--border-soft))}
+.mc-carrusel-stage{position:relative;overflow:hidden;border-radius:14px;background:#f4f4f5;aspect-ratio:16/9;box-shadow:0 6px 24px rgba(74,97,74,.14),0 2px 6px rgba(74,97,74,.06);border:1px solid color-mix(in srgb,var(--mc-color) 18%,var(--border-soft))}
 
 /* Track: contiene todos los slides en fila, con translateX se mueve */
 .mc-carrusel-track{display:flex;width:100%;height:100%;transition:transform .6s cubic-bezier(.4,0,.2,1);will-change:transform}
@@ -1761,7 +1765,7 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
    Iterar sobre MC_REELS escala automáticamente: 2 reels → grid 2x1,
    3 reels → 2+1, 4 → 2x2, etc. */
 .mc-reels-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;align-items:stretch}
-.mc-reel-card{display:flex;flex-direction:column;border:1px solid color-mix(in srgb,var(--mc-color) 18%,var(--border-soft));border-radius:14px;overflow:hidden;background:linear-gradient(180deg,#fff 0%,color-mix(in srgb,var(--mc-color-soft) 60%,#fff) 100%);box-shadow:0 4px 18px -6px color-mix(in srgb,var(--mc-color) 18%,transparent),0 1px 3px rgba(15,23,42,.04);transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
+.mc-reel-card{display:flex;flex-direction:column;border:1px solid var(--border-soft);border-radius:14px;overflow:hidden;background:#fff;--sin-gradiente:linear-gradient(180deg,#fff 0%,color-mix(in srgb,var(--mc-color-soft) 60%,#fff) 100%);box-shadow:0 4px 18px -6px color-mix(in srgb,var(--mc-color) 18%,transparent),0 1px 3px rgba(15,23,42,.04);transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
 /* DESTACADO — réplica del layout de instagram.com: video grande a la
    izquierda LLENANDO su recuadro + caption a la derecha.
 
@@ -1823,7 +1827,7 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 /* Sidebar derecha — 30% del ancho, replica el panel de caption de IG */
 .mc-ig-sidebar{display:flex;flex-direction:column;background:#fff;min-width:0}
 .mc-ig-header{display:flex;align-items:center;gap:12px;padding:16px 18px;border-bottom:1px solid #efefef;flex-shrink:0}
-.mc-ig-avatar{flex-shrink:0;width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#f58529 0%,#dd2a7b 50%,#8134af 100%);color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.mc-ig-avatar{flex-shrink:0;width:38px;height:38px;border-radius:50%;background:#18181b;color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 2px rgba(0,0,0,.08)}
 .mc-ig-handle-wrap{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
 .mc-ig-handle{font-size:14px;font-weight:600;color:#262626;letter-spacing:-.1px}
 .mc-ig-sub{font-size:11.5px;color:#737373;letter-spacing:.1px}
@@ -1863,7 +1867,7 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 .mc-reel-title{font-size:13.5px;font-weight:700;color:var(--text);line-height:1.32;letter-spacing:-.15px;margin-bottom:10px;flex:0 0 auto}
 .mc-reel-quote{font-family:'Playfair Display','Georgia',serif;font-style:italic;font-size:14.5px;line-height:1.5;color:var(--mc-color-dark);font-weight:500;letter-spacing:-.1px;margin-bottom:16px;flex:1}
 .mc-reel-meta > .mc-reel-btn:nth-child(3){margin-top:auto}  /* sin cita: empuja el botón al fondo */
-.mc-reel-btn{display:inline-flex;align-items:center;align-self:flex-start;padding:9px 16px;background:linear-gradient(180deg,var(--mc-color) 0%,var(--mc-color-dark) 100%);color:#fff;text-decoration:none;font-size:12px;font-weight:700;letter-spacing:.3px;border-radius:8px;box-shadow:0 3px 10px -2px color-mix(in srgb,var(--mc-color-dark) 45%,transparent),inset 0 1px 0 rgba(255,255,255,.18);transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
+.mc-reel-btn{display:inline-flex;align-items:center;align-self:flex-start;padding:9px 16px;background:var(--gold-dark);color:#fff;text-decoration:none;font-size:12px;font-weight:700;letter-spacing:.3px;border-radius:8px;box-shadow:0 3px 10px -2px color-mix(in srgb,var(--mc-color-dark) 45%,transparent),inset 0 1px 0 rgba(255,255,255,.18);transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
 .mc-reel-btn:hover{transform:translateY(-1px);box-shadow:0 5px 14px -3px color-mix(in srgb,var(--mc-color-dark) 55%,transparent),inset 0 1px 0 rgba(255,255,255,.22)}
 @media(max-width:760px){
   .mc-reels-grid{grid-template-columns:1fr;gap:16px}
@@ -1877,10 +1881,10 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 /* "Por qué importa" — rediseño editorial pull-quote.
    Fondo gradient sage suave + grandes comillas decorativas serif +
    tipografía más generosa. Feel revista institucional, no caja informativa. */
-.mc-why{position:relative;padding:32px 38px 30px;background:linear-gradient(135deg,var(--mc-color-soft) 0%,#fefefe 60%,color-mix(in srgb,var(--mc-accent) 6%,#fff) 100%);border:1px solid color-mix(in srgb,var(--mc-color) 18%,var(--border-soft));border-radius:var(--radius-xl);box-shadow:0 4px 18px -4px color-mix(in srgb,var(--mc-color) 18%,transparent),inset 0 1px 0 rgba(255,255,255,.7);overflow:hidden}
+.mc-why{position:relative;padding:32px 38px 30px;background:#fff;border:1px solid color-mix(in srgb,var(--mc-color) 18%,var(--border-soft));border-radius:var(--radius-xl);box-shadow:0 4px 18px -4px color-mix(in srgb,var(--mc-color) 18%,transparent),inset 0 1px 0 rgba(255,255,255,.7);overflow:hidden}
 /* Comilla decorativa grande removida por solicitud (antes .mc-why::before). */
 /* Acento dorado en esquina inferior derecha */
-.mc-why::after{content:'';position:absolute;right:-40px;bottom:-40px;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--mc-accent) 18%,transparent) 0%,transparent 65%);pointer-events:none}
+.mc-why::after{content:none;background:radial-gradient(circle,color-mix(in srgb,var(--mc-accent) 18%,transparent) 0%,transparent 65%);pointer-events:none}
 .mc-why-eye{font-size:9.5px;text-transform:uppercase;font-weight:700;letter-spacing:1.8px;color:var(--mc-color-dark);margin-bottom:14px;display:inline-flex;align-items:center;gap:7px;position:relative;z-index:1}
 .mc-why-ico{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;color:var(--mc-accent)}
 .mc-why-ico svg{width:14px;height:14px}
@@ -1895,13 +1899,13 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 
 /* Testimonios - cards estilo cita */
 .mc-testimonios{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
-.mc-test{position:relative;background:linear-gradient(180deg,#fff 0%,#fdfcf8 100%);border:1px solid var(--border);border-radius:var(--radius-lg);padding:22px 22px 18px;box-shadow:0 2px 8px -3px rgba(15,23,42,.06);transition:transform .25s var(--ease),box-shadow .25s var(--ease),border-color .25s var(--ease);overflow:hidden}
+.mc-test{position:relative;background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);padding:22px 22px 18px;box-shadow:0 2px 8px -3px rgba(15,23,42,.06);transition:transform .25s var(--ease),box-shadow .25s var(--ease),border-color .25s var(--ease);overflow:hidden}
 .mc-test:hover{transform:translateY(-2px);box-shadow:0 10px 24px -8px color-mix(in srgb,var(--mc-color) 22%,transparent);border-color:color-mix(in srgb,var(--mc-color) 30%,var(--border))}
 /* Comilla decorativa MUCHO más grande con Playfair Display */
 .mc-test-quote{position:absolute;top:-8px;right:10px;font-family:'Playfair Display','Georgia',serif;font-size:90px;color:var(--mc-color);opacity:.14;line-height:1;font-weight:700;pointer-events:none}
 .mc-test-frase{font-size:13px;color:var(--text);line-height:1.62;font-style:italic;margin-bottom:16px;padding-right:22px;letter-spacing:.1px}
 .mc-test-author{display:flex;align-items:center;gap:10px;padding-top:10px;border-top:1px dashed var(--border-soft)}
-.mc-test-avatar{flex-shrink:0;width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--mc-color) 0%,var(--mc-color-dark) 100%);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;box-shadow:0 2px 6px rgba(111,142,108,.28)}
+.mc-test-avatar{flex-shrink:0;width:38px;height:38px;border-radius:50%;background:#18181b;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;box-shadow:0 2px 6px rgba(111,142,108,.28)}
 .mc-test-meta{flex:1;min-width:0}
 .mc-test-name{font-size:12px;font-weight:700;color:var(--text);letter-spacing:-.1px}
 .mc-test-info{font-size:10.5px;color:var(--text3);margin-top:1px}
@@ -2577,9 +2581,11 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 /* Cards de viaje */
 .gest-list{position:relative;display:flex;flex-direction:column;gap:14px;z-index:1;padding:22px 30px 30px;background:#fff}
 .gest-card{position:relative;background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);padding:18px 22px;display:grid;grid-template-columns:80px 1fr auto;gap:18px;align-items:start;box-shadow:var(--shadow-xs);transition:transform .2s var(--ease),box-shadow .2s var(--ease),border-color .2s var(--ease);overflow:hidden}
-.gest-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent,var(--gold));opacity:.85;transition:width .2s var(--ease)}
+/* Filo vertical de color removido (ago-2026): pintaba una raya negra, verde
+   o violeta segun el Centro y ensuciaba la lista. */
+.gest-card::before{content:none}
 .gest-card:hover{transform:translateY(-1px);box-shadow:var(--shadow);border-color:#d6dae3}
-.gest-card:hover::before{width:5px}
+.gest-card:hover::before{width:0}
 .gest-card-flag{font-size:42px;line-height:1;text-align:center;display:flex;flex-direction:column;align-items:center;gap:6px}
 .gest-card-flag-emoji{filter:drop-shadow(0 2px 4px rgba(0,0,0,.18))}
 /* Bandera como imagen (flagcdn) — tamaño fijo, esquinas suaves y borde sutil
@@ -8016,7 +8022,7 @@ function GestionEstrategica({ data, onOpenCentro }) {
         </div>
         <div className="gest-eyebrow">
           {/* Estrellas ✦ removidas por solicitud. */}
-          Gestión Estratégica · Centros de Pensamiento
+          Gestión Estratégica
         </div>
         <div className="gest-title">Alianzas que <em>transforman</em> la Facultad</div>
         <div className="gest-tagline">Las alianzas, convenios y redes académicas que conectan a la Facultad de Minas con instituciones del país y del mundo.</div>
@@ -8702,19 +8708,16 @@ function MinasContigo({ programa, cursos, hitos, testimonios, fotos, reels, onOp
           <div className="mc-section-title">El impacto en cifras</div>
           <div className="mc-kpis">
             <div className="mc-kpi">
-              <div className="mc-kpi-icon" aria-hidden="true"><Icon name="users" size={22}/></div>
               <div className="mc-kpi-num">≈{programa.estudiantesAcumulados.toLocaleString('es-CO')}</div>
               <div className="mc-kpi-lbl">Estudiantes acompañados</div>
               <div className="mc-kpi-sub">acumulado desde {programa.inicio}</div>
             </div>
             <div className="mc-kpi">
-              <div className="mc-kpi-icon" aria-hidden="true"><Icon name="calendar" size={22}/></div>
               <div className="mc-kpi-num">{programa.totalSemestres}</div>
               <div className="mc-kpi-lbl">Semestres consecutivos</div>
               <div className="mc-kpi-sub">{programa.inicio} → {programa.semestreActual}</div>
             </div>
             <div className="mc-kpi">
-              <div className="mc-kpi-icon" aria-hidden="true"><Icon name="check-circle" size={22}/></div>
               <div className="mc-kpi-num">{programa.aprobacionPromedio}<em>%</em></div>
               <div className="mc-kpi-lbl">Aprobación promedio</div>
               <div className="mc-kpi-sub">de quienes asisten al programa</div>
