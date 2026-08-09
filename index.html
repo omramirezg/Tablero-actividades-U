@@ -8741,7 +8741,9 @@ function MinasContigo({ programa, cursos, hitos, testimonios, fotos, reels, onOp
           <div className="mc-cursos">
             {cursos.map(c => (
               <div key={c.id} className="mc-curso">
-                <div className="mc-curso-sym" data-id={c.id}><CursoSym id={c.id} simbolo={c.simbolo} /></div>
+                {/* Simbolos matematicos removidos por solicitud (ago-2026): el
+                    nombre del curso ya identifica la tarjeta. CursoSym y MC_SYM
+                    se conservan por si se quieren reactivar. */}
                 <div className="mc-curso-nm">{c.nombre}</div>
                 <div className="mc-curso-tbl">
                   <div className="mc-curso-thead"><span>Sem.</span><span>Estud.</span><span>Aprob.</span></div>
