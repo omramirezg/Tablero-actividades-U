@@ -1219,7 +1219,9 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 .gd-dot-on:hover{background:var(--gold)}
 .gd-count{color:#a8a29e;font-size:11px;font-weight:600;margin-left:2px}
 @media(max-width:640px){
-  .gd-overlay{padding:12px}
+  /* Mismo aire lateral que .gest-overlay (Alianzas), que es el que quedo mejor
+     en movil: el modal se lee como tarjeta y no pegado a los bordes (ago-2026). */
+  .gd-overlay{padding:32px 20px}
   /* En móvil el sello se oculta: no hay ancho para reservarle una columna sin
      estrangular el título (misma decisión que en los heroes ≤1080px). */
   .gd-head-logo{display:none}
@@ -1953,7 +1955,7 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
   .mc-curso-sym[data-id="BAS"]{--symh:29px}
   .mc-curso-sym[data-id="EDO"]{--symh:27px}
   .mc-curso-sym[data-id="DIF"]{--symh:30px}
-  .mc-overlay{padding:8px}
+  .mc-overlay{padding:32px 20px}
 }
 
 /* ═══════════════ LOGROS VISIBLES — modal de entregas ═══════════════
@@ -2394,7 +2396,7 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
      para que el padding compacto realmente se aplique en mobile.
      Texto justificado (a pedido del usuario) con hyphens + overflow-wrap
      como safety net contra palabras largas ("Automatización"). */
-  .lgr-overlay{padding:6px}
+  .lgr-overlay{padding:32px 20px}
   .lgr-body{padding:14px}
   .lgr-item{min-width:0;max-width:100%;box-sizing:border-box}
   .lgr-item-text{padding:4px}
