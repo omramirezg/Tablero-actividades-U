@@ -2114,11 +2114,12 @@ a.dep-link:hover{color:var(--gold-dark);border-bottom-color:var(--gold)}
 .lgr-kpi-lbl{font-size:8.5px;font-weight:700;color:rgba(255,255,255,.72);letter-spacing:.4px;text-transform:uppercase;margin-top:2px;line-height:1.25}
 @media(max-width:640px){
   /* 4 KPIs en grid 2×2 (2 por fila) por solicitud, en vez de apilados. */
-  .lgr-kpis{grid-template-columns:repeat(2,1fr);padding:14px 16px 4px;gap:10px}
-  .lgr-kpi{padding:14px 8px 12px}
-  .lgr-kpi-num{font-size:28px}
-  .lgr-kpi-icon{width:26px;height:26px;margin:0}
-  .lgr-kpi-lbl{font-size:10px;letter-spacing:.2px}
+  /* Fichas mas compactas en movil (ago-2026): estas reglas seguian con los
+     tamanos de cuando la ficha llevaba icono, y quedaban muy altas. */
+  .lgr-kpis{grid-template-columns:repeat(2,1fr);padding:10px 16px 12px;gap:8px}
+  .lgr-kpi{padding:8px 6px}
+  .lgr-kpi-num{font-size:19px}
+  .lgr-kpi-lbl{font-size:8px;letter-spacing:.2px;margin-top:2px}
 }
 .lgr-item-fecha{font-size:11px;font-weight:700;color:#3f3f46;letter-spacing:.6px;text-transform:uppercase;font-feature-settings:"tnum"}
 .lgr-item-monto{display:inline-flex;align-items:center;font-size:10.5px;font-weight:700;color:#1f4d2a;background:rgba(34,166,82,.10);border:1px solid rgba(34,166,82,.25);padding:3px 9px;border-radius:14px;letter-spacing:.4px;font-feature-settings:"tnum"}
